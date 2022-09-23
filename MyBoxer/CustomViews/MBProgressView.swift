@@ -11,6 +11,7 @@ enum MBProgressType {
     case hp
     case stamina
     case experience
+    case time
 }
 
 class MBProgressView: UIProgressView {
@@ -46,6 +47,9 @@ class MBProgressView: UIProgressView {
         case .experience:
             progressTintColor = .systemCyan
             title.text = "Experience"
+        case .time:
+            progressTintColor = .systemGray2
+            title.text = "2:30"
         }
         translatesAutoresizingMaskIntoConstraints = false
         

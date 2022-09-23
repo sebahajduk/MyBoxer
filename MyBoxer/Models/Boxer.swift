@@ -7,6 +7,10 @@
 
 import UIKit
 
+enum BoxerStatus {
+    case training, fighting, resting
+}
+
 class Boxer {
     var vitality: Int = 100
     var punchPower: Int = 10
@@ -24,4 +28,5 @@ class Boxer {
     var experience: Int = 0
     var nextLevel: Int = 100
     
+    var status: BoxerStatus = .training
 }
