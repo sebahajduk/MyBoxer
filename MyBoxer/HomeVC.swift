@@ -7,22 +7,6 @@
 
 import UIKit
 
-extension UIButton {
-    func pulsate() {
-
-                let pulse = CASpringAnimation(keyPath: "transform.scale")
-                pulse.duration = 0.2
-                pulse.fromValue = 0.95
-                pulse.toValue = 1.0
-                pulse.autoreverses = true
-                pulse.repeatCount = 2
-                pulse.initialVelocity = 0.5
-                pulse.damping = 1.0
-
-                layer.add(pulse, forKey: "pulse")
-            }
-}
-
 class HomeVC: UIViewController {
 
     let testImage = MBImageView(frame: .zero)
@@ -35,7 +19,17 @@ class HomeVC: UIViewController {
     
     let timeProgress = MBProgressView(for: .time)
 
-    let button = UIButton()
+    let rankButton = MBButton(image: Images.rank!)
+    let trainingButton = MBButton(image: Images.bag!)
+    let fightButton = MBButton(image: Images.ring!)
+    let shopButton = MBButton(image: Images.shop!)
+    let teamButton = MBButton(image: Images.team!)
+    
+    /*
+        trainingButton          fightButton
+        shopButton              teamButton
+                    rankButton
+     */
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -56,19 +50,7 @@ class HomeVC: UIViewController {
         experienceProgress.setProgress(0.5, animated: true)
         timeProgress.setProgress(0.3, animated: true)
         
-        view.addSubview(healthProgress)
-        view.addSubview(staminaProgress)
-        view.addSubview(experienceProgress)
-        view.addSubview(timeProgress)
-        
-        
-        
-        button.setBackgroundImage(Images.bag, for: .normal)
-        button.backgroundColor = .black.withAlphaComponent(0.2)
-        button.setTitle("HELLO", for: .normal)
-        
-        button.translatesAutoresizingMaskIntoConstraints = false
-        view.addSubview(button)
+        view.addSubviews([healthProgress, staminaProgress, experienceProgress, timeProgress, trainingButton, fightButton, shopButton, teamButton, rankButton])
     }
     
     private func configurePhotoStatus() {
@@ -79,7 +61,6 @@ class HomeVC: UIViewController {
     
     private func configureButtonsMenu() {
         testImage.image = Images.bag
-        view.addSubview(testImage)
     }
     
     private func configureContraints() {
@@ -109,15 +90,20 @@ class HomeVC: UIViewController {
             timeProgress.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20),
             timeProgress.heightAnchor.constraint(equalToConstant: 17),
             
-            button.topAnchor.constraint(equalTo: timeProgress.bottomAnchor, constant: 10),
-            button.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            button.heightAnchor.constraint(equalToConstant: 100),
-            button.widthAnchor.constraint(equalToConstant: 100),
+            trainingButton.topAnchor.constraint(equalTo: timeProgress.bottomAnchor, constant: 90),
+            trainingButton.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 40),
             
-            testImage.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -40),
-            testImage.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            testImage.heightAnchor.constraint(equalToConstant: 100),
-            testImage.widthAnchor.constraint(equalToConstant: 100),
+            fightButton.topAnchor.constraint(equalTo: timeProgress.bottomAnchor, constant: 90),
+            fightButton.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            
+            shopButton.topAnchor.constraint(equalTo: timeProgress.bottomAnchor, constant: 90),
+            shopButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -40),
+
+            teamButton.topAnchor.constraint(equalTo: fightButton.bottomAnchor, constant: 40),
+            teamButton.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 100),
+            
+            rankButton.topAnchor.constraint(equalTo: shopButton.bottomAnchor, constant: 40),
+            rankButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -100)
         ])
     }
 }

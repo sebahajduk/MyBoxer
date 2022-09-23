@@ -19,6 +19,8 @@
 		605BD4F728DB5FA60026C185 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 605BD4F628DB5FA60026C185 /* Assets.xcassets */; };
 		605BD4FA28DB5FA60026C185 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 605BD4F828DB5FA60026C185 /* LaunchScreen.storyboard */; };
 		605BD50228DB62FB0026C185 /* HomeVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 605BD50128DB62FB0026C185 /* HomeVC.swift */; };
+		60E59FB028DE2893007BBE81 /* MBButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60E59FAF28DE2892007BBE81 /* MBButton.swift */; };
+		60E59FB328DE2E14007BBE81 /* UIViewExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60E59FB228DE2E14007BBE81 /* UIViewExtension.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -36,6 +38,8 @@
 		605BD4F928DB5FA60026C185 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		605BD4FB28DB5FA60026C185 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		605BD50128DB62FB0026C185 /* HomeVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeVC.swift; sourceTree = "<group>"; };
+		60E59FAF28DE2892007BBE81 /* MBButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MBButton.swift; sourceTree = "<group>"; };
+		60E59FB228DE2E14007BBE81 /* UIViewExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIViewExtension.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -54,6 +58,7 @@
 			children = (
 				604EC0DC28DB678F00F0D344 /* MBImageView.swift */,
 				604EC0E628DB74C300F0D344 /* MBProgressView.swift */,
+				60E59FAF28DE2892007BBE81 /* MBButton.swift */,
 			);
 			path = CustomViews;
 			sourceTree = "<group>";
@@ -109,6 +114,7 @@
 		605BD4EC28DB5F9D0026C185 /* MyBoxer */ = {
 			isa = PBXGroup;
 			children = (
+				60E59FB128DE2DFD007BBE81 /* Extensions */,
 				604EC0E828DB761C00F0D344 /* Managers */,
 				604EC0E328DB72F000F0D344 /* Models */,
 				604EC0DE28DB684B00F0D344 /* Utilities */,
@@ -123,6 +129,14 @@
 				605BD4FB28DB5FA60026C185 /* Info.plist */,
 			);
 			path = MyBoxer;
+			sourceTree = "<group>";
+		};
+		60E59FB128DE2DFD007BBE81 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				60E59FB228DE2E14007BBE81 /* UIViewExtension.swift */,
+			);
+			path = Extensions;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -198,10 +212,12 @@
 			files = (
 				604EC0E728DB74C300F0D344 /* MBProgressView.swift in Sources */,
 				605BD4F228DB5F9D0026C185 /* ViewController.swift in Sources */,
+				60E59FB328DE2E14007BBE81 /* UIViewExtension.swift in Sources */,
 				604EC0E028DB686200F0D344 /* Images.swift in Sources */,
 				605BD50228DB62FB0026C185 /* HomeVC.swift in Sources */,
 				605BD4EE28DB5F9D0026C185 /* AppDelegate.swift in Sources */,
 				604EC0E228DB6A9200F0D344 /* Constants.swift in Sources */,
+				60E59FB028DE2893007BBE81 /* MBButton.swift in Sources */,
 				604EC0DD28DB678F00F0D344 /* MBImageView.swift in Sources */,
 				604EC0E528DB72FF00F0D344 /* Boxer.swift in Sources */,
 				605BD4F028DB5F9D0026C185 /* SceneDelegate.swift in Sources */,
