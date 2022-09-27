@@ -8,6 +8,8 @@
 import UIKit
 
 class HomeVC: UIViewController {
+    
+    var myBoxer = Boxer()
 
     let testImage = MBImageView(frame: .zero)
     
@@ -25,12 +27,6 @@ class HomeVC: UIViewController {
     let shopButton = MBButton(image: Images.shop!)
     let teamButton = MBButton(image: Images.team!)
     
-    /*
-        trainingButton          fightButton
-        shopButton              teamButton
-                    rankButton
-     */
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .systemBackground
@@ -45,12 +41,12 @@ class HomeVC: UIViewController {
     }
     
     private func configureBars() {
-        healthProgress.setProgress(0.5, animated: true)
-        staminaProgress.setProgress(0.8, animated: true)
-        experienceProgress.setProgress(0.5, animated: true)
+        healthProgress.setProgress(myBoxer.hp/myBoxer.vitality, animated: true)
+        staminaProgress.setProgress(Float(myBoxer.stamina/100), animated: true)
+        experienceProgress.setProgress(Float(myBoxer.experience/myBoxer.nextLevel), animated: true)
         timeProgress.setProgress(0.3, animated: true)
         
-        view.addSubviews([healthProgress, staminaProgress, experienceProgress, timeProgress, trainingButton, fightButton, shopButton, teamButton, rankButton])
+        view.addSubviews([healthProgress, staminaProgress, experienceProgress, timeProgress])
     }
     
     private func configurePhotoStatus() {
@@ -60,7 +56,15 @@ class HomeVC: UIViewController {
     }
     
     private func configureButtonsMenu() {
-        testImage.image = Images.bag
+        view.addSubviews([trainingButton, fightButton, shopButton, teamButton, rankButton])
+        
+        trainingButton.addTarget(self, action: #selector(pushTrainingVC), for: .touchUpInside)
+    }
+    
+    @objc func pushTrainingVC() {
+        let trainingVC = TrainingVC(myBoxer: myBoxer)
+        
+        navigationController!.pushViewController(trainingVC, animated: true)
     }
     
     private func configureContraints() {
@@ -106,4 +110,6 @@ class HomeVC: UIViewController {
             rankButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -100)
         ])
     }
+    
+    
 }

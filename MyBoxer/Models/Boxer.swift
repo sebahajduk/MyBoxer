@@ -12,21 +12,26 @@ enum BoxerStatus {
 }
 
 class Boxer {
-    var vitality: Int = 100
-    var punchPower: Int = 10
-    var punchSpeed: Int = 10
-    var footwork: Int = 10
-    var movement: Int = 10
-    var defence: Int = 10
-    var condition: Int = 10
+    var vitality: Float = 100.0
+    var punchPower: Int = 10 // Weight lifting +2
+    var punchSpeed: Int = 10 // Ball throwing +2
+    var footwork: Int = 10 // Jumping rope +2
+    var movement: Int = 10 // Shadow box +1
+    var defence: Int = 10 // Shadow box +1
+    var endurance: Int = 10 // Interval +2
     
     #warning("Change it to correct values")
-    var hp: Int = 80
+    var hp: Float = 80.0
     var stamina: Int = 100
     
     var currentLevel: Int = 1
-    var experience: Int = 0
-    var nextLevel: Int = 100
+    var experience: Float = 20.0
+    var nextLevel: Float = 100.0
     
     var status: BoxerStatus = .training
+    
+    func shadowBox() {
+        movement += 1
+        defence += 1
+    }
 }
