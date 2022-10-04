@@ -9,7 +9,9 @@ import UIKit
 
 class HomeVC: UIViewController {
     
-    var myBoxer = Boxer()
+    static let shared = HomeVC()
+    
+    var player = Player()
 
     let testImage = MBImageView(frame: .zero)
     
@@ -27,10 +29,23 @@ class HomeVC: UIViewController {
     let shopButton = MBButton(image: Images.shop!)
     let teamButton = MBButton(image: Images.team!)
     
+    var timeProgressValue: Float = 0.2 {
+        didSet {
+            update()
+        }
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .systemBackground
         configure()
+    }
+    
+    func update() {
+        DispatchQueue.main.async {
+            self.timeProgress.setProgress(self.timeProgressValue/10, animated: true)
+            print(self.timeProgressValue)
+        }
     }
     
     private func configure() {
@@ -41,10 +56,10 @@ class HomeVC: UIViewController {
     }
     
     private func configureBars() {
-        healthProgress.setProgress(myBoxer.hp/myBoxer.vitality, animated: true)
-        staminaProgress.setProgress(Float(myBoxer.stamina/100), animated: true)
-        experienceProgress.setProgress(Float(myBoxer.experience/myBoxer.nextLevel), animated: true)
-        timeProgress.setProgress(0.3, animated: true)
+        healthProgress.setProgress(player.hp/player.vitality, animated: true)
+        staminaProgress.setProgress(Float(player.stamina/100), animated: true)
+        experienceProgress.setProgress(Float(player.experience/player.nextLevel), animated: true)
+        timeProgress.setProgress(timeProgressValue, animated: true)
         
         view.addSubviews([healthProgress, staminaProgress, experienceProgress, timeProgress])
     }
@@ -59,12 +74,19 @@ class HomeVC: UIViewController {
         view.addSubviews([trainingButton, fightButton, shopButton, teamButton, rankButton])
         
         trainingButton.addTarget(self, action: #selector(pushTrainingVC), for: .touchUpInside)
+        fightButton.addTarget(self, action: #selector(pushFightingVC), for: .touchUpInside)
     }
     
     @objc func pushTrainingVC() {
-        let trainingVC = TrainingVC(myBoxer: myBoxer)
+        let trainingVC = TrainingVC(myBoxer: player)
         
         navigationController!.pushViewController(trainingVC, animated: true)
+    }
+    
+    @objc func pushFightingVC() {
+        let fightingVC = FightingVC()
+        
+        navigationController!.pushViewController(fightingVC, animated: true)
     }
     
     private func configureContraints() {
@@ -110,6 +132,4 @@ class HomeVC: UIViewController {
             rankButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -100)
         ])
     }
-    
-    
 }

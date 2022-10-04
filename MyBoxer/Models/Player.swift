@@ -19,8 +19,9 @@ class Boxer {
     var movement: Int = 10 // Shadow box +1
     var defence: Int = 10 // Shadow box +1
     var endurance: Int = 10 // Interval +2
-    
-    #warning("Change it to correct values")
+}
+
+class Player: Boxer {
     var hp: Float = 80.0
     var stamina: Int = 100
     
@@ -34,4 +35,19 @@ class Boxer {
         movement += 1
         defence += 1
     }
+}
+
+class Opponent: Boxer {
+    
+    func generateOpponent(forLevel: Int) {
+        // Think about algorithm
+//        vitality
+//        punchPower
+//        punchSpeed
+//        footwork
+//        movement
+//        defence
+//        endurance
+    }
+    
 }

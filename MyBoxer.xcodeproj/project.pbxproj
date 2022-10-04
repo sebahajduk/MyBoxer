@@ -7,44 +7,52 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		602B046228EC8A0200BDEB3F /* TimeManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 602B046128EC8A0200BDEB3F /* TimeManager.swift */; };
 		604D924E28DEFCFC0054934C /* TrainingVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 604D924D28DEFCFC0054934C /* TrainingVC.swift */; };
 		604EC0DD28DB678F00F0D344 /* MBImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 604EC0DC28DB678F00F0D344 /* MBImageView.swift */; };
 		604EC0E028DB686200F0D344 /* Images.swift in Sources */ = {isa = PBXBuildFile; fileRef = 604EC0DF28DB686200F0D344 /* Images.swift */; };
 		604EC0E228DB6A9200F0D344 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 604EC0E128DB6A9200F0D344 /* Constants.swift */; };
-		604EC0E528DB72FF00F0D344 /* Boxer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 604EC0E428DB72FF00F0D344 /* Boxer.swift */; };
+		604EC0E528DB72FF00F0D344 /* Player.swift in Sources */ = {isa = PBXBuildFile; fileRef = 604EC0E428DB72FF00F0D344 /* Player.swift */; };
 		604EC0E728DB74C300F0D344 /* MBProgressView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 604EC0E628DB74C300F0D344 /* MBProgressView.swift */; };
 		604EC0EB28DB869B00F0D344 /* Plaguard.otf in Resources */ = {isa = PBXBuildFile; fileRef = 604EC0EA28DB869B00F0D344 /* Plaguard.otf */; };
 		605BD4EE28DB5F9D0026C185 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 605BD4ED28DB5F9D0026C185 /* AppDelegate.swift */; };
 		605BD4F028DB5F9D0026C185 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 605BD4EF28DB5F9D0026C185 /* SceneDelegate.swift */; };
-		605BD4F228DB5F9D0026C185 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 605BD4F128DB5F9D0026C185 /* ViewController.swift */; };
 		605BD4F728DB5FA60026C185 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 605BD4F628DB5FA60026C185 /* Assets.xcassets */; };
 		605BD4FA28DB5FA60026C185 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 605BD4F828DB5FA60026C185 /* LaunchScreen.storyboard */; };
 		605BD50228DB62FB0026C185 /* HomeVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 605BD50128DB62FB0026C185 /* HomeVC.swift */; };
 		60E59FB028DE2893007BBE81 /* MBButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60E59FAF28DE2892007BBE81 /* MBButton.swift */; };
 		60E59FB328DE2E14007BBE81 /* UIViewExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60E59FB228DE2E14007BBE81 /* UIViewExtension.swift */; };
+		60EDB89728E8B7AD00EF9747 /* MBLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60EDB89628E8B7AD00EF9747 /* MBLabel.swift */; };
+		60EDB89928E8C71D00EF9747 /* OpponentStatView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60EDB89828E8C71D00EF9747 /* OpponentStatView.swift */; };
+		60EFAF6628E635080011E2E8 /* FightingVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60EFAF6528E635080011E2E8 /* FightingVC.swift */; };
+		60EFAF6828E635C20011E2E8 /* FightingCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60EFAF6728E635C20011E2E8 /* FightingCell.swift */; };
 		60F1F0A028E3507C0018AC4B /* TrainingCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60F1F09F28E3507C0018AC4B /* TrainingCell.swift */; };
 		60F1F0A228E356860018AC4B /* Training.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60F1F0A128E356860018AC4B /* Training.swift */; };
 		60F1F0A428E36FD90018AC4B /* UILabelExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60F1F0A328E36FD90018AC4B /* UILabelExtension.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		602B046128EC8A0200BDEB3F /* TimeManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeManager.swift; sourceTree = "<group>"; };
 		604D924D28DEFCFC0054934C /* TrainingVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrainingVC.swift; sourceTree = "<group>"; };
 		604EC0DC28DB678F00F0D344 /* MBImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MBImageView.swift; sourceTree = "<group>"; };
 		604EC0DF28DB686200F0D344 /* Images.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Images.swift; sourceTree = "<group>"; };
 		604EC0E128DB6A9200F0D344 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
-		604EC0E428DB72FF00F0D344 /* Boxer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Boxer.swift; sourceTree = "<group>"; };
+		604EC0E428DB72FF00F0D344 /* Player.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Player.swift; sourceTree = "<group>"; };
 		604EC0E628DB74C300F0D344 /* MBProgressView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MBProgressView.swift; sourceTree = "<group>"; };
 		604EC0EA28DB869B00F0D344 /* Plaguard.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = Plaguard.otf; sourceTree = "<group>"; };
 		605BD4EA28DB5F9D0026C185 /* MyBoxer.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MyBoxer.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		605BD4ED28DB5F9D0026C185 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		605BD4EF28DB5F9D0026C185 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		605BD4F128DB5F9D0026C185 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		605BD4F628DB5FA60026C185 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		605BD4F928DB5FA60026C185 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		605BD4FB28DB5FA60026C185 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		605BD50128DB62FB0026C185 /* HomeVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeVC.swift; sourceTree = "<group>"; };
 		60E59FAF28DE2892007BBE81 /* MBButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MBButton.swift; sourceTree = "<group>"; };
 		60E59FB228DE2E14007BBE81 /* UIViewExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIViewExtension.swift; sourceTree = "<group>"; };
+		60EDB89628E8B7AD00EF9747 /* MBLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MBLabel.swift; sourceTree = "<group>"; };
+		60EDB89828E8C71D00EF9747 /* OpponentStatView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OpponentStatView.swift; sourceTree = "<group>"; };
+		60EFAF6528E635080011E2E8 /* FightingVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FightingVC.swift; sourceTree = "<group>"; };
+		60EFAF6728E635C20011E2E8 /* FightingCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FightingCell.swift; sourceTree = "<group>"; };
 		60F1F09F28E3507C0018AC4B /* TrainingCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrainingCell.swift; sourceTree = "<group>"; };
 		60F1F0A128E356860018AC4B /* Training.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Training.swift; sourceTree = "<group>"; };
 		60F1F0A328E36FD90018AC4B /* UILabelExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UILabelExtension.swift; sourceTree = "<group>"; };
@@ -65,6 +73,7 @@
 			isa = PBXGroup;
 			children = (
 				605BD50128DB62FB0026C185 /* HomeVC.swift */,
+				60EFAF6528E635080011E2E8 /* FightingVC.swift */,
 				604D924D28DEFCFC0054934C /* TrainingVC.swift */,
 			);
 			path = ViewControllers;
@@ -73,10 +82,12 @@
 		604EC0DB28DB676300F0D344 /* CustomViews */ = {
 			isa = PBXGroup;
 			children = (
+				60EDB89A28E8C72200EF9747 /* Cells */,
 				604EC0DC28DB678F00F0D344 /* MBImageView.swift */,
 				604EC0E628DB74C300F0D344 /* MBProgressView.swift */,
 				60E59FAF28DE2892007BBE81 /* MBButton.swift */,
-				60F1F09F28E3507C0018AC4B /* TrainingCell.swift */,
+				60EDB89628E8B7AD00EF9747 /* MBLabel.swift */,
+				60EDB89828E8C71D00EF9747 /* OpponentStatView.swift */,
 			);
 			path = CustomViews;
 			sourceTree = "<group>";
@@ -93,7 +104,7 @@
 		604EC0E328DB72F000F0D344 /* Models */ = {
 			isa = PBXGroup;
 			children = (
-				604EC0E428DB72FF00F0D344 /* Boxer.swift */,
+				604EC0E428DB72FF00F0D344 /* Player.swift */,
 				60F1F0A128E356860018AC4B /* Training.swift */,
 			);
 			path = Models;
@@ -102,6 +113,7 @@
 		604EC0E828DB761C00F0D344 /* Managers */ = {
 			isa = PBXGroup;
 			children = (
+				602B046128EC8A0200BDEB3F /* TimeManager.swift */,
 			);
 			path = Managers;
 			sourceTree = "<group>";
@@ -141,7 +153,6 @@
 				604EC0DB28DB676300F0D344 /* CustomViews */,
 				605BD4ED28DB5F9D0026C185 /* AppDelegate.swift */,
 				605BD4EF28DB5F9D0026C185 /* SceneDelegate.swift */,
-				605BD4F128DB5F9D0026C185 /* ViewController.swift */,
 				604EC0E928DB867700F0D344 /* Fonts */,
 				605BD4F628DB5FA60026C185 /* Assets.xcassets */,
 				605BD4F828DB5FA60026C185 /* LaunchScreen.storyboard */,
@@ -157,6 +168,15 @@
 				60F1F0A328E36FD90018AC4B /* UILabelExtension.swift */,
 			);
 			path = Extensions;
+			sourceTree = "<group>";
+		};
+		60EDB89A28E8C72200EF9747 /* Cells */ = {
+			isa = PBXGroup;
+			children = (
+				60F1F09F28E3507C0018AC4B /* TrainingCell.swift */,
+				60EFAF6728E635C20011E2E8 /* FightingCell.swift */,
+			);
+			path = Cells;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -232,7 +252,7 @@
 			files = (
 				60F1F0A028E3507C0018AC4B /* TrainingCell.swift in Sources */,
 				604EC0E728DB74C300F0D344 /* MBProgressView.swift in Sources */,
-				605BD4F228DB5F9D0026C185 /* ViewController.swift in Sources */,
+				60EFAF6628E635080011E2E8 /* FightingVC.swift in Sources */,
 				60E59FB328DE2E14007BBE81 /* UIViewExtension.swift in Sources */,
 				604EC0E028DB686200F0D344 /* Images.swift in Sources */,
 				605BD50228DB62FB0026C185 /* HomeVC.swift in Sources */,
@@ -243,8 +263,12 @@
 				60E59FB028DE2893007BBE81 /* MBButton.swift in Sources */,
 				604D924E28DEFCFC0054934C /* TrainingVC.swift in Sources */,
 				604EC0DD28DB678F00F0D344 /* MBImageView.swift in Sources */,
-				604EC0E528DB72FF00F0D344 /* Boxer.swift in Sources */,
+				60EFAF6828E635C20011E2E8 /* FightingCell.swift in Sources */,
+				604EC0E528DB72FF00F0D344 /* Player.swift in Sources */,
+				60EDB89928E8C71D00EF9747 /* OpponentStatView.swift in Sources */,
 				605BD4F028DB5F9D0026C185 /* SceneDelegate.swift in Sources */,
+				60EDB89728E8B7AD00EF9747 /* MBLabel.swift in Sources */,
+				602B046228EC8A0200BDEB3F /* TimeManager.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

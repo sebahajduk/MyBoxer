@@ -43,10 +43,10 @@ class TrainingCell: UITableViewCell {
         trainingName.font = UIFont(name: "Plaguard", size: 20)
         
         trainingEffect.font = UIFont(name: "Plaguard", size: 16)
-        trainingEffect.textColor = UIColor.systemGray2
+        trainingEffect.textColor = .systemGray2
         
         trainingStamina.font = UIFont(name: "Plaguard", size: 16)
-        trainingStamina.textColor = UIColor.systemMint
+        trainingStamina.textColor = .systemMint
         
         bolt.tintColor = .systemMint
         

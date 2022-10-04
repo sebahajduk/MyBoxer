@@ -11,7 +11,7 @@ class TrainingVC: UIViewController {
     
     let tableView = UITableView()
     
-    var boxer: Boxer!
+    var boxer: Player!
     
     let trainings: [Training] = [
         Training(name: "Shadow boxing", staminaNeeded: 5, effect: "+1 Movement / +1 Defence", image: Images.shadowBox!),
@@ -25,13 +25,13 @@ class TrainingVC: UIViewController {
         super.viewDidLoad()
     }
     
-    convenience init(myBoxer: Boxer) {
+    convenience init(myBoxer: Player) {
         self.init()
         configureData(myBoxer: myBoxer)
         configureTableView()
     }
     
-    private func configureData(myBoxer: Boxer) {
+    private func configureData(myBoxer: Player) {
         boxer = myBoxer
     }
     
@@ -65,6 +65,12 @@ extension TrainingVC: UITableViewDataSource, UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         boxer.shadowBox()
+        
+        if TimeManager.shared.inProgres {
+            print("Cannot do training. You are already train")
+        } else {
+            TimeManager.shared.start()
+        }
         print(boxer.movement)
     }
 }
