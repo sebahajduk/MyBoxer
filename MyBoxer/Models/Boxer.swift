@@ -39,15 +39,15 @@ class Player: Boxer {
 
 class Opponent: Boxer {
     
-    func generateOpponent(forLevel: Int) {
-        // Think about algorithm
-//        vitality
-//        punchPower
-//        punchSpeed
-//        footwork
-//        movement
-//        defence
-//        endurance
+    init(forLevel: Int) {
+        super.init()
+        self.vitality = Float(vitality) * 150
+        punchPower = forLevel * 3
+        punchSpeed = forLevel * 3
+        footwork = forLevel * 3
+        movement = forLevel * 3
+        defence = forLevel * 3
+        endurance = forLevel * 3
     }
     
 }

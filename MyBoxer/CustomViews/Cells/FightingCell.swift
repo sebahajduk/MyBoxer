@@ -22,17 +22,16 @@ class FightingCell: UITableViewCell {
     
     let opponentImage = MBImageView(frame: .zero)
     let opponentName = MBLabel(size: 16)
-    var opponentVitality: OpponentStatView!
-    var opponentPunchPower: OpponentStatView!
-    var opponentPunchSpeed: OpponentStatView!
-    var opponentFootwork: OpponentStatView!
-    var opponentMovement: OpponentStatView!
-    var opponentDefence: OpponentStatView!
-    var opponentEndurance: OpponentStatView!
+    let opponentVitality: OpponentStatView = OpponentStatView(statType: .vitality)
+    var opponentPunchPower: OpponentStatView = OpponentStatView(statType: .power)
+    var opponentPunchSpeed: OpponentStatView = OpponentStatView(statType: .speed)
+    var opponentFootwork: OpponentStatView = OpponentStatView(statType: .footwork)
+    var opponentMovement: OpponentStatView = OpponentStatView(statType: .movement)
+    var opponentDefence: OpponentStatView = OpponentStatView(statType: .defence)
+    var opponentEndurance: OpponentStatView = OpponentStatView(statType: .endurance)
 
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
-        set()
         configure()
     }
     
@@ -40,16 +39,16 @@ class FightingCell: UITableViewCell {
         fatalError("init(coder:) has not been implemented")
     }
     
-    func set() {
+    func set(for opponent: Opponent) {
         opponentImage.image = UIImage(named: "baby-face")
-        opponentName.text = "Henryk Sienkiewcz"
-        opponentVitality = OpponentStatView(statType: .vitality, value: 100)
-        opponentPunchPower = OpponentStatView(statType: .power, value: 100)
-        opponentPunchSpeed = OpponentStatView(statType: .speed, value: 100)
-        opponentFootwork = OpponentStatView(statType: .footwork, value: 100)
-        opponentMovement = OpponentStatView(statType: .movement, value: 100)
-        opponentDefence = OpponentStatView(statType: .defence, value: 100)
-        opponentEndurance = OpponentStatView(statType: .endurance, value: 100)
+        opponentName.text = "Henryk Sienkiewicz"
+        opponentVitality.set(value: Int(opponent.vitality))
+        opponentPunchPower.set(value: opponent.punchPower)
+        opponentPunchSpeed.set(value: opponent.punchSpeed)
+        opponentFootwork.set(value: opponent.footwork)
+        opponentMovement.set(value: opponent.movement)
+        opponentDefence.set(value: opponent.defence)
+        opponentEndurance.set(value: opponent.endurance)
     }
     
     private func configure() {

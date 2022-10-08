@@ -10,6 +10,14 @@ import UIKit
 class FightingVC: UIViewController {
     
     let tableView = UITableView()
+    
+    let opponents: [Opponent] = [
+        Opponent(forLevel: 1),
+        Opponent(forLevel: 5),
+        Opponent(forLevel: 10),
+        Opponent(forLevel: 20),
+        Opponent(forLevel: 50)
+    ]
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -36,19 +44,17 @@ class FightingVC: UIViewController {
             tableView.bottomAnchor.constraint(equalTo: view.bottomAnchor)
         ])
     }
-
 }
 
 extension FightingVC: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        
-        return 5
+        return opponents.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: FightingCell.reuseID) as! FightingCell
         
-        cell.set()
+        cell.set(for: opponents[indexPath.row])
         
         return cell
     }

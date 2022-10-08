@@ -14,23 +14,29 @@ enum Stats {
 class OpponentStatView: UIView {
     
     let stat = MBLabel(size: 16, color: .systemGray2)
-    let statValue = MBLabel(size: 16, color: .systemGray2, alignment: .right)
-
+    var statValue = MBLabel(size: 16, color: .systemGray2, alignment: .right)
+    var value: Int!
+    
     override init(frame: CGRect) {
         super.init(frame: .zero)
     }
     
-    convenience init(statType: Stats, value: Int) {
+    convenience init(statType: Stats, value: Int = 4) {
         self.init(frame: .zero)
-        
-        configure(statType: statType, value: value)
+        set(value: value)
+        configure(statType: statType)
     }
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
     
-    private func configure(statType: Stats, value: Int) {
+    func set(value: Int) {
+        self.value = value
+        statValue.text = "\(self.value!)"
+    }
+    
+    private func configure(statType: Stats) {
         addSubviews([stat, statValue])
         
         switch statType {
@@ -49,8 +55,6 @@ class OpponentStatView: UIView {
         case .endurance:
             stat.text = "endurance"
         }
-        
-        statValue.text = "\(value)"
         
         translatesAutoresizingMaskIntoConstraints = false
         

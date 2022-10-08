@@ -30,7 +30,6 @@ class TimeManager {
                 timer.invalidate()
             }
         }
-        
     }
     
     func getTimeLeft() -> TimeInterval! {
