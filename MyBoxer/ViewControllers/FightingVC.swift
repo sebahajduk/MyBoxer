@@ -48,9 +48,7 @@ extension FightingVC: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: FightingCell.reuseID) as! FightingCell
         
-        tableView.beginUpdates()
         cell.set()
-        tableView.endUpdates()
         
         return cell
     }

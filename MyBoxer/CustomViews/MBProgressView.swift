@@ -48,8 +48,8 @@ class MBProgressView: UIProgressView {
             progressTintColor = .systemCyan
             title.text = "Experience"
         case .time:
-            progressTintColor = .systemGray2
-            title.text = "2:30"
+            progressTintColor = .systemGreen
+            title.text = "Time"
         }
         translatesAutoresizingMaskIntoConstraints = false
         

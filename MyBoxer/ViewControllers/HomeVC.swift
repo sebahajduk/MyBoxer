@@ -9,11 +9,7 @@ import UIKit
 
 class HomeVC: UIViewController {
     
-    static let shared = HomeVC()
-    
     var player = Player()
-
-    let testImage = MBImageView(frame: .zero)
     
     let staminaProgress = MBProgressView(for: .stamina)
     let healthProgress = MBProgressView(for: .hp)
@@ -29,11 +25,10 @@ class HomeVC: UIViewController {
     let shopButton = MBButton(image: Images.shop!)
     let teamButton = MBButton(image: Images.team!)
     
-    var timeProgressValue: Float = 0.2 {
-        didSet {
-            update()
-        }
-    }
+    let timeLeftLabel = MBLabel(size: 15, alignment: .center)
+    var timeLeft: TimeInterval?
+    var isTimerActive = false
+    var timer: Timer?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -41,11 +36,14 @@ class HomeVC: UIViewController {
         configure()
     }
     
-    func update() {
-        DispatchQueue.main.async {
-            self.timeProgress.setProgress(self.timeProgressValue/10, animated: true)
-            print(self.timeProgressValue)
-        }
+    
+    
+    override func viewWillAppear(_ animated: Bool) {
+        startTimer()
+    }
+    
+    override func viewDidDisappear(_ animated: Bool) {
+        stopTimer()
     }
     
     private func configure() {
@@ -59,9 +57,8 @@ class HomeVC: UIViewController {
         healthProgress.setProgress(player.hp/player.vitality, animated: true)
         staminaProgress.setProgress(Float(player.stamina/100), animated: true)
         experienceProgress.setProgress(Float(player.experience/player.nextLevel), animated: true)
-        timeProgress.setProgress(timeProgressValue, animated: true)
         
-        view.addSubviews([healthProgress, staminaProgress, experienceProgress, timeProgress])
+        view.addSubviews([healthProgress, staminaProgress, experienceProgress, timeProgress, timeLeftLabel])
     }
     
     private func configurePhotoStatus() {
@@ -75,6 +72,33 @@ class HomeVC: UIViewController {
         
         trainingButton.addTarget(self, action: #selector(pushTrainingVC), for: .touchUpInside)
         fightButton.addTarget(self, action: #selector(pushFightingVC), for: .touchUpInside)
+    }
+    
+    private func startTimer() {
+        if TimeManager.shared.inProgres && !isTimerActive {
+            timer = Timer.scheduledTimer(withTimeInterval: 0.3, repeats: true) { timer in
+                if TimeManager.shared.inProgres {
+                    self.timeLeft = TimeManager.shared.getTimeLeft()
+                    self.isTimerActive = true
+                    DispatchQueue.main.async {
+                        self.timeProgress.setProgress(Float((self.timeLeft ?? 0) / TimeManager.shared.trainingTime), animated: true)
+                        self.timeLeftLabel.text = DateComponentsFormatter().string(from: self.timeLeft!)!
+                        print(Float(self.timeLeft!))
+                    }
+                } else {
+                    self.timeProgress.setProgress(0, animated: true)
+                    self.timeLeftLabel.text = ""
+                    self.isTimerActive = false
+                    timer.invalidate()
+                }
+            }
+        }
+    }
+    
+    private func stopTimer() {
+        timer?.invalidate()
+        isTimerActive = false
+        timeProgress.setProgress(Float((self.timeLeft ?? 0) / TimeManager.shared.trainingTime), animated: true)
     }
     
     @objc func pushTrainingVC() {
@@ -115,6 +139,11 @@ class HomeVC: UIViewController {
             timeProgress.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
             timeProgress.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20),
             timeProgress.heightAnchor.constraint(equalToConstant: 17),
+            
+            timeLeftLabel.topAnchor.constraint(equalTo: timeProgress.bottomAnchor, constant: 10),
+            timeLeftLabel.centerXAnchor.constraint(equalTo: timeProgress.centerXAnchor),
+            timeLeftLabel.heightAnchor.constraint(equalToConstant: 17),
+            timeLeftLabel.widthAnchor.constraint(equalToConstant: 100),
             
             trainingButton.topAnchor.constraint(equalTo: timeProgress.bottomAnchor, constant: 90),
             trainingButton.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 40),

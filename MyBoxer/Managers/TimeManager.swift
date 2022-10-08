@@ -13,29 +13,29 @@ class TimeManager {
     
     var now = Date.now
     var endedTime: Date!
-    var timeLeft: TimeInterval! = 0.5 {
-        didSet {
-            HomeVC.shared.timeProgressValue = Float(timeLeft)
-        }
-    }
+    var timeLeft: TimeInterval! = 0.5
     var inProgres: Bool = false
+    var trainingTime: Double = 1
     
-    func start() {
-        endedTime = now.addingTimeInterval(10)
+    func train(for time: Double) {
+        now = Date.now
+        trainingTime = time
+        endedTime = now.addingTimeInterval(time)
         inProgres = true
         
-        Timer.scheduledTimer(withTimeInterval: 1.0, repeats: true) { timer in
+        Timer.scheduledTimer(withTimeInterval: 0.1, repeats: true) { timer in
             self.now = Date.now
             if self.endedTime < self.now {
-                print("Training completed")
                 self.inProgres = false
                 timer.invalidate()
-            } else {
-                print("Training...")
-                self.timeLeft = self.endedTime.timeIntervalSinceReferenceDate - self.now.timeIntervalSinceReferenceDate
-                
             }
         }
+        
+    }
+    
+    func getTimeLeft() -> TimeInterval! {
+        self.timeLeft = self.endedTime.timeIntervalSinceReferenceDate - self.now.timeIntervalSinceReferenceDate
+        return timeLeft
     }
     
 }

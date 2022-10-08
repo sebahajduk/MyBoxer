@@ -69,7 +69,7 @@ extension TrainingVC: UITableViewDataSource, UITableViewDelegate {
         if TimeManager.shared.inProgres {
             print("Cannot do training. You are already train")
         } else {
-            TimeManager.shared.start()
+            TimeManager.shared.train(for: 200)
         }
         print(boxer.movement)
     }
