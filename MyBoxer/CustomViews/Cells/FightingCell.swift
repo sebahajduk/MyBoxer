@@ -40,7 +40,7 @@ class FightingCell: UITableViewCell {
     }
     
     func set(for opponent: Opponent) {
-        opponentImage.image = UIImage(named: "baby-face")
+        opponentImage.image = UIImage(named: "opponent")
         opponentName.text = "Henryk Sienkiewicz"
         opponentVitality.set(value: Int(opponent.vitality))
         opponentPunchPower.set(value: opponent.punchPower)

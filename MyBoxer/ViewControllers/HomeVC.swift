@@ -19,11 +19,11 @@ class HomeVC: UIViewController {
     
     let timeProgress = MBProgressView(for: .time)
 
-    let rankButton = MBButton(image: Images.rank!)
-    let trainingButton = MBButton(image: Images.bag!)
-    let fightButton = MBButton(image: Images.ring!)
-    let shopButton = MBButton(image: Images.shop!)
-    let teamButton = MBButton(image: Images.team!)
+    let rankButton = MBHomeButton(image: Images.rank!)
+    let trainingButton = MBHomeButton(image: Images.bag!)
+    let fightButton = MBHomeButton(image: Images.ring!)
+    let shopButton = MBHomeButton(image: Images.shop!)
+    let teamButton = MBHomeButton(image: Images.team!)
     
     let timeLeftLabel = MBLabel(size: 15, alignment: .center)
     var timeLeft: TimeInterval?
@@ -62,7 +62,8 @@ class HomeVC: UIViewController {
     }
     
     private func configurePhotoStatus() {
-        statusPhoto.image = UIImage(named: "training")
+        statusPhoto.image = UIImage(named: "boxer")
+        statusPhoto.sizeToFit()
         view.addSubview(statusPhoto)
         statusPhoto.translatesAutoresizingMaskIntoConstraints = false
     }
@@ -72,6 +73,7 @@ class HomeVC: UIViewController {
         
         trainingButton.addTarget(self, action: #selector(pushTrainingVC), for: .touchUpInside)
         fightButton.addTarget(self, action: #selector(pushFightingVC), for: .touchUpInside)
+        shopButton.addTarget(self, action: #selector(pushShopVC), for: .touchUpInside)
     }
     
     private func startTimer() {
@@ -106,11 +108,17 @@ class HomeVC: UIViewController {
         
         navigationController!.pushViewController(trainingVC, animated: true)
     }
-    
+     
     @objc func pushFightingVC() {
         let fightingVC = FightingVC()
         
         navigationController!.pushViewController(fightingVC, animated: true)
+    }
+    
+    @objc func pushShopVC() {
+        let shopVC = ShopVC()
+        
+        navigationController!.pushViewController(shopVC, animated: true)
     }
     
     private func configureContraints() {
@@ -133,7 +141,7 @@ class HomeVC: UIViewController {
             statusPhoto.topAnchor.constraint(equalTo: experienceProgress.bottomAnchor, constant: 40),
             statusPhoto.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             statusPhoto.heightAnchor.constraint(equalToConstant: 240),
-            statusPhoto.widthAnchor.constraint(equalToConstant: 300),
+            statusPhoto.widthAnchor.constraint(equalToConstant: 240),
             
             timeProgress.topAnchor.constraint(equalTo: statusPhoto.bottomAnchor, constant: 10),
             timeProgress.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),

@@ -8,15 +8,15 @@
 import UIKit
 
 enum Images {
-    static let bag = UIImage(named: "bag")
-    static let rank = UIImage(named: "rank")
+    static let bag = UIImage(named: "skill")
+    static let rank = UIImage(named: "belt")
     static let ring = UIImage(named: "ring")
     static let shop = UIImage(named: "shop")
-    static let team = UIImage(named: "team")
+    static let team = UIImage(named: "club")
     
-    static let ballThrow = UIImage(named: "ballThrow")
-    static let interval = UIImage(named: "interval")
-    static let jumpingRope = UIImage(named: "jumpingRope")
-    static let shadowBox = UIImage(named: "shadowBox")
-    static let weightLift = UIImage(named: "weightLift")
+    static let ballThrow = UIImage(named: "throwing")
+    static let interval = UIImage(named: "running")
+    static let jumpingRope = UIImage(named: "jumping")
+    static let shadowBox = UIImage(named: "boxing")
+    static let weightLift = UIImage(named: "lifting")
 }

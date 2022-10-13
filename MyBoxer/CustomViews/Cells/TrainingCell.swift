@@ -12,9 +12,9 @@ class TrainingCell: UITableViewCell {
     static let reuseID = "trainingCell"
     
     let trainingImage = MBImageView(frame: .zero)
-    let trainingName = UILabel()
-    let trainingEffect = UILabel()
-    let trainingStamina = UILabel()
+    let trainingName = MBLabel(size: 20)
+    let trainingEffect = MBLabel(size: 16, color: .systemGray2)
+    let trainingStamina = MBLabel(size: 16, color: .systemMint)
     
     let bolt = UIImageView(image: UIImage(systemName: "bolt.fill"))
     
@@ -40,14 +40,6 @@ class TrainingCell: UITableViewCell {
         trainingStamina.translatesAutoresizingMaskIntoConstraints = false
         bolt.translatesAutoresizingMaskIntoConstraints = false
         
-        trainingName.font = UIFont(name: "Plaguard", size: 20)
-        
-        trainingEffect.font = UIFont(name: "Plaguard", size: 16)
-        trainingEffect.textColor = .systemGray2
-        
-        trainingStamina.font = UIFont(name: "Plaguard", size: 16)
-        trainingStamina.textColor = .systemMint
-        
         bolt.tintColor = .systemMint
         
         addSubviews([trainingImage, trainingName, trainingEffect, trainingStamina, bolt])
@@ -72,7 +64,7 @@ class TrainingCell: UITableViewCell {
             trainingStamina.widthAnchor.constraint(equalToConstant: 10),
             trainingStamina.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -10),
             
-            bolt.topAnchor.constraint(equalTo: trainingStamina.topAnchor, constant: -1),
+            bolt.centerYAnchor.constraint(equalTo: trainingStamina.centerYAnchor),
             bolt.leadingAnchor.constraint(equalTo: trainingStamina.trailingAnchor),
             bolt.heightAnchor.constraint(equalToConstant: 15),
             bolt.widthAnchor.constraint(equalToConstant: 15)
