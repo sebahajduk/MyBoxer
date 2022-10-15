@@ -7,11 +7,17 @@
 
 import UIKit
 
-class ShopVC: UIViewController {
+protocol UpdateCategoryDelegate: AnyObject {
+    func updateCategory(to category: EquipmentCategory)
+}
+
+class ShopVC: UIViewController, UpdateCategoryDelegate {
     
     let itemCategories: [String] = ["Gloves", "Boots", "Shorts", "Wraps"]
     let menu = MBShopMenu(frame: .zero)
     let tableView = UITableView()
+    
+    var category: EquipmentCategory = .boots
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -19,11 +25,23 @@ class ShopVC: UIViewController {
         configure()
     }
     
+    func updateCategory(to category: EquipmentCategory) {
+        self.category = category
+        UIView.transition(with: tableView,
+                          duration: 0.35,
+                          options: .transitionCrossDissolve,
+                          animations: { () -> Void in
+            self.tableView.reloadData()
+        },
+                          completion: nil)
+    }
+    
     private func configure() {
         view.addSubviews([menu, tableView])
         tableView.translatesAutoresizingMaskIntoConstraints = false
         menu.translatesAutoresizingMaskIntoConstraints = false
-
+        menu.updateCategoryDelegate = self
+        
         tableView.delegate = self
         tableView.dataSource = self
 
@@ -36,7 +54,7 @@ class ShopVC: UIViewController {
             menu.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20),
             menu.heightAnchor.constraint(equalToConstant: 30),
             
-            tableView.topAnchor.constraint(equalTo: menu.bottomAnchor),
+            tableView.topAnchor.constraint(equalTo: menu.bottomAnchor, constant: 30),
             tableView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             tableView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
             tableView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
@@ -52,9 +70,7 @@ extension ShopVC: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: ShopItemCell.reuseID) as! ShopItemCell
 
-        cell.set()
+        cell.set(for: category)
         return cell
     }
-
-
 }

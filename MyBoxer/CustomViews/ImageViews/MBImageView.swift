@@ -20,7 +20,6 @@ class MBImageView: UIImageView {
     
     private func configure() {
         layer.cornerRadius = 10
-        layer.borderWidth = 1
         layer.borderColor = UIColor.secondarySystemBackground.cgColor
         clipsToBounds = true
         translatesAutoresizingMaskIntoConstraints = false

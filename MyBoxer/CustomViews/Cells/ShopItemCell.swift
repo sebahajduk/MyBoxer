@@ -7,6 +7,10 @@
 
 import UIKit
 
+enum EquipmentCategory {
+    case gloves, boots, shorts, tapes
+}
+
 class ShopItemCell: UITableViewCell {
     
     static let reuseID = "ShopItemCell"
@@ -27,11 +31,32 @@ class ShopItemCell: UITableViewCell {
         fatalError("init(coder:) has not been implemented")
     }
     
-    func set() {
-        itemName.text = "Boxing glove"
-        itemStats.text = "Punch power +5"
-        itemPrice.text = "150"
-        itemImage.image = UIImage(named: "boxing-gloves")
+    func set(for category: EquipmentCategory) {
+        
+        switch category {
+        case .gloves:
+            itemName.text = "Boxing glove"
+            itemStats.text = "Punch power +5"
+            itemPrice.text = "150"
+            itemImage.image = Images.boxingGlove
+        case .boots:
+            itemName.text = "Boxing boots"
+            itemStats.text = "Movement +5"
+            itemPrice.text = "50"
+            itemImage.image = Images.boxingBoots
+        case .shorts:
+            itemName.text = "Boxing shorts"
+            itemStats.text = "Endurance +5"
+            itemPrice.text = "350"
+            itemImage.image = Images.boxingShorts
+        case .tapes:
+            itemName.text = "Boxing tapes"
+            itemStats.text = "Power +5"
+            itemPrice.text = "1000"
+            itemImage.image = Images.boxingTapes
+        }
+        
+        
     }
     
     private func configure() {
@@ -40,8 +65,6 @@ class ShopItemCell: UITableViewCell {
         coin.translatesAutoresizingMaskIntoConstraints = false
         
         coin.tintColor = .systemYellow
-        
-        
         
         NSLayoutConstraint.activate([
             itemImage.centerYAnchor.constraint(equalTo: centerYAnchor),

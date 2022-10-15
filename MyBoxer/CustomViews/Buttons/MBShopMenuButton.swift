@@ -7,6 +7,10 @@
 
 import UIKit
 
+enum ButtonStyle {
+    case gloves, boots, shorts, tapes
+}
+
 class MBShopMenuButton: UIButton {
 
     override init(frame: CGRect) {
@@ -17,16 +21,28 @@ class MBShopMenuButton: UIButton {
         fatalError("init(coder:) has not been implemented")
     }
     
-    convenience init(string: String) {
+    convenience init(type: ButtonStyle) {
         self.init()
-        configure()
+        configure(type: type)
     }
     
-    private func configure() {
-//        setBackgroundImage(image, for: .normal)
+    private func configure(type: ButtonStyle) {
         layer.cornerRadius = 10
         layer.masksToBounds = true
         translatesAutoresizingMaskIntoConstraints = false
+        
+        switch type {
+        case .gloves:
+            setTitle("gloves", for: .normal)
+        case .boots:
+            setTitle("boots", for: .normal)
+        case .shorts:
+            setTitle("shorts", for: .normal)
+        case .tapes:
+            setTitle("tapes", for: .normal)
+        }
+        
+        titleLabel?.font = UIFont(name: "college", size: 15)
         
         NSLayoutConstraint.activate([
             heightAnchor.constraint(equalToConstant: 30),
