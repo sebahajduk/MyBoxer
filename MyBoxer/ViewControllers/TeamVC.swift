@@ -1,47 +1,41 @@
 //
-//  ShopVC.swift
+//  TeamVC.swift
 //  MyBoxer
 //
-//  Created by Sebastian Hajduk on 10/10/2022.
+//  Created by Sebastian Hajduk on 16/10/2022.
 //
 
 import UIKit
 
-protocol UpdateCategoryDelegate: AnyObject {
-    func updateCategory(to category: EquipmentCategory)
+protocol UpdateTeamHireAgency: AnyObject {
+    func updateTeamHireAgency(to specialization: MemberCategory)
 }
 
-class ShopVC: UIViewController, UpdateCategoryDelegate {
+class TeamVC: UIViewController, UpdateTeamHireAgency {
     
-    let itemCategories: [String] = ["Gloves", "Boots", "Shorts", "Wraps"]
-    let menu = MBShopMenu(frame: .zero)
+    let menu = MBTeamMenu(frame: .zero)
     let tableView = UITableView()
     
-    var category: EquipmentCategory = .gloves
-    
+    var category: MemberCategory = .manager
+
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .systemBackground
+        
         configure()
-    }
-    
-    func updateCategory(to category: EquipmentCategory) {
-        self.category = category
-        UIView.transition(with: tableView, duration: 0.35, options: .transitionCrossDissolve, animations: { () -> Void in
-            self.tableView.reloadData()
-        })
     }
     
     private func configure() {
         view.addSubviews([menu, tableView])
+        menu.updateTeamHireAgencyDelegate = self
+        
         tableView.translatesAutoresizingMaskIntoConstraints = false
         menu.translatesAutoresizingMaskIntoConstraints = false
-        menu.updateCategoryDelegate = self
         
         tableView.delegate = self
         tableView.dataSource = self
 
-        tableView.register(ShopItemCell.self, forCellReuseIdentifier: ShopItemCell.reuseID)
+        tableView.register(TeamMemberCell.self, forCellReuseIdentifier: TeamMemberCell.reuseID)
         tableView.rowHeight = 100
         
         NSLayoutConstraint.activate([
@@ -56,17 +50,30 @@ class ShopVC: UIViewController, UpdateCategoryDelegate {
             tableView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
         ])
     }
+    
+    func updateTeamHireAgency(to specialization: MemberCategory) {
+        self.category = specialization
+        
+        UIView.transition(with: tableView, duration: 0.35, options: .transitionCrossDissolve, animations: { () -> Void in
+            self.tableView.reloadData()
+        })
+        
+    }
+
 }
 
-extension ShopVC: UITableViewDelegate, UITableViewDataSource {
+extension TeamVC: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return 5
     }
-
+    
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: ShopItemCell.reuseID) as! ShopItemCell
-
-        cell.set(for: category)
+        let cell = tableView.dequeueReusableCell(withIdentifier: TeamMemberCell.reuseID) as! TeamMemberCell
+        
+        cell.set(to: category)
+        
         return cell
     }
+    
+    
 }

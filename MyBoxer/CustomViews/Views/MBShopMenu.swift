@@ -9,16 +9,16 @@ import UIKit
 
 class MBShopMenu: UIView {
     
-    let buttonGloves = MBShopMenuButton(type: .gloves)
-    let buttonBoots = MBShopMenuButton(type: .boots)
-    let buttonShorts = MBShopMenuButton(type: .shorts)
-    let buttonTapes = MBShopMenuButton(type: .tapes)
+    let buttonGloves = MBCategoriesButton(type: .gloves)
+    let buttonBoots = MBCategoriesButton(type: .boots)
+    let buttonShorts = MBCategoriesButton(type: .shorts)
+    let buttonTapes = MBCategoriesButton(type: .tapes)
     
     var updateCategoryDelegate: UpdateCategoryDelegate? = nil
 
     override init(frame: CGRect) {
         super.init(frame: frame)
-        
+        backgroundColor = .systemBackground
         configure()
         configureButtons()
     }

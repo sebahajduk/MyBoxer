@@ -8,10 +8,10 @@
 import UIKit
 
 enum ButtonStyle {
-    case gloves, boots, shorts, tapes
+    case gloves, boots, shorts, tapes, manager, coach, cutman, physio
 }
 
-class MBShopMenuButton: UIButton {
+class MBCategoriesButton: UIButton {
 
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -40,6 +40,14 @@ class MBShopMenuButton: UIButton {
             setTitle("shorts", for: .normal)
         case .tapes:
             setTitle("tapes", for: .normal)
+        case .manager:
+            setTitle("managers", for: .normal)
+        case .coach:
+            setTitle("coaches", for: .normal)
+        case .cutman:
+            setTitle("cutmans", for: .normal)
+        case .physio:
+            setTitle("physio", for: .normal)
         }
         
         titleLabel?.font = UIFont(name: "college", size: 15)

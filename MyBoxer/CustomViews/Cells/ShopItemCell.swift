@@ -32,7 +32,6 @@ class ShopItemCell: UITableViewCell {
     }
     
     func set(for category: EquipmentCategory) {
-        
         switch category {
         case .gloves:
             itemName.text = "Boxing glove"
@@ -55,8 +54,6 @@ class ShopItemCell: UITableViewCell {
             itemPrice.text = "1000"
             itemImage.image = Images.boxingTapes
         }
-        
-        
     }
     
     private func configure() {

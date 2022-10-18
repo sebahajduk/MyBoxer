@@ -41,13 +41,13 @@ class Opponent: Boxer {
     
     init(forLevel: Int) {
         super.init()
-        self.vitality = Float(vitality) * 150
-        punchPower = forLevel * 3
-        punchSpeed = forLevel * 3
-        footwork = forLevel * 3
+        self.vitality = Float(forLevel) * 150
+        punchPower = forLevel * 2
+        punchSpeed = forLevel * 2
+        footwork = forLevel * 4
         movement = forLevel * 3
         defence = forLevel * 3
-        endurance = forLevel * 3
+        endurance = forLevel * 5
     }
     
 }

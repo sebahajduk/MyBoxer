@@ -24,4 +24,9 @@ enum Images {
     static let boxingBoots = UIImage(named: "boxing-boots")
     static let boxingShorts = UIImage(named: "boxing-shorts")
     static let boxingTapes = UIImage(named: "boxing-tapes")
+    
+    static let managerImage = UIImage(named: "manager")
+    static let coachImage = UIImage(named: "coach")
+    static let physioImage = UIImage(named: "physio")
+    static let cutmanImage = UIImage(named: "cutman")
 }
