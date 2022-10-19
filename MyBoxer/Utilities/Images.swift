@@ -20,6 +20,8 @@ enum Images {
     static let shadowBox = UIImage(named: "boxing")
     static let weightLift = UIImage(named: "lifting")
     
+    static let opponent = UIImage(named: "opponent")
+    
     static let boxingGlove = UIImage(named: "boxing-gloves")
     static let boxingBoots = UIImage(named: "boxing-boots")
     static let boxingShorts = UIImage(named: "boxing-shorts")

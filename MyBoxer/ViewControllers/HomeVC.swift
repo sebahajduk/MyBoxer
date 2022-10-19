@@ -75,6 +75,7 @@ class HomeVC: UIViewController {
         fightButton.addTarget(self, action: #selector(pushFightingVC), for: .touchUpInside)
         shopButton.addTarget(self, action: #selector(pushShopVC), for: .touchUpInside)
         teamButton.addTarget(self, action: #selector(pushTeamVC), for: .touchUpInside)
+        rankButton.addTarget(self, action: #selector(pushRankVC), for: .touchUpInside)
     }
     
     private func startTimer() {
@@ -126,6 +127,12 @@ class HomeVC: UIViewController {
         let teamVC = TeamVC()
         
         navigationController!.pushViewController(teamVC, animated: true)
+    }
+    
+    @objc func pushRankVC() {
+        let rankVC = RankVC()
+        
+        navigationController!.pushViewController(rankVC, animated: true)
     }
     
     private func configureContraints() {
