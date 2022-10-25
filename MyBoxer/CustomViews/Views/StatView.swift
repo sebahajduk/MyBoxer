@@ -11,7 +11,7 @@ enum Stats {
     case vitality, power, speed, footwork, movement, defence, endurance
 }
 
-class OpponentStatView: UIView {
+class StatView: UIView {
     
     let stat = MBLabel(size: 16, color: .systemGray2)
     var statValue = MBLabel(size: 16, color: .systemGray2, alignment: .right)
