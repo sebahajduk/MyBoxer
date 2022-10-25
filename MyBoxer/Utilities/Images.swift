@@ -8,6 +8,8 @@
 import UIKit
 
 enum Images {
+    static let player = UIImage(named: "boxer")
+    
     static let bag = UIImage(named: "skill")
     static let rank = UIImage(named: "belt")
     static let ring = UIImage(named: "ring")

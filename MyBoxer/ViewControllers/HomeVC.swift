@@ -36,8 +36,6 @@ class HomeVC: UIViewController {
         configure()
     }
     
-    
-    
     override func viewWillAppear(_ animated: Bool) {
         startTimer()
     }
@@ -47,6 +45,8 @@ class HomeVC: UIViewController {
     }
     
     private func configure() {
+        navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(systemName: "line.3.horizontal"), style: .plain, target: self, action: #selector(pushDetailVC))
+        
         configureBars()
         configurePhotoStatus()
         configureButtonsMenu()
@@ -62,7 +62,7 @@ class HomeVC: UIViewController {
     }
     
     private func configurePhotoStatus() {
-        statusPhoto.image = UIImage(named: "boxer")
+        statusPhoto.image = Images.player
         statusPhoto.sizeToFit()
         view.addSubview(statusPhoto)
         statusPhoto.translatesAutoresizingMaskIntoConstraints = false
@@ -70,7 +70,7 @@ class HomeVC: UIViewController {
     
     private func configureButtonsMenu() {
         view.addSubviews([trainingButton, fightButton, shopButton, teamButton, rankButton])
-        
+                
         trainingButton.addTarget(self, action: #selector(pushTrainingVC), for: .touchUpInside)
         fightButton.addTarget(self, action: #selector(pushFightingVC), for: .touchUpInside)
         shopButton.addTarget(self, action: #selector(pushShopVC), for: .touchUpInside)
@@ -105,6 +105,15 @@ class HomeVC: UIViewController {
         timeProgress.setProgress(Float((self.timeLeft ?? 0) / TimeManager.shared.trainingTime), animated: true)
     }
     
+    @objc func pushDetailVC() {
+        let detailVC = PlayerDetailsVC()
+        
+        detailVC.modalPresentationStyle = .overFullScreen
+        detailVC.modalTransitionStyle = .crossDissolve
+        
+        navigationController!.present(detailVC, animated: true)
+    }
+    
     @objc func pushTrainingVC() {
         let trainingVC = TrainingVC(myBoxer: player)
         
@@ -137,7 +146,7 @@ class HomeVC: UIViewController {
     
     private func configureContraints() {
         NSLayoutConstraint.activate([
-            healthProgress.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 20),
+            healthProgress.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 30),
             healthProgress.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
             healthProgress.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20),
             healthProgress.heightAnchor.constraint(equalToConstant: 17),

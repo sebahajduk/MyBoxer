@@ -22,13 +22,13 @@ class FightingCell: UITableViewCell {
     
     let opponentImage = MBImageView(frame: .zero)
     let opponentName = MBLabel(size: 16)
-    let opponentVitality: OpponentStatView = OpponentStatView(statType: .vitality)
-    var opponentPunchPower: OpponentStatView = OpponentStatView(statType: .power)
-    var opponentPunchSpeed: OpponentStatView = OpponentStatView(statType: .speed)
-    var opponentFootwork: OpponentStatView = OpponentStatView(statType: .footwork)
-    var opponentMovement: OpponentStatView = OpponentStatView(statType: .movement)
-    var opponentDefence: OpponentStatView = OpponentStatView(statType: .defence)
-    var opponentEndurance: OpponentStatView = OpponentStatView(statType: .endurance)
+    let opponentVitality: StatView = StatView(statType: .vitality)
+    let opponentPunchPower: StatView = StatView(statType: .power)
+    let opponentPunchSpeed: StatView = StatView(statType: .speed)
+    let opponentFootwork: StatView = StatView(statType: .footwork)
+    let opponentMovement: StatView = StatView(statType: .movement)
+    let opponentDefence: StatView = StatView(statType: .defence)
+    let opponentEndurance: StatView = StatView(statType: .endurance)
 
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
@@ -39,16 +39,16 @@ class FightingCell: UITableViewCell {
         fatalError("init(coder:) has not been implemented")
     }
     
-    func set(for opponent: Opponent) {
+    func set(for boxer: Boxer) {
         opponentImage.image = Images.opponent
         opponentName.text = "Henryk Sienkiewicz"
-        opponentVitality.set(value: Int(opponent.vitality))
-        opponentPunchPower.set(value: opponent.punchPower)
-        opponentPunchSpeed.set(value: opponent.punchSpeed)
-        opponentFootwork.set(value: opponent.footwork)
-        opponentMovement.set(value: opponent.movement)
-        opponentDefence.set(value: opponent.defence)
-        opponentEndurance.set(value: opponent.endurance)
+        opponentVitality.set(value: Int(boxer.vitality))
+        opponentPunchPower.set(value: boxer.punchPower)
+        opponentPunchSpeed.set(value: boxer.punchSpeed)
+        opponentFootwork.set(value: boxer.footwork)
+        opponentMovement.set(value: boxer.movement)
+        opponentDefence.set(value: boxer.defence)
+        opponentEndurance.set(value: boxer.endurance)
     }
     
     private func configure() {

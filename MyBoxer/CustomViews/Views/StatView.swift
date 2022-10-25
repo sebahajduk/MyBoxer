@@ -8,7 +8,7 @@
 import UIKit
 
 enum Stats {
-    case vitality, power, speed, footwork, movement, defence, endurance
+    case vitality, power, speed, footwork, movement, defence, endurance, level
 }
 
 class StatView: UIView {
@@ -54,6 +54,10 @@ class StatView: UIView {
             stat.text = "defence"
         case .endurance:
             stat.text = "endurance"
+        case .level:
+            stat.text = "level"
+            stat.textColor = .label
+            statValue.textColor = .label
         }
         
         translatesAutoresizingMaskIntoConstraints = false
