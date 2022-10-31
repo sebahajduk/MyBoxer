@@ -14,11 +14,11 @@ class TrainingVC: UIViewController {
     var boxer: Player!
     
     let trainings: [Training] = [
-        Training(name: "Shadow boxing", staminaNeeded: 5, effect: "+1 Movement / +1 Defence", image: Images.shadowBox!),
-        Training(name: "Weight lifting", staminaNeeded: 5, effect: "+2 Punch power", image: Images.weightLift!),
-        Training(name: "Jumping rope", staminaNeeded: 5, effect: "+2 Footwork", image: Images.jumpingRope!),
-        Training(name: "Ball throw", staminaNeeded: 5, effect: "+2 Punch speed", image: Images.ballThrow!),
-        Training(name: "Intervals", staminaNeeded: 5, effect: "+2 Endurance", image: Images.interval!)
+        Training(type: .shadowBoxing),
+        Training(type: .weightLifting),
+        Training(type: .jumpingRope),
+        Training(type: .ballThrow),
+        Training(type: .intervals)
     ]
 
     override func viewDidLoad() {
@@ -64,13 +64,15 @@ extension TrainingVC: UITableViewDataSource, UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        boxer.shadowBox()
         
-        if TimeManager.shared.inProgres {
+        if TimeManagerLocal.shared.inProgres {
             print("Cannot do training. You are already train")
         } else {
-            TimeManager.shared.train(for: 200)
+            TimeManagerLocal.shared.train(for: 200)
+            boxer.training(trainings[indexPath.row].type)
+            print(trainings[indexPath.row].type)
         }
-        print(boxer.movement)
+        
+        tableView.deselectRow(at: indexPath, animated: true)
     }
 }

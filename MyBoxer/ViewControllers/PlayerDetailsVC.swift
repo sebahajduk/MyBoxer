@@ -35,6 +35,16 @@ class PlayerDetailsVC: UIViewController {
         configureConstraints()
     }
     
+    func set(for boxer: Boxer) {
+        vitality.set(value: Int(boxer.vitality))
+        punchPower.set(value: boxer.punchPower)
+        punchSpeed.set(value: boxer.punchSpeed)
+        footwork.set(value: boxer.footwork)
+        movement.set(value: boxer.movement)
+        defence.set(value: boxer.defence)
+        endurance.set(value: boxer.endurance)
+    }
+    
     @objc func dismissVC() {
         dismiss(animated: true)
     }

@@ -18,7 +18,7 @@ class HomeVC: UIViewController {
     let statusPhoto = UIImageView()
     
     let timeProgress = MBProgressView(for: .time)
-
+    
     let rankButton = MBHomeButton(image: Images.rank!)
     let trainingButton = MBHomeButton(image: Images.bag!)
     let fightButton = MBHomeButton(image: Images.ring!)
@@ -33,7 +33,13 @@ class HomeVC: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .systemBackground
+        
         configure()
+        
+        DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 0.3) {
+            self.startTimer()
+            self.loadData()
+        }
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -43,6 +49,84 @@ class HomeVC: UIViewController {
     override func viewDidDisappear(_ animated: Bool) {
         stopTimer()
     }
+    
+    private func loadData() {
+        player = Defaults.shared.myBoxer ?? Player()
+    }
+    
+    //MARK: Time managment
+    
+    private func startTimer() {
+        if TimeManagerLocal.shared.inProgres && !isTimerActive {
+            timer = Timer.scheduledTimer(withTimeInterval: 0.3, repeats: true) { timer in
+                if TimeManagerLocal.shared.inProgres {
+                    self.timeLeft = TimeManagerLocal.shared.getTimeLeft()
+                    self.isTimerActive = true
+                    DispatchQueue.main.async {
+                        self.timeProgress.setProgress(Float((self.timeLeft ?? 0) / Defaults.shared.actionTime), animated: true)
+                        self.timeLeftLabel.text = DateComponentsFormatter().string(from: self.timeLeft!)!
+                        print(Float(self.timeLeft!))
+                    }
+                } else {
+                    self.timeProgress.setProgress(0, animated: true)
+                    self.timeLeftLabel.text = ""
+                    self.isTimerActive = false
+                    timer.invalidate()
+                }
+            }
+        }
+    }
+    
+    private func stopTimer() {
+        timer?.invalidate()
+        isTimerActive = false
+        timeProgress.setProgress(Float((self.timeLeft ?? 0) / TimeManagerLocal.shared.trainingTime), animated: true)
+    }
+    
+    //MARK: Objective-c methods
+    
+    @objc func pushDetailVC() {
+        let detailVC = PlayerDetailsVC()
+        
+        detailVC.set(for: player)
+        
+        detailVC.modalPresentationStyle = .overFullScreen
+        detailVC.modalTransitionStyle = .crossDissolve
+        
+        navigationController!.present(detailVC, animated: true)
+    }
+    
+    @objc func pushTrainingVC() {
+        let trainingVC = TrainingVC(myBoxer: player)
+        
+        navigationController!.pushViewController(trainingVC, animated: true)
+    }
+    
+    @objc func pushFightingVC() {
+        let fightingVC = FightingVC()
+        
+        navigationController!.pushViewController(fightingVC, animated: true)
+    }
+    
+    @objc func pushShopVC() {
+        let shopVC = ShopVC()
+        
+        navigationController!.pushViewController(shopVC, animated: true)
+    }
+    
+    @objc func pushTeamVC() {
+        let teamVC = TeamVC()
+        
+        navigationController!.pushViewController(teamVC, animated: true)
+    }
+    
+    @objc func pushRankVC() {
+        let rankVC = RankVC()
+        
+        navigationController!.pushViewController(rankVC, animated: true)
+    }
+    
+    //MARK: View configuration
     
     private func configure() {
         navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(systemName: "line.3.horizontal"), style: .plain, target: self, action: #selector(pushDetailVC))
@@ -70,78 +154,12 @@ class HomeVC: UIViewController {
     
     private func configureButtonsMenu() {
         view.addSubviews([trainingButton, fightButton, shopButton, teamButton, rankButton])
-                
+        
         trainingButton.addTarget(self, action: #selector(pushTrainingVC), for: .touchUpInside)
         fightButton.addTarget(self, action: #selector(pushFightingVC), for: .touchUpInside)
         shopButton.addTarget(self, action: #selector(pushShopVC), for: .touchUpInside)
         teamButton.addTarget(self, action: #selector(pushTeamVC), for: .touchUpInside)
         rankButton.addTarget(self, action: #selector(pushRankVC), for: .touchUpInside)
-    }
-    
-    private func startTimer() {
-        if TimeManager.shared.inProgres && !isTimerActive {
-            timer = Timer.scheduledTimer(withTimeInterval: 0.3, repeats: true) { timer in
-                if TimeManager.shared.inProgres {
-                    self.timeLeft = TimeManager.shared.getTimeLeft()
-                    self.isTimerActive = true
-                    DispatchQueue.main.async {
-                        self.timeProgress.setProgress(Float((self.timeLeft ?? 0) / TimeManager.shared.trainingTime), animated: true)
-                        self.timeLeftLabel.text = DateComponentsFormatter().string(from: self.timeLeft!)!
-                        print(Float(self.timeLeft!))
-                    }
-                } else {
-                    self.timeProgress.setProgress(0, animated: true)
-                    self.timeLeftLabel.text = ""
-                    self.isTimerActive = false
-                    timer.invalidate()
-                }
-            }
-        }
-    }
-    
-    private func stopTimer() {
-        timer?.invalidate()
-        isTimerActive = false
-        timeProgress.setProgress(Float((self.timeLeft ?? 0) / TimeManager.shared.trainingTime), animated: true)
-    }
-    
-    @objc func pushDetailVC() {
-        let detailVC = PlayerDetailsVC()
-        
-        detailVC.modalPresentationStyle = .overFullScreen
-        detailVC.modalTransitionStyle = .crossDissolve
-        
-        navigationController!.present(detailVC, animated: true)
-    }
-    
-    @objc func pushTrainingVC() {
-        let trainingVC = TrainingVC(myBoxer: player)
-        
-        navigationController!.pushViewController(trainingVC, animated: true)
-    }
-     
-    @objc func pushFightingVC() {
-        let fightingVC = FightingVC()
-        
-        navigationController!.pushViewController(fightingVC, animated: true)
-    }
-    
-    @objc func pushShopVC() {
-        let shopVC = ShopVC()
-        
-        navigationController!.pushViewController(shopVC, animated: true)
-    }
-    
-    @objc func pushTeamVC() {
-        let teamVC = TeamVC()
-        
-        navigationController!.pushViewController(teamVC, animated: true)
-    }
-    
-    @objc func pushRankVC() {
-        let rankVC = RankVC()
-        
-        navigationController!.pushViewController(rankVC, animated: true)
     }
     
     private func configureContraints() {
@@ -155,7 +173,7 @@ class HomeVC: UIViewController {
             staminaProgress.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
             staminaProgress.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20),
             staminaProgress.heightAnchor.constraint(equalToConstant: 17),
-
+            
             experienceProgress.topAnchor.constraint(equalTo: staminaProgress.bottomAnchor, constant: 10),
             experienceProgress.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
             experienceProgress.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20),
@@ -184,7 +202,7 @@ class HomeVC: UIViewController {
             
             shopButton.topAnchor.constraint(equalTo: timeProgress.bottomAnchor, constant: 90),
             shopButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -40),
-
+            
             teamButton.topAnchor.constraint(equalTo: fightButton.bottomAnchor, constant: 40),
             teamButton.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 100),
             

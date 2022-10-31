@@ -11,7 +11,7 @@ enum BoxerStatus {
     case training, fighting, resting
 }
 
-class Boxer {
+class Boxer: Codable {
     var vitality: Float = 100.0
     var punchPower: Int = 10 // Weight lifting +2
     var punchSpeed: Int = 10 // Ball throwing +2
@@ -19,35 +19,4 @@ class Boxer {
     var movement: Int = 10 // Shadow box +1
     var defence: Int = 10 // Shadow box +1
     var endurance: Int = 10 // Interval +2
-}
-
-class Player: Boxer {
-    var hp: Float = 80.0
-    var stamina: Int = 100
-    
-    var currentLevel: Int = 1
-    var experience: Float = 20.0
-    var nextLevel: Float = 100.0
-    
-    var status: BoxerStatus = .training
-    
-    func shadowBox() {
-        movement += 1
-        defence += 1
-    }
-}
-
-class Opponent: Boxer {
-    
-    init(forLevel: Int) {
-        super.init()
-        self.vitality = Float(forLevel) * 150
-        punchPower = forLevel * 2
-        punchSpeed = forLevel * 2
-        footwork = forLevel * 4
-        movement = forLevel * 3
-        defence = forLevel * 3
-        endurance = forLevel * 5
-    }
-    
 }
