@@ -52,26 +52,33 @@ class HomeVC: UIViewController {
     
     private func loadData() {
         player = Defaults.shared.myBoxer ?? Player()
+        player.homeRegeneration(intervals: TimeManagerLocal.shared.timeIntervals)
     }
     
     //MARK: Time managment
     
     private func startTimer() {
-        if TimeManagerLocal.shared.inProgres && !isTimerActive {
-            timer = Timer.scheduledTimer(withTimeInterval: 0.3, repeats: true) { timer in
+        var timerFiredCounter = 0
+        if !isTimerActive {
+            timer = Timer.scheduledTimer(withTimeInterval: 0.2, repeats: true) { timer in
                 if TimeManagerLocal.shared.inProgres {
                     self.timeLeft = TimeManagerLocal.shared.getTimeLeft()
                     self.isTimerActive = true
-                    DispatchQueue.main.async {
-                        self.timeProgress.setProgress(Float((self.timeLeft ?? 0) / Defaults.shared.actionTime), animated: true)
-                        self.timeLeftLabel.text = DateComponentsFormatter().string(from: self.timeLeft!)!
-                        print(Float(self.timeLeft!))
+                    DispatchQueue.main.async { [self] in
+                        timeProgress.setProgress(Float((timeLeft ?? 0) / Defaults.shared.actionTime), animated: true)
+                        timeLeftLabel.text = DateComponentsFormatter().string(from: timeLeft!)!
+                        print(Float(timeLeft!))
                     }
                 } else {
+                    if timerFiredCounter % 15_000 == 0 {
+                        self.player.homeRegeneration()
+                        self.updateBars()
+                    }
+                    
+                    timerFiredCounter += 1
                     self.timeProgress.setProgress(0, animated: true)
                     self.timeLeftLabel.text = ""
                     self.isTimerActive = false
-                    timer.invalidate()
                 }
             }
         }
@@ -83,47 +90,14 @@ class HomeVC: UIViewController {
         timeProgress.setProgress(Float((self.timeLeft ?? 0) / TimeManagerLocal.shared.trainingTime), animated: true)
     }
     
-    //MARK: Objective-c methods
+    //MARK: View updating
     
-    @objc func pushDetailVC() {
-        let detailVC = PlayerDetailsVC()
-        
-        detailVC.set(for: player)
-        
-        detailVC.modalPresentationStyle = .overFullScreen
-        detailVC.modalTransitionStyle = .crossDissolve
-        
-        navigationController!.present(detailVC, animated: true)
-    }
-    
-    @objc func pushTrainingVC() {
-        let trainingVC = TrainingVC(myBoxer: player)
-        
-        navigationController!.pushViewController(trainingVC, animated: true)
-    }
-    
-    @objc func pushFightingVC() {
-        let fightingVC = FightingVC()
-        
-        navigationController!.pushViewController(fightingVC, animated: true)
-    }
-    
-    @objc func pushShopVC() {
-        let shopVC = ShopVC()
-        
-        navigationController!.pushViewController(shopVC, animated: true)
-    }
-    
-    @objc func pushTeamVC() {
-        let teamVC = TeamVC()
-        
-        navigationController!.pushViewController(teamVC, animated: true)
-    }
-    
-    @objc func pushRankVC() {
-        let rankVC = RankVC()
-        
-        navigationController!.pushViewController(rankVC, animated: true)
+    private func updateBars() {
+        DispatchQueue.main.async { [self] in
+            healthProgress.setProgress(player.hp/player.vitality, animated: true)
+            staminaProgress.setProgress(Float(player.stamina/100), animated: true)
+            experienceProgress.setProgress(Float(player.experience/player.nextLevel), animated: true)
+        }
     }
     
     //MARK: View configuration
@@ -209,5 +183,48 @@ class HomeVC: UIViewController {
             rankButton.topAnchor.constraint(equalTo: shopButton.bottomAnchor, constant: 40),
             rankButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -100)
         ])
+    }
+    
+    //MARK: Objective-c methods
+    
+    @objc func pushDetailVC() {
+        let detailVC = PlayerDetailsVC()
+        
+        detailVC.set(for: player)
+        
+        detailVC.modalPresentationStyle = .overFullScreen
+        detailVC.modalTransitionStyle = .crossDissolve
+        
+        navigationController!.present(detailVC, animated: true)
+    }
+    
+    @objc func pushTrainingVC() {
+        let trainingVC = TrainingVC(myBoxer: player)
+        
+        navigationController!.pushViewController(trainingVC, animated: true)
+    }
+    
+    @objc func pushFightingVC() {
+        let fightingVC = FightingVC()
+        
+        navigationController!.pushViewController(fightingVC, animated: true)
+    }
+    
+    @objc func pushShopVC() {
+        let shopVC = ShopVC()
+        
+        navigationController!.pushViewController(shopVC, animated: true)
+    }
+    
+    @objc func pushTeamVC() {
+        let teamVC = TeamVC()
+        
+        navigationController!.pushViewController(teamVC, animated: true)
+    }
+    
+    @objc func pushRankVC() {
+        let rankVC = RankVC()
+        
+        navigationController!.pushViewController(rankVC, animated: true)
     }
 }

@@ -16,6 +16,7 @@ class TimeManagerLocal {
     var timeLeft: TimeInterval! = 0.5
     var inProgres: Bool = false
     var trainingTime: Double = 1
+    var timeIntervals: Int = 0
     
     func train(for time: Double) {
         now = Date.now
@@ -58,11 +59,13 @@ class TimeManagerLocal {
     }
     
     private func loadData() {
+        endedTime = Defaults.shared.actionEndAt
         if Defaults.shared.actionEndAt ?? Date.now > Date.now {
-            endedTime = Defaults.shared.actionEndAt
             startTimer()
             print("training")
         } else {
+            let restingTime: TimeInterval = Date.now.timeIntervalSinceReferenceDate - endedTime.timeIntervalSinceReferenceDate
+            timeIntervals = Int(restingTime / 60)
             print("training ends")
         }
     }

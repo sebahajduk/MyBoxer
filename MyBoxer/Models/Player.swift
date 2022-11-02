@@ -8,17 +8,18 @@
 import Foundation
 
 class Player: Boxer {
-    var hp: Float = 100.0
+    var hp: Float = 10.0
     
-    var stamina: Int = 100
+    var stamina: Float = 100
+    var fullStamina: Float = 100
     
     var currentLevel: Int = 1
     var experience: Float = 0.0
     var nextLevel: Float = 100.0
     
-    var status: BoxerStatus = .training
-    
     func training(_ type: TrainingType) {
+        stamina -= 5
+        
         switch type {
             
         case .shadowBoxing:
@@ -39,6 +40,16 @@ class Player: Boxer {
         }
         
         saveBoxer()
+    }
+    
+    func homeRegeneration(intervals: Int = 1) {
+        if stamina < fullStamina {
+            stamina += stamina * (0.01 * Float(intervals))
+        }
+        
+        if hp < vitality {
+            hp += hp * (0.01 * Float(intervals))
+        }
     }
     
     private func saveBoxer() {
