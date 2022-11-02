@@ -35,7 +35,8 @@ class PlayerDetailsVC: UIViewController {
         configureConstraints()
     }
     
-    func set(for boxer: Boxer) {
+    func set(for boxer: Player) {
+        level.set(value: boxer.currentLevel)
         vitality.set(value: Int(boxer.vitality))
         punchPower.set(value: boxer.punchPower)
         punchSpeed.set(value: boxer.punchSpeed)

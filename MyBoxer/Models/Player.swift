@@ -8,11 +8,12 @@
 import Foundation
 
 class Player: Boxer {
-    var hp: Float = 80.0
+    var hp: Float = 100.0
+    
     var stamina: Int = 100
     
     var currentLevel: Int = 1
-    var experience: Float = 20.0
+    var experience: Float = 0.0
     var nextLevel: Float = 100.0
     
     var status: BoxerStatus = .training
@@ -42,8 +43,29 @@ class Player: Boxer {
     
     private func saveBoxer() {
         Defaults.shared.myBoxer = self
+    }
+    
+    private func experienceGained(points: Float) {
+        if experience < nextLevel {
+            experience += points
+        } else {
+            levelUp()
+        }
+    }
+    
+    private func levelUp() {
+        experience -= nextLevel
+        nextLevel += 100 * Float(currentLevel)
+        currentLevel += 1
         
-        
-        
+        if currentLevel % 3 == 0 {
+            vitality += 10
+            movement += 1
+            defence += 1
+            punchSpeed += 1
+            punchPower += 1
+            footwork += 1
+            endurance += 1
+        }
     }
 }
