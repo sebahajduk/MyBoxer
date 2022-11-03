@@ -36,14 +36,16 @@ class HomeVC: UIViewController {
         
         configure()
         
-        DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 0.3) {
-            self.startTimer()
-            self.loadData()
+        DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 0.3) { [self] in
+           startTimer()
+           loadData()
         }
     }
     
     override func viewWillAppear(_ animated: Bool) {
         startTimer()
+        updateBars()
+        
     }
     
     override func viewDidDisappear(_ animated: Bool) {
@@ -70,11 +72,10 @@ class HomeVC: UIViewController {
                         print(Float(timeLeft!))
                     }
                 } else {
-                    if timerFiredCounter % 15_000 == 0 {
+                    if timerFiredCounter % 1500 == 0 {
                         self.player.homeRegeneration()
                         self.updateBars()
                     }
-                    
                     timerFiredCounter += 1
                     self.timeProgress.setProgress(0, animated: true)
                     self.timeLeftLabel.text = ""

@@ -8,9 +8,9 @@
 import Foundation
 
 class Player: Boxer {
-    var hp: Float = 10.0
+    var hp: Float = 30.0
     
-    var stamina: Float = 100
+    var stamina: Float = 30
     var fullStamina: Float = 100
     
     var currentLevel: Int = 1
