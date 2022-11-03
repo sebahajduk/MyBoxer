@@ -15,7 +15,7 @@ class HomeVC: UIViewController {
     let healthProgress = MBProgressView(for: .hp)
     let experienceProgress = MBProgressView(for: .experience)
     
-    let statusPhoto = UIImageView()
+    let playerPhoto = UIImageView(image: Images.player)
     
     let timeProgress = MBProgressView(for: .time)
     
@@ -35,26 +35,31 @@ class HomeVC: UIViewController {
         view.backgroundColor = .systemBackground
         
         configure()
+        loadData()
         
-        DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 0.3) { [self] in
-           startTimer()
-           loadData()
+        DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 1) { [self] in
+            updateBars()
+            startTimer()
         }
     }
     
     override func viewWillAppear(_ animated: Bool) {
         startTimer()
         updateBars()
-        
     }
     
     override func viewDidDisappear(_ animated: Bool) {
         stopTimer()
+        saveBoxer()
+    }
+    private func saveBoxer() {
+        Defaults.shared.myBoxer = player
     }
     
     private func loadData() {
         player = Defaults.shared.myBoxer ?? Player()
         player.homeRegeneration(intervals: TimeManagerLocal.shared.timeIntervals)
+        print(player.stamina)
     }
     
     //MARK: Time managment
@@ -96,7 +101,7 @@ class HomeVC: UIViewController {
     private func updateBars() {
         DispatchQueue.main.async { [self] in
             healthProgress.setProgress(player.hp/player.vitality, animated: true)
-            staminaProgress.setProgress(Float(player.stamina/100), animated: true)
+            staminaProgress.setProgress(Float(player.stamina/player.fullStamina), animated: true)
             experienceProgress.setProgress(Float(player.experience/player.nextLevel), animated: true)
         }
     }
@@ -114,17 +119,16 @@ class HomeVC: UIViewController {
     
     private func configureBars() {
         healthProgress.setProgress(player.hp/player.vitality, animated: true)
-        staminaProgress.setProgress(Float(player.stamina/100), animated: true)
+        staminaProgress.setProgress(Float(player.stamina/player.fullStamina), animated: true)
         experienceProgress.setProgress(Float(player.experience/player.nextLevel), animated: true)
         
         view.addSubviews([healthProgress, staminaProgress, experienceProgress, timeProgress, timeLeftLabel])
     }
     
     private func configurePhotoStatus() {
-        statusPhoto.image = Images.player
-        statusPhoto.sizeToFit()
-        view.addSubview(statusPhoto)
-        statusPhoto.translatesAutoresizingMaskIntoConstraints = false
+        playerPhoto.sizeToFit()
+        view.addSubview(playerPhoto)
+        playerPhoto.translatesAutoresizingMaskIntoConstraints = false
     }
     
     private func configureButtonsMenu() {
@@ -154,12 +158,12 @@ class HomeVC: UIViewController {
             experienceProgress.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20),
             experienceProgress.heightAnchor.constraint(equalToConstant: 17),
             
-            statusPhoto.topAnchor.constraint(equalTo: experienceProgress.bottomAnchor, constant: 40),
-            statusPhoto.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            statusPhoto.heightAnchor.constraint(equalToConstant: 240),
-            statusPhoto.widthAnchor.constraint(equalToConstant: 240),
+            playerPhoto.topAnchor.constraint(equalTo: experienceProgress.bottomAnchor, constant: 40),
+            playerPhoto.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            playerPhoto.heightAnchor.constraint(equalToConstant: 240),
+            playerPhoto.widthAnchor.constraint(equalToConstant: 240),
             
-            timeProgress.topAnchor.constraint(equalTo: statusPhoto.bottomAnchor, constant: 10),
+            timeProgress.topAnchor.constraint(equalTo: playerPhoto.bottomAnchor, constant: 10),
             timeProgress.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
             timeProgress.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20),
             timeProgress.heightAnchor.constraint(equalToConstant: 17),

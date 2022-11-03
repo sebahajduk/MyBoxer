@@ -68,9 +68,8 @@ extension TrainingVC: UITableViewDataSource, UITableViewDelegate {
         if TimeManagerLocal.shared.inProgres {
             print("Cannot do training. You are already train")
         } else {
-            TimeManagerLocal.shared.train(for: 200)
+            TimeManagerLocal.shared.train(for: 5)
             boxer.training(trainings[indexPath.row].type)
-            print(trainings[indexPath.row].type)
         }
         
         tableView.deselectRow(at: indexPath, animated: true)

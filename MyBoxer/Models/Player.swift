@@ -7,10 +7,10 @@
 
 import Foundation
 
-class Player: Boxer {
-    var hp: Float = 30.0
+class Player: Boxer, Codable {
+    var hp: Float = 100
     
-    var stamina: Float = 30
+    var stamina: Float = 100
     var fullStamina: Float = 100
     
     var currentLevel: Int = 1
@@ -18,8 +18,6 @@ class Player: Boxer {
     var nextLevel: Float = 100.0
     
     func training(_ type: TrainingType) {
-        stamina -= 5
-        
         switch type {
             
         case .shadowBoxing:
@@ -38,8 +36,8 @@ class Player: Boxer {
         case .intervals:
             endurance += 2
         }
-        
-        saveBoxer()
+        stamina -= 5
+        experience += 50
     }
     
     func homeRegeneration(intervals: Int = 1) {
@@ -52,9 +50,7 @@ class Player: Boxer {
         }
     }
     
-    private func saveBoxer() {
-        Defaults.shared.myBoxer = self
-    }
+    
     
     private func experienceGained(points: Float) {
         if experience < nextLevel {
