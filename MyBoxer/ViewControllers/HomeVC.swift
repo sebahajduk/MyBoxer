@@ -33,9 +33,9 @@ class HomeVC: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .systemBackground
-        
-        configure()
         loadData()
+        configure()
+        
         
         DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 1) { [self] in
             updateBars()

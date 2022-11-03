@@ -11,7 +11,7 @@ enum BoxerStatus {
     case training, fighting, resting
 }
 
-class Boxer {
+class Boxer: Codable {
     var vitality: Float = 100.0
     var punchPower: Int = 10 // Weight lifting +2
     var punchSpeed: Int = 10 // Ball throwing +2

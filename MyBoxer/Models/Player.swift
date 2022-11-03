@@ -7,7 +7,7 @@
 
 import Foundation
 
-class Player: Boxer, Codable {
+class Player: Boxer {
     var hp: Float = 100
     
     var stamina: Float = 100
@@ -16,6 +16,7 @@ class Player: Boxer, Codable {
     var currentLevel: Int = 1
     var experience: Float = 0.0
     var nextLevel: Float = 100.0
+
     
     func training(_ type: TrainingType) {
         switch type {
@@ -37,7 +38,7 @@ class Player: Boxer, Codable {
             endurance += 2
         }
         stamina -= 5
-        experience += 50
+        experienceGained(points: 50)
     }
     
     func homeRegeneration(intervals: Int = 1) {
@@ -45,12 +46,18 @@ class Player: Boxer, Codable {
             stamina += stamina * (0.01 * Float(intervals))
         }
         
+        if stamina > fullStamina {
+            stamina = fullStamina
+        }
+        
         if hp < vitality {
             hp += hp * (0.01 * Float(intervals))
         }
+        
+        if hp > vitality {
+            hp = vitality
+        }
     }
-    
-    
     
     private func experienceGained(points: Float) {
         if experience < nextLevel {
@@ -75,4 +82,43 @@ class Player: Boxer, Codable {
             endurance += 1
         }
     }
+    
+    override init() {
+        super.init()
+    }
+    
+    //MARK: Codable conformance
+    
+    private enum CodingKeys: String, CodingKey {
+        case hp, stamina, fullStamina, currentLevel, experience, nextLevel
+    }
+    
+    required init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        
+        try super.init(from: decoder)
+        
+        hp = try container.decode(Float.self, forKey: .hp)
+        stamina = try container.decode(Float.self, forKey: .stamina)
+        fullStamina = try container.decode(Float.self, forKey: .fullStamina)
+        currentLevel = try container.decode(Int.self, forKey: .currentLevel)
+        experience = try container.decode(Float.self, forKey: .experience)
+        nextLevel = try container.decode(Float.self, forKey: .nextLevel)
+    }
+    
+    override func encode(to encoder: Encoder) throws {
+        var container = encoder.container(keyedBy: CodingKeys.self)
+        
+        try super.encode(to: encoder)
+        
+        try container.encode(hp, forKey: .hp)
+        try container.encode(stamina, forKey: .stamina)
+        try container.encode(fullStamina, forKey: .fullStamina)
+        try container.encode(currentLevel, forKey: .currentLevel)
+        try container.encode(experience, forKey: .experience)
+        try container.encode(nextLevel, forKey: .nextLevel)
+    }
+    
+    
+    
 }
