@@ -43,7 +43,7 @@ class Player: Boxer {
     
     func homeRegeneration(intervals: Int = 1) {
         if stamina < fullStamina {
-            stamina += stamina * (0.01 * Float(intervals))
+            stamina += fullStamina * (0.01 * Float(intervals))
         }
         
         if stamina > fullStamina {
@@ -51,7 +51,7 @@ class Player: Boxer {
         }
         
         if hp < vitality {
-            hp += hp * (0.01 * Float(intervals))
+            hp += vitality * (0.01 * Float(intervals))
         }
         
         if hp > vitality {
@@ -60,7 +60,7 @@ class Player: Boxer {
     }
     
     private func experienceGained(points: Float) {
-        if experience < nextLevel {
+        if nextLevel - experience > points {
             experience += points
         } else {
             levelUp()
