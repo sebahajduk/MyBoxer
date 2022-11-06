@@ -17,21 +17,22 @@ enum MBProgressType {
 class MBProgressView: UIProgressView {
     
     let title = MBLabel(size: 14)
+    let showTitle: Bool = true
     
     override init(frame: CGRect) {
         super.init(frame: frame)
     }
     
-    convenience init(for type: MBProgressType) {
+    convenience init(for type: MBProgressType, showTitle: Bool = true) {
         self.init()
-        configure(type: type)
+        configure(type: type, showTitle: showTitle)
     }
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
     
-    private func configure(type: MBProgressType) {
+    private func configure(type: MBProgressType, showTitle: Bool) {
         progressViewStyle = .default
         trackTintColor = .secondarySystemBackground
         addSubview(title)
@@ -39,16 +40,24 @@ class MBProgressView: UIProgressView {
         switch type {
         case .hp:
             progressTintColor = .systemRed
-            title.text = "Health"
+            if showTitle {
+                title.text = "Health"
+            }
         case .stamina:
             progressTintColor = .systemMint
-            title.text = "Stamina"
+            if showTitle {
+                title.text = "Stamina"
+            }
         case .experience:
             progressTintColor = .systemCyan
-            title.text = "Experience"
+            if showTitle {
+                title.text = "Experience"
+            }
         case .time:
             progressTintColor = .systemGreen
-            title.text = "Time"
+            if showTitle {
+                title.text = "Time"
+            }
         }
         translatesAutoresizingMaskIntoConstraints = false
         

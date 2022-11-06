@@ -18,6 +18,7 @@ struct Training {
     let effect: String
     let image: UIImage
     let type: TrainingType
+
     
     init(type: TrainingType) {
         self.type = type

@@ -41,7 +41,7 @@ class Player: Boxer {
         experienceGained(points: 50)
     }
     
-    func homeRegeneration(intervals: Int = 1) {
+    func homeRegeneration(intervals: Int = 0) {
         if stamina < fullStamina {
             stamina += fullStamina * (0.01 * Float(intervals))
         }

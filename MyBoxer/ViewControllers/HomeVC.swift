@@ -77,9 +77,10 @@ class HomeVC: UIViewController {
                         print(Float(timeLeft!))
                     }
                 } else {
-                    if timerFiredCounter % 1500 == 0 {
-                        self.player.homeRegeneration()
+                    if timerFiredCounter == 1500 {
+                        self.player.homeRegeneration(intervals: 1)
                         self.updateBars()
+                        timerFiredCounter = 0
                     }
                     timerFiredCounter += 1
                     self.timeProgress.setProgress(0, animated: true)
@@ -135,7 +136,7 @@ class HomeVC: UIViewController {
         view.addSubviews([trainingButton, fightButton, shopButton, teamButton, rankButton])
         
         trainingButton.addTarget(self, action: #selector(pushTrainingVC), for: .touchUpInside)
-        fightButton.addTarget(self, action: #selector(pushFightingVC), for: .touchUpInside)
+        fightButton.addTarget(self, action: #selector(pushOpponentsVC), for: .touchUpInside)
         shopButton.addTarget(self, action: #selector(pushShopVC), for: .touchUpInside)
         teamButton.addTarget(self, action: #selector(pushTeamVC), for: .touchUpInside)
         rankButton.addTarget(self, action: #selector(pushRankVC), for: .touchUpInside)
@@ -209,10 +210,10 @@ class HomeVC: UIViewController {
         navigationController!.pushViewController(trainingVC, animated: true)
     }
     
-    @objc func pushFightingVC() {
-        let fightingVC = FightingVC()
+    @objc func pushOpponentsVC() {
+        let opponentsVC = OpponentsVC(player: player)
         
-        navigationController!.pushViewController(fightingVC, animated: true)
+        navigationController!.pushViewController(opponentsVC, animated: true)
     }
     
     @objc func pushShopVC() {

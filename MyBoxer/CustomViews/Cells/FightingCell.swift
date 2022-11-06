@@ -18,6 +18,8 @@ class FightingCell: UITableViewCell {
     
     static let reuseID = "FightingCell"
     
+    let names: [String] = ["Devin Colbert", "Colt Street", "Deryck Michaels", "Brody Miller", "Theo Barker"]
+    
     let vitLabel = MBLabel(size: 16, color: .systemGray2)
     
     let opponentImage = MBImageView(frame: .zero)
@@ -39,9 +41,9 @@ class FightingCell: UITableViewCell {
         fatalError("init(coder:) has not been implemented")
     }
     
-    func set(for boxer: Boxer) {
+    func set(for boxer: Boxer, index: Int) {
         opponentImage.image = Images.opponent
-        opponentName.text = "Henryk Sienkiewicz"
+        opponentName.text = names[index]
         opponentVitality.set(value: Int(boxer.vitality))
         opponentPunchPower.set(value: boxer.punchPower)
         opponentPunchSpeed.set(value: boxer.punchSpeed)
