@@ -68,12 +68,12 @@ extension OpponentsVC: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: true)
         
         let fightingVC = FightingVC()
         
         fightingVC.set(player: player, opponent: opponents[indexPath.row])
         
         navigationController?.pushViewController(fightingVC, animated: true)
-        
     }
 }

@@ -17,6 +17,10 @@ class FightingVC: UIViewController {
     
     var vsLabel = MBLabel(size: 15)
     
+    let roundLabel = MBLabel(size: 15)
+    var roundNumberLabel = MBLabel(size: 20)
+    var time = MBLabel(size: 30)
+    
     var playerName = MBLabel(size: 15)
     var opponentName = MBLabel(size: 15)
     
@@ -41,7 +45,7 @@ class FightingVC: UIViewController {
     }
     
     private func configure() {
-        view.addSubviews([playerImage, opponentImage, vsLabel, playerName, opponentName, playerHealthBar, playerStaminaBar, opponentHealthBar, opponentStaminaBar, tableView])
+        view.addSubviews([playerImage, opponentImage, vsLabel, playerName, opponentName, playerHealthBar, playerStaminaBar, opponentHealthBar, opponentStaminaBar, tableView, roundLabel, roundNumberLabel, time])
         
         playerImage.image = Images.player
         opponentImage.image = Images.opponent
@@ -54,6 +58,15 @@ class FightingVC: UIViewController {
         opponentName.text = "Devin Colbert"
         opponentName.textAlignment = .center
         
+        roundLabel.text = "Round"
+        roundLabel.textAlignment = .center
+        
+        roundNumberLabel.text = "3"
+        roundNumberLabel.textAlignment = .center
+        
+        time.text = "20"
+        time.textAlignment = .center
+        
         playerHealthBar.setProgress(1, animated: true)
         playerStaminaBar.setProgress(1, animated: true)
         
@@ -63,7 +76,7 @@ class FightingVC: UIViewController {
         tableView.delegate = self
         tableView.dataSource = self
         
-        tableView.rowHeight = 20
+        tableView.rowHeight = 30
         
         
         tableView.translatesAutoresizingMaskIntoConstraints = false
@@ -81,10 +94,25 @@ class FightingVC: UIViewController {
             opponentImage.heightAnchor.constraint(equalToConstant: 120),
             opponentImage.widthAnchor.constraint(equalToConstant: 120),
             
+            roundLabel.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 10),
+            roundLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            roundLabel.widthAnchor.constraint(equalToConstant: 50),
+            roundLabel.heightAnchor.constraint(equalToConstant: 16),
+            
+            roundNumberLabel.topAnchor.constraint(equalTo: roundLabel.bottomAnchor, constant: 5),
+            roundNumberLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            roundNumberLabel.widthAnchor.constraint(equalToConstant: 20),
+            roundNumberLabel.heightAnchor.constraint(equalToConstant: 21),
+            
             vsLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            vsLabel.centerYAnchor.constraint(equalTo: playerImage.centerYAnchor),
+            vsLabel.bottomAnchor.constraint(equalTo: playerImage.bottomAnchor, constant: -10),
             vsLabel.heightAnchor.constraint(equalToConstant: 20),
             vsLabel.widthAnchor.constraint(equalToConstant: 20),
+            
+            time.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            time.centerYAnchor.constraint(equalTo: playerHealthBar.bottomAnchor),
+            time.heightAnchor.constraint(equalToConstant: 31),
+            time.widthAnchor.constraint(equalToConstant: 30),
             
             playerName.topAnchor.constraint(equalTo: playerImage.bottomAnchor, constant: 10),
             playerName.centerXAnchor.constraint(equalTo: playerImage.centerXAnchor),
@@ -117,7 +145,7 @@ class FightingVC: UIViewController {
             opponentStaminaBar.widthAnchor.constraint(equalToConstant: 120),
             
             tableView.topAnchor.constraint(equalTo: playerStaminaBar.bottomAnchor, constant: 20),
-            tableView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
+            tableView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             tableView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20),
             tableView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor)
         ])
