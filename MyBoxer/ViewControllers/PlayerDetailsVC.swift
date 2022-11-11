@@ -36,8 +36,8 @@ class PlayerDetailsVC: UIViewController {
     }
     
     func set(for boxer: Player) {
-        level.set(value: boxer.currentLevel)
-        vitality.set(value: Int(boxer.vitality))
+        level.set(value: Float(boxer.currentLevel))
+        vitality.set(value: boxer.vitality)
         punchPower.set(value: boxer.punchPower)
         punchSpeed.set(value: boxer.punchSpeed)
         footwork.set(value: boxer.footwork)

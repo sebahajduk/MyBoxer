@@ -9,15 +9,19 @@ import Foundation
 
 class Opponent: Boxer {
     
-    init(forLevel: Int) {
+    var name: String!
+    
+    init(forLevel: Int, name: String) {
         super.init()
-        self.vitality = Float(forLevel) * 150
-        punchPower = forLevel * 2
-        punchSpeed = forLevel * 2
-        footwork = forLevel * 4
-        movement = forLevel * 3
-        defence = forLevel * 3
-        endurance = forLevel * 5
+        vitality = Float(forLevel) * 150
+        hp = vitality
+        self.name = name
+        punchPower = Float(forLevel * 2)
+        punchSpeed = Float(forLevel * 2)
+        footwork = Float(forLevel * 4)
+        movement = Float(forLevel * 3)
+        defence = Float(forLevel * 3)
+        endurance = Float(forLevel * 5)
     }
     
     required init(from decoder: Decoder) throws {

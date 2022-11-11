@@ -14,11 +14,11 @@ class OpponentsVC: UIViewController {
     var player: Player!
     
     let opponents: [Opponent] = [
-        Opponent(forLevel: 1),
-        Opponent(forLevel: 5),
-        Opponent(forLevel: 10),
-        Opponent(forLevel: 20),
-        Opponent(forLevel: 50)
+        Opponent(forLevel: 1, name: "Devin Colbert"),
+        Opponent(forLevel: 5, name: "Colt Street"),
+        Opponent(forLevel: 10, name: "Deryck Michaels"),
+        Opponent(forLevel: 20, name: "Brody Miller"),
+        Opponent(forLevel: 50, name: "Theo Barker")
     ]
 
     override func viewDidLoad() {
@@ -72,8 +72,18 @@ extension OpponentsVC: UITableViewDelegate, UITableViewDataSource {
         
         let fightingVC = FightingVC()
         
-        fightingVC.set(player: player, opponent: opponents[indexPath.row])
+        if player.hp > 50 {
+            fightingVC.set(player: player, opponent: opponents[indexPath.row])
+            navigationController?.pushViewController(fightingVC, animated: true)
+        } else {
+            let alert = AlertVC(title: "You're exhausted", message: AlertType.youExhausted)
+            
+            alert.modalPresentationStyle = .overFullScreen
+            alert.modalTransitionStyle = .crossDissolve
+            
+            navigationController?.present(alert, animated: true)
+        }
         
-        navigationController?.pushViewController(fightingVC, animated: true)
+        
     }
 }

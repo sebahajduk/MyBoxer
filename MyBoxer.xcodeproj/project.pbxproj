@@ -25,10 +25,13 @@
 		6062CCE428FEF0C90089ED9E /* TeamMemberCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6062CCE328FEF0C90089ED9E /* TeamMemberCell.swift */; };
 		6062CCEA28FF044C0089ED9E /* BoxerRankCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6062CCE928FF044C0089ED9E /* BoxerRankCell.swift */; };
 		6062CCEC28FF07B70089ED9E /* RankVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6062CCEB28FF07B70089ED9E /* RankVC.swift */; };
+		60651D342917E10200CC75A4 /* FightingHitCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60651D332917E10200CC75A4 /* FightingHitCell.swift */; };
+		60651D362917E5BB00CC75A4 /* Attack.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60651D352917E5BB00CC75A4 /* Attack.swift */; };
 		6087257628F86A43005E4296 /* college.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 6087257528F86A43005E4296 /* college.ttf */; };
 		6087257828F872A0005E4296 /* MBShopMenu.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6087257728F872A0005E4296 /* MBShopMenu.swift */; };
 		6087257F28F88054005E4296 /* MBCategoriesButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6087257E28F88054005E4296 /* MBCategoriesButton.swift */; };
 		608867BF28F5C7BC003C8F78 /* Item.swift in Sources */ = {isa = PBXBuildFile; fileRef = 608867BE28F5C7BC003C8F78 /* Item.swift */; };
+		608FCC6A291E77DB00DB14C9 /* AlertVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 608FCC69291E77DB00DB14C9 /* AlertVC.swift */; };
 		609FFAC128F48F1C00B31C2D /* ShopVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 609FFAC028F48F1B00B31C2D /* ShopVC.swift */; };
 		609FFAC328F4949700B31C2D /* ShopItemCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 609FFAC228F4949700B31C2D /* ShopItemCell.swift */; };
 		60C21AD92915418100721BD0 /* FightingVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60C21AD82915418100721BD0 /* FightingVC.swift */; };
@@ -68,10 +71,13 @@
 		6062CCE328FEF0C90089ED9E /* TeamMemberCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TeamMemberCell.swift; sourceTree = "<group>"; };
 		6062CCE928FF044C0089ED9E /* BoxerRankCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoxerRankCell.swift; sourceTree = "<group>"; };
 		6062CCEB28FF07B70089ED9E /* RankVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RankVC.swift; sourceTree = "<group>"; };
+		60651D332917E10200CC75A4 /* FightingHitCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FightingHitCell.swift; sourceTree = "<group>"; };
+		60651D352917E5BB00CC75A4 /* Attack.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Attack.swift; sourceTree = "<group>"; };
 		6087257528F86A43005E4296 /* college.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = college.ttf; sourceTree = "<group>"; };
 		6087257728F872A0005E4296 /* MBShopMenu.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MBShopMenu.swift; sourceTree = "<group>"; };
 		6087257E28F88054005E4296 /* MBCategoriesButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MBCategoriesButton.swift; sourceTree = "<group>"; };
 		608867BE28F5C7BC003C8F78 /* Item.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Item.swift; sourceTree = "<group>"; };
+		608FCC69291E77DB00DB14C9 /* AlertVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertVC.swift; sourceTree = "<group>"; };
 		609FFAC028F48F1B00B31C2D /* ShopVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShopVC.swift; sourceTree = "<group>"; };
 		609FFAC228F4949700B31C2D /* ShopItemCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShopItemCell.swift; sourceTree = "<group>"; };
 		60C21AD82915418100721BD0 /* FightingVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FightingVC.swift; sourceTree = "<group>"; };
@@ -112,6 +118,7 @@
 				60F0D23028FC75F700485EDC /* TeamVC.swift */,
 				6062CCEB28FF07B70089ED9E /* RankVC.swift */,
 				60C21AD82915418100721BD0 /* FightingVC.swift */,
+				608FCC69291E77DB00DB14C9 /* AlertVC.swift */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -146,6 +153,7 @@
 				608867BE28F5C7BC003C8F78 /* Item.swift */,
 				60E3AACA2908599600D8D025 /* Opponent.swift */,
 				60E3AACC290859A400D8D025 /* Player.swift */,
+				60651D352917E5BB00CC75A4 /* Attack.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -263,6 +271,7 @@
 				60EFAF6728E635C20011E2E8 /* FightingCell.swift */,
 				6062CCE328FEF0C90089ED9E /* TeamMemberCell.swift */,
 				6062CCE928FF044C0089ED9E /* BoxerRankCell.swift */,
+				60651D332917E10200CC75A4 /* FightingHitCell.swift */,
 			);
 			path = Cells;
 			sourceTree = "<group>";
@@ -341,6 +350,7 @@
 				603C855029016E9400368288 /* ContainerView.swift in Sources */,
 				60F1F0A028E3507C0018AC4B /* TrainingCell.swift in Sources */,
 				60C21AD92915418100721BD0 /* FightingVC.swift in Sources */,
+				60651D362917E5BB00CC75A4 /* Attack.swift in Sources */,
 				604EC0E728DB74C300F0D344 /* MBProgressView.swift in Sources */,
 				60EFAF6628E635080011E2E8 /* OpponentsVC.swift in Sources */,
 				60E59FB328DE2E14007BBE81 /* UIViewExtension.swift in Sources */,
@@ -371,6 +381,8 @@
 				609FFAC328F4949700B31C2D /* ShopItemCell.swift in Sources */,
 				60E3AACB2908599600D8D025 /* Opponent.swift in Sources */,
 				605BD4F028DB5F9D0026C185 /* SceneDelegate.swift in Sources */,
+				60651D342917E10200CC75A4 /* FightingHitCell.swift in Sources */,
+				608FCC6A291E77DB00DB14C9 /* AlertVC.swift in Sources */,
 				60EDB89728E8B7AD00EF9747 /* MBLabel.swift in Sources */,
 				602B046228EC8A0200BDEB3F /* TimeManagerLocal.swift in Sources */,
 			);

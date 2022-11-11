@@ -21,7 +21,7 @@ class StatView: UIView {
         super.init(frame: .zero)
     }
     
-    convenience init(statType: Stats, value: Int = 4) {
+    convenience init(statType: Stats, value: Float = 4) {
         self.init(frame: .zero)
         set(value: value)
         configure(statType: statType)
@@ -31,8 +31,8 @@ class StatView: UIView {
         fatalError("init(coder:) has not been implemented")
     }
     
-    func set(value: Int) {
-        self.value = value
+    func set(value: Float) {
+        self.value = Int(value)
         statValue.text = "\(self.value!)"
     }
     

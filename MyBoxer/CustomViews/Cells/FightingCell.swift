@@ -44,7 +44,7 @@ class FightingCell: UITableViewCell {
     func set(for boxer: Boxer, index: Int) {
         opponentImage.image = Images.opponent
         opponentName.text = names[index]
-        opponentVitality.set(value: Int(boxer.vitality))
+        opponentVitality.set(value: boxer.vitality)
         opponentPunchPower.set(value: boxer.punchPower)
         opponentPunchSpeed.set(value: boxer.punchSpeed)
         opponentFootwork.set(value: boxer.footwork)

@@ -8,16 +8,10 @@
 import Foundation
 
 class Player: Boxer {
-    var hp: Float = 100
-    
-    var stamina: Float = 100
-    var fullStamina: Float = 100
-    
     var currentLevel: Int = 1
     var experience: Float = 0.0
     var nextLevel: Float = 100.0
 
-    
     func training(_ type: TrainingType) {
         switch type {
             

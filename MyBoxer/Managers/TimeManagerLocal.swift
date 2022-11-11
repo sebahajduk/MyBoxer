@@ -66,7 +66,7 @@ class TimeManagerLocal {
         } else {
             let restingTime: TimeInterval = Date.now.timeIntervalSinceReferenceDate - endedTime.timeIntervalSinceReferenceDate
             timeIntervals = Int(restingTime / 300)
-            
+            Defaults.shared.actionEndAt = Date.now
             print("training ends")
         }
     }
