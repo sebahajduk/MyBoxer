@@ -10,4 +10,10 @@ import Foundation
 struct Attack {
     let attacker: Attacker
     let damage: Float
+    
+    static func hit(attacker: Boxer, defender: Boxer) -> Float {
+        let damage = attacker.punch(opponent: defender)
+        
+        return damage
+    }
 }

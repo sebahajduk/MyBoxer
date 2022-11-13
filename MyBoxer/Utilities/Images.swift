@@ -24,6 +24,8 @@ enum Images {
     
     static let opponent = UIImage(named: "opponent")
     
+    static let coin = UIImage(systemName: "dollarsign.circle.fill")
+    
     static let boxingGlove = UIImage(named: "boxing-gloves")
     static let boxingBoots = UIImage(named: "boxing-boots")
     static let boxingShorts = UIImage(named: "boxing-shorts")

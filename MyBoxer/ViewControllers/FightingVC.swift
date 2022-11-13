@@ -7,6 +7,10 @@
 
 import UIKit
 
+enum FightResults {
+    case victory, defeat
+}
+
 class FightingVC: UIViewController {
 
     var player: Player!
@@ -69,32 +73,30 @@ class FightingVC: UIViewController {
         var timerCounter = 0
         timer = Timer.scheduledTimer(withTimeInterval: 1, repeats: true) { [self] timer in
             if timerCounter % 2 == 0 {
-                let attack = attack(attacker: player, defender: opponent)
+                var attack = Attack.hit(attacker: player, defender: opponent)
+                if attack > opponent.hp {
+                    attack = opponent.hp
+                }
                 opponent.hp -= attack
                 attackHistory.insert(Attack(attacker: .player, damage: attack), at: 0)
                 print("Player attack for \(attack)")
                 print("Opponent HP: \(opponent.hp)")
-                timerCounter += 1
             } else {
-                let attack = attack(attacker: opponent, defender: player)
+                var attack = Attack.hit(attacker: player, defender: opponent)
+                if attack > player.hp {
+                    attack = player.hp
+                }
                 player.hp -= attack
                 attackHistory.insert(Attack(attacker: .opponent, damage: attack), at: 0)
                 print("Opponent attack for \(attack)")
-                timerCounter += 1
             }
+            timerCounter += 1
             self.checkStatus()
             self.updateUI()
         }
     }
     
-    private func attack(attacker: Boxer, defender: Boxer) -> Float {
-        let damage = attacker.punch(opponent: defender)
-        
-        return damage
-    }
-    
     private func updateUI() {
-        // Bars, time left, table view, rounds
         if moves > 0 {
             self.moves -= 1
         } else if round < 10 {
@@ -120,21 +122,44 @@ class FightingVC: UIViewController {
     private func finishRound() {
         self.round += 1
         self.moves = 20
+        opponent.regeneration()
+        player.regeneration()
     }
     
     private func finishFight() {
         isFighting = false
         timer?.invalidate()
         Defaults.shared.myBoxer = player
+        self.navigationController?.setNavigationBarHidden(false, animated: true)
     }
     
     private func checkStatus() {
         if player.hp <= 0 {
             finishFight()
-            print("lose")
+            showResult(.defeat)
         } else if opponent.hp <= 0 {
             finishFight()
-            print("win")
+            showResult(.victory)
+            player.wonFight(against: opponent)
+        }
+    }
+    
+    private func showResult(_ result: FightResults) {
+        switch result {
+        case .victory:
+            let alert = AlertVC(title: "Congratulations", message: AlertType.youWin)
+            
+            alert.modalPresentationStyle = .overFullScreen
+            alert.modalTransitionStyle = .crossDissolve
+            
+            navigationController?.present(alert, animated: true)
+        case .defeat:
+            let alert = AlertVC(title: "Oopst", message: AlertType.youLose)
+            
+            alert.modalPresentationStyle = .overFullScreen
+            alert.modalTransitionStyle = .crossDissolve
+            
+            navigationController?.present(alert, animated: true)
         }
     }
     
@@ -148,7 +173,6 @@ class FightingVC: UIViewController {
         
         playerName.text = "My Boxer"
         playerName.textAlignment = .center
-        
         
         opponentName.textAlignment = .center
         
@@ -172,8 +196,6 @@ class FightingVC: UIViewController {
         tableView.register(FightingHitCell.self, forCellReuseIdentifier: FightingHitCell.reuseID)
         
         tableView.rowHeight = 20
-        
-        
         tableView.translatesAutoresizingMaskIntoConstraints = false
     }
     
@@ -260,6 +282,4 @@ extension FightingVC: UITableViewDelegate, UITableViewDataSource {
         
         return cell
     }
-    
-    
 }

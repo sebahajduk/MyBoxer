@@ -11,6 +11,7 @@ enum AlertType {
     static let youWin: String  = "Congratulations, you won the fight"
     static let youLose: String = "You lose, maybe try train more"
     static let youExhausted: String = "Give your boxer time to rest."
+    static let notEnoughMoney: String = "You have not enough money to buy it. Win some fight to get more cash."
 }
 
 class AlertVC: UIViewController {

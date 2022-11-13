@@ -11,6 +11,8 @@ class Player: Boxer {
     var currentLevel: Int = 1
     var experience: Float = 0.0
     var nextLevel: Float = 100.0
+    
+    var money: Int = 0
 
     func training(_ type: TrainingType) {
         switch type {
@@ -51,6 +53,11 @@ class Player: Boxer {
         if hp > vitality {
             hp = vitality
         }
+    }
+    
+    func wonFight(against opponent: Opponent) {
+        money += Int(opponent.vitality / 10)
+        experienceGained(points: opponent.vitality)
     }
     
     private func experienceGained(points: Float) {

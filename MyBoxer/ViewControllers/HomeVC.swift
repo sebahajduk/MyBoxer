@@ -16,6 +16,8 @@ class HomeVC: UIViewController {
     let experienceProgress = MBProgressView(for: .experience)
     
     let playerPhoto = UIImageView(image: Images.player)
+    let coinLabel = MBLabel(size: 15)
+    let coinImage = UIImageView(image: Images.coin)
     
     let timeProgress = MBProgressView(for: .time)
     
@@ -36,7 +38,6 @@ class HomeVC: UIViewController {
         loadData()
         configure()
         
-        
         DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 1) { [self] in
             updateBars()
             startTimer()
@@ -52,6 +53,7 @@ class HomeVC: UIViewController {
         stopTimer()
         saveBoxer()
     }
+    
     private func saveBoxer() {
         Defaults.shared.myBoxer = player
     }
@@ -111,7 +113,12 @@ class HomeVC: UIViewController {
     
     private func configure() {
         navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(systemName: "line.3.horizontal"), style: .plain, target: self, action: #selector(pushDetailVC))
-        
+        view.addSubviews([coinImage, coinLabel])
+        coinImage.translatesAutoresizingMaskIntoConstraints = false
+        coinImage.tintColor = .systemYellow
+        coinLabel.textAlignment = .right
+        coinLabel.textColor = .label
+        coinLabel.text = String(player.money)
         configureBars()
         configurePhotoStatus()
         configureButtonsMenu()
@@ -144,6 +151,16 @@ class HomeVC: UIViewController {
     
     private func configureContraints() {
         NSLayoutConstraint.activate([
+            coinImage.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 5),
+            coinImage.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20),
+            coinImage.widthAnchor.constraint(equalToConstant: 15),
+            coinImage.heightAnchor.constraint(equalToConstant: 15),
+            
+            coinLabel.centerYAnchor.constraint(equalTo: coinImage.centerYAnchor),
+            coinLabel.trailingAnchor.constraint(equalTo: coinImage.leadingAnchor, constant: -2),
+            coinLabel.widthAnchor.constraint(equalToConstant: 150),
+            coinLabel.heightAnchor.constraint(equalToConstant: 15),
+            
             healthProgress.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 30),
             healthProgress.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
             healthProgress.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20),

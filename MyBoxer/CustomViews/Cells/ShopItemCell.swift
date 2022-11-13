@@ -19,7 +19,7 @@ class ShopItemCell: UITableViewCell {
     let itemStats = MBLabel(size: 16, color: .systemGray2)
     let itemImage = MBImageView(frame: .zero)
     let itemPrice = MBLabel(size: 16, color: .systemYellow)
-    let coin = UIImageView(image: UIImage(systemName: "dollarsign.circle.fill"))
+    let coin = UIImageView(image: Images.coin)
 
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)

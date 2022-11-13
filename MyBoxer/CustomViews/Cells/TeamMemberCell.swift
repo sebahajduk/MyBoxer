@@ -20,7 +20,7 @@ class TeamMemberCell: UITableViewCell {
     let memberStat = MBLabel(size: 16, color: .systemGray2)
     let memberPrice = MBLabel(size: 16, color: .systemYellow)
     
-    let coin = UIImageView(image: UIImage(systemName: "dollarsign.circle.fill"))
+    let coin = UIImageView(image: Images.coin)
 
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
