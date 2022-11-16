@@ -38,10 +38,12 @@ class FightingHitCell: UITableViewCell {
         case .player:
             backgroundColor = .systemCyan.withAlphaComponent(0.2)
             
-            if damage > 0 {
+            if damage > 0.00001 {
                 message.text = "You dealt \(stringDamage) damage"
+            } else if damage == 0.00001 {
+                message.text = "You are exhausted"
             } else {
-                message.text = "You've missed"
+                message.text = "You missed"
             }
             
         case .opponent:

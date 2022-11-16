@@ -79,16 +79,13 @@ class FightingVC: UIViewController {
                 }
                 opponent.hp -= attack
                 attackHistory.insert(Attack(attacker: .player, damage: attack), at: 0)
-                print("Player attack for \(attack)")
-                print("Opponent HP: \(opponent.hp)")
             } else {
-                var attack = Attack.hit(attacker: player, defender: opponent)
+                var attack = Attack.hit(attacker: opponent, defender: player)
                 if attack > player.hp {
                     attack = player.hp
                 }
                 player.hp -= attack
                 attackHistory.insert(Attack(attacker: .opponent, damage: attack), at: 0)
-                print("Opponent attack for \(attack)")
             }
             timerCounter += 1
             self.checkStatus()

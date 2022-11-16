@@ -15,10 +15,18 @@ class OpponentsVC: UIViewController {
     
     let opponents: [Opponent] = [
         Opponent(forLevel: 1, name: "Devin Colbert"),
-        Opponent(forLevel: 5, name: "Colt Street"),
-        Opponent(forLevel: 10, name: "Deryck Michaels"),
-        Opponent(forLevel: 20, name: "Brody Miller"),
-        Opponent(forLevel: 50, name: "Theo Barker")
+        Opponent(forLevel: 2, name: "Colt Street"),
+        Opponent(forLevel: 4, name: "Deryck Michaels"),
+        Opponent(forLevel: 8, name: "Brody Miller"),
+        Opponent(forLevel: 16, name: "Theo Barker"),
+        Opponent(forLevel: 24, name: "Hughie Mcbride"),
+        Opponent(forLevel: 32, name: "Alvin Blair"),
+        Opponent(forLevel: 40, name: "Randolph Barton"),
+        Opponent(forLevel: 48, name: "Gaylord Saunders"),
+        Opponent(forLevel: 56, name: "Atwater Fitzgerald"),
+        Opponent(forLevel: 64, name: "Marsh Bell"),
+        Opponent(forLevel: 72, name: "Justin Andrews"),
+        Opponent(forLevel: 80, name: "Jordan Jenning"),
     ]
 
     override func viewDidLoad() {
@@ -83,7 +91,5 @@ extension OpponentsVC: UITableViewDelegate, UITableViewDataSource {
             
             navigationController?.present(alert, animated: true)
         }
-        
-        
     }
 }

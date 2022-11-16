@@ -33,7 +33,8 @@ class Boxer: Codable {
         case .jab:
             // Fastest punch. It has biggest chance to hit the target, but damage is small.
             let n = Float.random(in: 0...1)
-            if stamina >= 1 { stamina -= 1 } else { return 0.0 }
+            if stamina >= 1 { stamina -= 1 } else { return 0.00001 }
+            print("\(stamina)  /// \(vitality)")
             if n <= hitChance {
                 let p = Float.random(in: 0.8...1.0)
                 return attPower * p
@@ -44,7 +45,8 @@ class Boxer: Codable {
         case .hook:
             // Medium punch. It has smaller chance to hit the targer, but damage is bigger than jab.
             let n = Float.random(in: 0...1)
-            if stamina >= 3 { stamina -= 3 } else { return 0.0 }
+            if stamina >= 3 { stamina -= 3 } else { return 0.00001 }
+            print("\(stamina)  /// \(vitality)")
             if n <= hitChance - 0.2 {
                 let p = Float.random(in: 0.9...1.2)
                 return attPower * p
@@ -55,7 +57,8 @@ class Boxer: Codable {
         case .uppercut:
             // Hard punch. It has the biggest damage, but it's hard to hit the target.
             let n = Float.random(in: 0...1)
-            if stamina >= 5 { stamina -= 5 } else { return 0.0 }
+            if stamina >= 5 { stamina -= 5 } else { return 0.00001 }
+            print("\(stamina)  /// \(vitality)")
             if n <= hitChance - 0.4 {
                 let p = Float.random(in: 1.2...1.6)
                 return attPower * p
@@ -64,6 +67,8 @@ class Boxer: Codable {
             }
             
         }
+        
+        
     }
     
     func regeneration() {

@@ -61,14 +61,14 @@ class Player: Boxer {
     }
     
     private func experienceGained(points: Float) {
-        if nextLevel - experience > points {
-            experience += points
-        } else {
+        experience += points
+        if experience >= nextLevel {
             levelUp()
         }
     }
     
     private func levelUp() {
+        print("Experience before level up: \(experience)")
         experience -= nextLevel
         nextLevel += 100 * Float(currentLevel)
         currentLevel += 1
@@ -82,6 +82,7 @@ class Player: Boxer {
             footwork += 1
             endurance += 1
         }
+        print("Experience after level up: \(experience)")
     }
     
     override init() {
@@ -91,7 +92,7 @@ class Player: Boxer {
     //MARK: Codable conformance
     
     private enum CodingKeys: String, CodingKey {
-        case hp, stamina, fullStamina, currentLevel, experience, nextLevel
+        case hp, stamina, fullStamina, currentLevel, experience, nextLevel, money
     }
     
     required init(from decoder: Decoder) throws {
@@ -105,6 +106,7 @@ class Player: Boxer {
         currentLevel = try container.decode(Int.self, forKey: .currentLevel)
         experience = try container.decode(Float.self, forKey: .experience)
         nextLevel = try container.decode(Float.self, forKey: .nextLevel)
+        money = try container.decode(Int.self, forKey: .money)
     }
     
     override func encode(to encoder: Encoder) throws {
@@ -118,6 +120,7 @@ class Player: Boxer {
         try container.encode(currentLevel, forKey: .currentLevel)
         try container.encode(experience, forKey: .experience)
         try container.encode(nextLevel, forKey: .nextLevel)
+        try container.encode(money, forKey: .money)
     }
     
     

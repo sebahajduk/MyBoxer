@@ -106,6 +106,8 @@ class HomeVC: UIViewController {
             healthProgress.setProgress(player.hp/player.vitality, animated: true)
             staminaProgress.setProgress(Float(player.stamina/player.fullStamina), animated: true)
             experienceProgress.setProgress(Float(player.experience/player.nextLevel), animated: true)
+            
+            coinLabel.text = "\(player.money)"
         }
     }
     
