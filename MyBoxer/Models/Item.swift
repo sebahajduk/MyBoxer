@@ -9,6 +9,12 @@ import Foundation
 
 struct Item {
     let name: String
-    let stats: String
-    let cost: String
+    let stats: Float
+    let cost: Int
+    
+    init(name: String, stats: Float, cost: Int) {
+        self.name = name
+        self.stats = stats
+        self.cost = cost
+    }
 }

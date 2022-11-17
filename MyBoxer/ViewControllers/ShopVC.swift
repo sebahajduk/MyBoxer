@@ -66,7 +66,7 @@ extension ShopVC: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: ShopItemCell.reuseID) as! ShopItemCell
 
-        cell.set(for: category)
+        cell.set(for: category, at: indexPath.row)
         return cell
     }
 }

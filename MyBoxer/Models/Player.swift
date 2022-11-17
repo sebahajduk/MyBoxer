@@ -60,6 +60,10 @@ class Player: Boxer {
         experienceGained(points: opponent.vitality)
     }
     
+    func buyItem(_ item: Item) {
+        
+    }
+    
     private func experienceGained(points: Float) {
         experience += points
         if experience >= nextLevel {
@@ -85,9 +89,13 @@ class Player: Boxer {
         print("Experience after level up: \(experience)")
     }
     
+    
+    
     override init() {
         super.init()
     }
+    
+    
     
     //MARK: Codable conformance
     
