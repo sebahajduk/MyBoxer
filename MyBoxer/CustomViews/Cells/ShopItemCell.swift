@@ -7,9 +7,7 @@
 
 import UIKit
 
-enum EquipmentCategory {
-    case gloves, boots, shorts, tapes
-}
+
 
 class ShopItemCell: UITableViewCell {
     
@@ -21,38 +19,6 @@ class ShopItemCell: UITableViewCell {
     let itemPrice = MBLabel(size: 16, color: .systemYellow)
     let coin = UIImageView(image: Images.coin)
     
-    let gloves: [Item] = [
-        Item(name: "Boxing glove", stats: 3, cost: 15),
-        Item(name: "Boxing glove", stats: 5, cost: 25),
-        Item(name: "Boxing glove", stats: 7, cost: 40),
-        Item(name: "Boxing glove", stats: 11, cost: 60),
-        Item(name: "Boxing glove", stats: 13, cost: 90),
-    ]
-    
-    let boots: [Item] = [
-        Item(name: "Boxing boots", stats: 3, cost: 15),
-        Item(name: "Boxing boots", stats: 5, cost: 25),
-        Item(name: "Boxing boots", stats: 7, cost: 40),
-        Item(name: "Boxing boots", stats: 11, cost: 60),
-        Item(name: "Boxing boots", stats: 13, cost: 90),
-    ]
-    
-    let shorts: [Item] = [
-        Item(name: "Boxing shorts", stats: 3, cost: 15),
-        Item(name: "Boxing shorts", stats: 5, cost: 25),
-        Item(name: "Boxing shorts", stats: 7, cost: 40),
-        Item(name: "Boxing shorts", stats: 11, cost: 60),
-        Item(name: "Boxing shorts", stats: 13, cost: 90),
-    ]
-    
-    let tapes: [Item] = [
-        Item(name: "Boxing tapes", stats: 3, cost: 15),
-        Item(name: "Boxing tapes", stats: 5, cost: 25),
-        Item(name: "Boxing tapes", stats: 7, cost: 40),
-        Item(name: "Boxing tapes", stats: 11, cost: 60),
-        Item(name: "Boxing tapes", stats: 13, cost: 90),
-    ]
-
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         
@@ -63,28 +29,20 @@ class ShopItemCell: UITableViewCell {
         fatalError("init(coder:) has not been implemented")
     }
     
-    func set(for category: EquipmentCategory, at row: Int) {
-        switch category {
+    func set(item: Item) {
+        itemName.text = item.name
+        itemPrice.text = "\(item.cost)"
+        itemImage.image = item.image
+        
+        switch item.type {
         case .gloves:
-            itemName.text = gloves[row].name
-            itemStats.text = "Punch power +\(gloves[row].stats)"
-            itemPrice.text = "\(gloves[row].cost)"
-            itemImage.image = Images.boxingGlove
+            itemStats.text = "Punch power +\(item.stats)"
         case .boots:
-            itemName.text = boots[row].name
-            itemStats.text = "Movement +\(boots[row].stats)"
-            itemPrice.text = "\(boots[row].cost)"
-            itemImage.image = Images.boxingBoots
+            itemStats.text = "Footwork +\(item.stats)"
         case .shorts:
-            itemName.text = shorts[row].name
-            itemStats.text = "Endurance +\(shorts[row].stats)"
-            itemPrice.text = "\(shorts[row].cost)"
-            itemImage.image = Images.boxingShorts
+            itemStats.text = "Movement +\(item.stats)"
         case .tapes:
-            itemName.text = tapes[row].name
-            itemStats.text = "Punch speed +\(tapes[row].stats)"
-            itemPrice.text = "\(tapes[row].cost)"
-            itemImage.image = Images.boxingTapes
+            itemStats.text = "Punch speed +\(item.stats)"
         }
     }
     

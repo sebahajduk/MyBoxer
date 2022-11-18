@@ -236,7 +236,7 @@ class HomeVC: UIViewController {
     }
     
     @objc func pushShopVC() {
-        let shopVC = ShopVC()
+        let shopVC = ShopVC(player: player)
         
         navigationController!.pushViewController(shopVC, animated: true)
     }

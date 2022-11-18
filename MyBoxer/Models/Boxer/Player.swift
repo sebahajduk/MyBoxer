@@ -61,7 +61,17 @@ class Player: Boxer {
     }
     
     func buyItem(_ item: Item) {
-        
+        money -= item.cost
+        switch item.type {
+        case .gloves:
+            punchPower += item.stats
+        case .boots:
+            footwork += item.stats
+        case .shorts:
+            movement += item.stats
+        case .tapes:
+            punchSpeed += item.stats
+        }
     }
     
     private func experienceGained(points: Float) {
@@ -72,7 +82,6 @@ class Player: Boxer {
     }
     
     private func levelUp() {
-        print("Experience before level up: \(experience)")
         experience -= nextLevel
         nextLevel += 100 * Float(currentLevel)
         currentLevel += 1
@@ -86,7 +95,6 @@ class Player: Boxer {
             footwork += 1
             endurance += 1
         }
-        print("Experience after level up: \(experience)")
     }
     
     

@@ -7,10 +7,6 @@
 
 import UIKit
 
-enum MemberCategory {
-    case manager, coach, physio, cutman
-}
-
 class TeamMemberCell: UITableViewCell {
     
     static let reuseID = "TeamMemberCell"
@@ -32,7 +28,7 @@ class TeamMemberCell: UITableViewCell {
         fatalError("init(coder:) has not been implemented")
     }
 
-    func set(to category: MemberCategory) {
+    func set(to category: MemberType) {
         switch category {
         case .manager:
             memberImage.image = Images.managerImage

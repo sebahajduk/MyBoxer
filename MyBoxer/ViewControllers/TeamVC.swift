@@ -8,7 +8,7 @@
 import UIKit
 
 protocol UpdateTeamHireAgency: AnyObject {
-    func updateTeamHireAgency(to specialization: MemberCategory)
+    func updateTeamHireAgency(to specialization: MemberType)
 }
 
 class TeamVC: UIViewController, UpdateTeamHireAgency {
@@ -16,7 +16,7 @@ class TeamVC: UIViewController, UpdateTeamHireAgency {
     let menu = MBTeamMenu(frame: .zero)
     let tableView = UITableView()
     
-    var category: MemberCategory = .manager
+    var category: MemberType = .manager
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -51,7 +51,7 @@ class TeamVC: UIViewController, UpdateTeamHireAgency {
         ])
     }
     
-    func updateTeamHireAgency(to specialization: MemberCategory) {
+    func updateTeamHireAgency(to specialization: MemberType) {
         self.category = specialization
         
         UIView.transition(with: tableView, duration: 0.35, options: .transitionCrossDissolve, animations: { () -> Void in

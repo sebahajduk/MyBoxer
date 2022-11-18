@@ -35,6 +35,7 @@
 		609FFAC128F48F1C00B31C2D /* ShopVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 609FFAC028F48F1B00B31C2D /* ShopVC.swift */; };
 		609FFAC328F4949700B31C2D /* ShopItemCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 609FFAC228F4949700B31C2D /* ShopItemCell.swift */; };
 		60C21AD92915418100721BD0 /* FightingVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60C21AD82915418100721BD0 /* FightingVC.swift */; };
+		60E134722927E2880032B292 /* Member.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60E134712927E2880032B292 /* Member.swift */; };
 		60E3AACB2908599600D8D025 /* Opponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60E3AACA2908599600D8D025 /* Opponent.swift */; };
 		60E3AACD290859A400D8D025 /* Player.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60E3AACC290859A400D8D025 /* Player.swift */; };
 		60E59FB028DE2893007BBE81 /* MBHomeButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60E59FAF28DE2892007BBE81 /* MBHomeButton.swift */; };
@@ -81,6 +82,7 @@
 		609FFAC028F48F1B00B31C2D /* ShopVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShopVC.swift; sourceTree = "<group>"; };
 		609FFAC228F4949700B31C2D /* ShopItemCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShopItemCell.swift; sourceTree = "<group>"; };
 		60C21AD82915418100721BD0 /* FightingVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FightingVC.swift; sourceTree = "<group>"; };
+		60E134712927E2880032B292 /* Member.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Member.swift; sourceTree = "<group>"; };
 		60E3AACA2908599600D8D025 /* Opponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Opponent.swift; sourceTree = "<group>"; };
 		60E3AACC290859A400D8D025 /* Player.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Player.swift; sourceTree = "<group>"; };
 		60E59FAF28DE2892007BBE81 /* MBHomeButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MBHomeButton.swift; sourceTree = "<group>"; };
@@ -148,12 +150,11 @@
 		604EC0E328DB72F000F0D344 /* Models */ = {
 			isa = PBXGroup;
 			children = (
-				604EC0E428DB72FF00F0D344 /* Boxer.swift */,
+				60E134702927E2290032B292 /* Boxer */,
 				60F1F0A128E356860018AC4B /* Training.swift */,
 				608867BE28F5C7BC003C8F78 /* Item.swift */,
-				60E3AACA2908599600D8D025 /* Opponent.swift */,
-				60E3AACC290859A400D8D025 /* Player.swift */,
 				60651D352917E5BB00CC75A4 /* Attack.swift */,
+				60E134712927E2880032B292 /* Member.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -252,6 +253,16 @@
 				60EDB89628E8B7AD00EF9747 /* MBLabel.swift */,
 			);
 			path = Labels;
+			sourceTree = "<group>";
+		};
+		60E134702927E2290032B292 /* Boxer */ = {
+			isa = PBXGroup;
+			children = (
+				604EC0E428DB72FF00F0D344 /* Boxer.swift */,
+				60E3AACA2908599600D8D025 /* Opponent.swift */,
+				60E3AACC290859A400D8D025 /* Player.swift */,
+			);
+			path = Boxer;
 			sourceTree = "<group>";
 		};
 		60E59FB128DE2DFD007BBE81 /* Extensions */ = {
@@ -369,6 +380,7 @@
 				6062CCEC28FF07B70089ED9E /* RankVC.swift in Sources */,
 				603C854E2901690D00368288 /* PlayerDetailsVC.swift in Sources */,
 				604D924E28DEFCFC0054934C /* TrainingVC.swift in Sources */,
+				60E134722927E2880032B292 /* Member.swift in Sources */,
 				604EC0DD28DB678F00F0D344 /* MBImageView.swift in Sources */,
 				60EFAF6828E635C20011E2E8 /* FightingCell.swift in Sources */,
 				604EC0E528DB72FF00F0D344 /* Boxer.swift in Sources */,
