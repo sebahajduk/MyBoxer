@@ -16,7 +16,7 @@ class HomeVC: UIViewController {
     let experienceProgress = MBProgressView(for: .experience)
     
     let playerPhoto = UIImageView(image: Images.player)
-    let coinLabel = MBLabel(size: 15)
+    let coinLabel = MBLabel(size: 15, color: .label, alignment: .right)
     let coinImage = UIImageView(image: Images.coin)
     
     let timeProgress = MBProgressView(for: .time)
@@ -39,14 +39,14 @@ class HomeVC: UIViewController {
         configure()
         
         DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 1) { [self] in
-            updateBars()
+            updateUI()
             startTimer()
         }
     }
     
     override func viewWillAppear(_ animated: Bool) {
         startTimer()
-        updateBars()
+        updateUI()
     }
     
     override func viewDidDisappear(_ animated: Bool) {
@@ -61,7 +61,6 @@ class HomeVC: UIViewController {
     private func loadData() {
         player = Defaults.shared.myBoxer ?? Player()
         player.homeRegeneration(intervals: TimeManagerLocal.shared.timeIntervals)
-        print(player.stamina)
     }
     
     //MARK: Time managment
@@ -69,10 +68,10 @@ class HomeVC: UIViewController {
     private func startTimer() {
         var timerFiredCounter = 0
         if !isTimerActive {
-            timer = Timer.scheduledTimer(withTimeInterval: 0.2, repeats: true) { timer in
+            timer = Timer.scheduledTimer(withTimeInterval: 0.2, repeats: true) { [self] timer in
                 if TimeManagerLocal.shared.inProgres {
-                    self.timeLeft = TimeManagerLocal.shared.getTimeLeft()
-                    self.isTimerActive = true
+                    timeLeft = TimeManagerLocal.shared.getTimeLeft()
+                    isTimerActive = true
                     DispatchQueue.main.async { [self] in
                         timeProgress.setProgress(Float((timeLeft ?? 0) / Defaults.shared.actionTime), animated: true)
                         timeLeftLabel.text = DateComponentsFormatter().string(from: timeLeft!)!
@@ -80,14 +79,13 @@ class HomeVC: UIViewController {
                     }
                 } else {
                     if timerFiredCounter == 1500 {
-                        self.player.homeRegeneration(intervals: 1)
-                        self.updateBars()
+                        player.homeRegeneration(intervals: 1)
+                        updateUI()
                         timerFiredCounter = 0
                     }
                     timerFiredCounter += 1
-                    self.timeProgress.setProgress(0, animated: true)
-                    self.timeLeftLabel.text = ""
-                    self.isTimerActive = false
+                    timeLeftLabel.text = ""
+                    stopTimer()
                 }
             }
         }
@@ -96,14 +94,14 @@ class HomeVC: UIViewController {
     private func stopTimer() {
         timer?.invalidate()
         isTimerActive = false
-        timeProgress.setProgress(Float((self.timeLeft ?? 0) / TimeManagerLocal.shared.trainingTime), animated: true)
+        timeProgress.setProgress(0, animated: true)
     }
     
     //MARK: View updating
     
-    private func updateBars() {
+    private func updateUI() {
         DispatchQueue.main.async { [self] in
-            healthProgress.setProgress(player.hp/player.vitality, animated: true)
+            healthProgress.setProgress(Float(player.hp/player.vitality), animated: true)
             staminaProgress.setProgress(Float(player.stamina/player.fullStamina), animated: true)
             experienceProgress.setProgress(Float(player.experience/player.nextLevel), animated: true)
             
@@ -114,30 +112,30 @@ class HomeVC: UIViewController {
     //MARK: View configuration
     
     private func configure() {
-        navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(systemName: "line.3.horizontal"), style: .plain, target: self, action: #selector(pushDetailVC))
         view.addSubviews([coinImage, coinLabel])
+        navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(systemName: "line.3.horizontal"), style: .plain, target: self, action: #selector(pushDetailVC))
+        
         coinImage.translatesAutoresizingMaskIntoConstraints = false
         coinImage.tintColor = .systemYellow
-        coinLabel.textAlignment = .right
-        coinLabel.textColor = .label
         coinLabel.text = String(player.money)
+        
         configureBars()
-        configurePhotoStatus()
+        configurePlayerPhoto()
         configureButtonsMenu()
         configureContraints()
     }
     
     private func configureBars() {
-        healthProgress.setProgress(player.hp/player.vitality, animated: true)
+        view.addSubviews([healthProgress, staminaProgress, experienceProgress, timeProgress, timeLeftLabel])
+        
+        healthProgress.setProgress(Float(player.hp/player.vitality), animated: true)
         staminaProgress.setProgress(Float(player.stamina/player.fullStamina), animated: true)
         experienceProgress.setProgress(Float(player.experience/player.nextLevel), animated: true)
-        
-        view.addSubviews([healthProgress, staminaProgress, experienceProgress, timeProgress, timeLeftLabel])
     }
     
-    private func configurePhotoStatus() {
-        playerPhoto.sizeToFit()
+    private func configurePlayerPhoto() {
         view.addSubview(playerPhoto)
+        playerPhoto.sizeToFit()
         playerPhoto.translatesAutoresizingMaskIntoConstraints = false
     }
     
@@ -215,7 +213,7 @@ class HomeVC: UIViewController {
     @objc func pushDetailVC() {
         let detailVC = PlayerDetailsVC()
         
-        detailVC.set(for: player)
+        detailVC.set(player: player)
         
         detailVC.modalPresentationStyle = .overFullScreen
         detailVC.modalTransitionStyle = .crossDissolve
@@ -242,7 +240,7 @@ class HomeVC: UIViewController {
     }
     
     @objc func pushTeamVC() {
-        let teamVC = TeamVC()
+        let teamVC = TeamVC(player: player)
         
         navigationController!.pushViewController(teamVC, animated: true)
     }

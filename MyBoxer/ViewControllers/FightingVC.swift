@@ -105,11 +105,11 @@ class FightingVC: UIViewController {
         roundNumberLabel.text = "\(round)"
         movesLeftLabel.text = "\(moves)"
         
-        playerHealthBar.setProgress(player.hp/player.vitality, animated: true)
-        playerStaminaBar.setProgress(player.stamina/player.fullStamina, animated: true)
+        playerHealthBar.setProgress(Float(player.hp/player.vitality), animated: true)
+        playerStaminaBar.setProgress(Float(player.stamina/player.fullStamina), animated: true)
         
-        opponentHealthBar.setProgress(opponent.hp/opponent.vitality, animated: true)
-        opponentStaminaBar.setProgress(opponent.stamina/opponent.fullStamina, animated: true)
+        opponentHealthBar.setProgress(Float(opponent.hp/opponent.vitality), animated: true)
+        opponentStaminaBar.setProgress(Float(opponent.stamina/opponent.fullStamina), animated: true)
         
         UIView.transition(with: tableView, duration: 0.2, options: .transitionCrossDissolve, animations: { () -> Void in
             self.tableView.reloadData()

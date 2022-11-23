@@ -8,21 +8,22 @@
 import UIKit
 
 enum Stats {
-    case vitality, power, speed, footwork, movement, defence, endurance, level
+    case vitality, power, speed, footwork, movement, defence, endurance, level, moneyMultiplier, trainingEffect, fightRegeneration, homeRegeneration
 }
 
-class StatView: UIView {
+class SingleStatView: UIView {
     
     let stat = MBLabel(size: 16, color: .systemGray2)
     var statValue = MBLabel(size: 16, color: .systemGray2, alignment: .right)
-    var value: Int!
+    var value: Double!
     
     override init(frame: CGRect) {
         super.init(frame: .zero)
     }
     
-    convenience init(statType: Stats, value: Float = 4) {
+    convenience init(statType: Stats, value: Double = 4) {
         self.init(frame: .zero)
+        
         set(value: value)
         configure(statType: statType)
     }
@@ -31,8 +32,8 @@ class StatView: UIView {
         fatalError("init(coder:) has not been implemented")
     }
     
-    func set(value: Float) {
-        self.value = Int(value)
+    func set(value: Double) {
+        self.value = value
         statValue.text = "\(self.value!)"
     }
     
@@ -58,6 +59,14 @@ class StatView: UIView {
             stat.text = "level"
             stat.textColor = .label
             statValue.textColor = .label
+        case .moneyMultiplier:
+            stat.text = "moneyMultiplier"
+        case .trainingEffect:
+            stat.text = "trainingEffect"
+        case .fightRegeneration:
+            stat.text = "fightRegeneration"
+        case .homeRegeneration:
+            stat.text = "homeRegeneration"
         }
         
         translatesAutoresizingMaskIntoConstraints = false

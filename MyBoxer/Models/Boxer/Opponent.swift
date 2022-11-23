@@ -13,15 +13,15 @@ class Opponent: Boxer {
     
     init(forLevel: Int, name: String) {
         super.init()
-        vitality = Float(forLevel) * 150
+        vitality = Double(forLevel) * 150
         hp = vitality
         self.name = name
-        punchPower = Float(forLevel * 2)
-        punchSpeed = Float(forLevel * 2)
-        footwork = Float(forLevel * 4)
-        movement = Float(forLevel * 3)
-        defence = Float(forLevel * 3)
-        endurance = Float(forLevel * 5)
+        punchPower = Double(forLevel * 2)
+        punchSpeed = Double(forLevel * 2)
+        footwork = Double(forLevel * 4)
+        movement = Double(forLevel * 3)
+        defence = Double(forLevel * 3)
+        endurance = Double(forLevel * 5)
     }
     
     required init(from decoder: Decoder) throws {

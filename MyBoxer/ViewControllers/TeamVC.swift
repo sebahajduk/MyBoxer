@@ -13,11 +13,51 @@ protocol UpdateTeamHireAgency: AnyObject {
 
 class TeamVC: UIViewController, UpdateTeamHireAgency {
     
+    var player: Player!
+    
     let menu = MBTeamMenu(frame: .zero)
     let tableView = UITableView()
     
-    var category: MemberType = .manager
-
+    var memberType: MemberType = .manager
+    
+    let managers: [Member] = [
+        Member(name: "Horace Hines", stats: 2, price: 300, type: .manager),
+        Member(name: "Shawn Bennett", stats: 5, price: 800, type: .manager),
+        Member(name: "Halbert Rowse", stats: 7, price: 1200, type: .manager),
+        Member(name: "Jack Swanson", stats: 10, price: 2000, type: .manager),
+        Member(name: "Herman Nichols", stats: 15, price: 3500, type: .manager)
+    ]
+    
+    let coaches: [Member] = [
+        Member(name: "Dane Lawrence", stats: 2, price: 300, type: .coach),
+        Member(name: "Ryan Pierpoint", stats: 5, price: 800, type: .coach),
+        Member(name: "Ray Warner", stats: 7, price: 1200, type: .coach),
+        Member(name: "Tristan Buckley", stats: 10, price: 2000, type: .coach),
+        Member(name: "Cecil Wolfe", stats: 15, price: 3500, type: .coach)
+    ]
+    
+    let cutmans: [Member] = [
+        Member(name: "Davy Mendoza", stats: 2, price: 300, type: .cutman),
+        Member(name: "Hanley Chasey", stats: 5, price: 800, type: .cutman),
+        Member(name: "Frederick Lucas", stats: 7, price: 1200, type: .cutman),
+        Member(name: "Russ Steele", stats: 10, price: 2000, type: .cutman),
+        Member(name: "Marsh Carr", stats: 15, price: 3500, type: .cutman)
+    ]
+    
+    let physios: [Member] = [
+        Member(name: "Jerry Bates", stats: 2, price: 300, type: .physio),
+        Member(name: "Justin Hodgson", stats: 5, price: 800, type: .physio),
+        Member(name: "Sylvester Harris", stats: 7, price: 1200, type: .physio),
+        Member(name: "Franklin Olson", stats: 10, price: 2000, type: .physio),
+        Member(name: "Errol Floyd", stats: 15, price: 3500, type: .physio)
+    ]
+    
+    convenience init(player: Player) {
+        self.init()
+        
+        self.player = player
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .systemBackground
@@ -34,7 +74,7 @@ class TeamVC: UIViewController, UpdateTeamHireAgency {
         
         tableView.delegate = self
         tableView.dataSource = self
-
+        
         tableView.register(TeamMemberCell.self, forCellReuseIdentifier: TeamMemberCell.reuseID)
         tableView.rowHeight = 100
         
@@ -52,14 +92,12 @@ class TeamVC: UIViewController, UpdateTeamHireAgency {
     }
     
     func updateTeamHireAgency(to specialization: MemberType) {
-        self.category = specialization
+        self.memberType = specialization
         
         UIView.transition(with: tableView, duration: 0.35, options: .transitionCrossDissolve, animations: { () -> Void in
             self.tableView.reloadData()
         })
-        
     }
-
 }
 
 extension TeamVC: UITableViewDelegate, UITableViewDataSource {
@@ -70,10 +108,34 @@ extension TeamVC: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: TeamMemberCell.reuseID) as! TeamMemberCell
         
-        cell.set(to: category)
+        switch memberType {
+        case .manager:
+            cell.set(for: managers[indexPath.row])
+        case .coach:
+            cell.set(for: coaches[indexPath.row])
+        case .cutman:
+            cell.set(for: cutmans[indexPath.row])
+        case .physio:
+            cell.set(for: physios[indexPath.row])
+        }
         
         return cell
     }
     
-    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        var member: Member
+        
+        switch memberType {
+        case .manager:
+            member = managers[indexPath.row]
+        case .coach:
+            member = coaches[indexPath.row]
+        case .cutman:
+            member = cutmans[indexPath.row]
+        case .physio:
+            member = physios[indexPath.row]
+        }
+        
+        player.hire(member: member)
+    }
 }

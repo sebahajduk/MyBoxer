@@ -9,9 +9,9 @@ import Foundation
 
 struct Attack {
     let attacker: Attacker
-    let damage: Float
+    let damage: Double
     
-    static func hit(attacker: Boxer, defender: Boxer) -> Float {
+    static func hit(attacker: Boxer, defender: Boxer) -> Double {
         let damage = attacker.punch(opponent: defender)
         
         return damage

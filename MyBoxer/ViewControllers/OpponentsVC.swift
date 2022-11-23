@@ -50,8 +50,8 @@ class OpponentsVC: UIViewController {
         tableView.dataSource = self
         tableView.delegate = self
         tableView.translatesAutoresizingMaskIntoConstraints = false
-        tableView.register(FightingCell.self, forCellReuseIdentifier: FightingCell.reuseID)
-        tableView.rowHeight = 192
+        tableView.register(OpponentCell.self, forCellReuseIdentifier: OpponentCell.reuseID)
+        tableView.rowHeight = 202
         
         NSLayoutConstraint.activate([
             tableView.topAnchor.constraint(equalTo: view.topAnchor),
@@ -68,7 +68,7 @@ extension OpponentsVC: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: FightingCell.reuseID) as! FightingCell
+        let cell = tableView.dequeueReusableCell(withIdentifier: OpponentCell.reuseID) as! OpponentCell
         
         cell.set(for: opponents[indexPath.row], index: indexPath.row)
         

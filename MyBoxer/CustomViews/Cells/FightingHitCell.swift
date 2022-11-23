@@ -15,7 +15,7 @@ class FightingHitCell: UITableViewCell {
     
     static let reuseID = "FightingHitCell"
     var attacker: Attacker = .player
-    var damage: Float = 0.0
+    var damage: Double = 0.0
     
     let message = MBLabel(size: 15)
 

@@ -27,10 +27,10 @@ class TimeManagerLocal {
         Defaults.shared.actionEndAt = endedTime
         Defaults.shared.actionTime = time
         
-        Timer.scheduledTimer(withTimeInterval: 0.1, repeats: true) { timer in
-            self.now = Date.now
-            if self.endedTime < self.now {
-                self.inProgres = false
+        Timer.scheduledTimer(withTimeInterval: 0.1, repeats: true) { [self] timer in
+            now = Date.now
+            if endedTime < now {
+                inProgres = false
                 timer.invalidate()
             }
         }
@@ -38,7 +38,7 @@ class TimeManagerLocal {
     
     func getTimeLeft() -> TimeInterval! {
         now = Date.now
-        self.timeLeft = self.endedTime.timeIntervalSinceReferenceDate - self.now.timeIntervalSinceReferenceDate
+        timeLeft = endedTime.timeIntervalSinceReferenceDate - now.timeIntervalSinceReferenceDate
         return timeLeft
     }
     
@@ -47,13 +47,13 @@ class TimeManagerLocal {
     }
     
     private func startTimer() {
-        Timer.scheduledTimer(withTimeInterval: 0.1, repeats: true) { timer in
-            self.now = Date.now
-            if self.endedTime < self.now {
-                self.inProgres = false
+        Timer.scheduledTimer(withTimeInterval: 0.1, repeats: true) { [self] timer in
+            now = Date.now
+            if endedTime < now {
+                inProgres = false
                 timer.invalidate()
             } else {
-                self.inProgres = true
+                inProgres = true
             }
         }
     }
@@ -62,14 +62,11 @@ class TimeManagerLocal {
         endedTime = Defaults.shared.actionEndAt
         if Defaults.shared.actionEndAt ?? Date.now > Date.now {
             startTimer()
-            print("training")
         } else {
             guard let endedTime else { return }
             let restingTime: TimeInterval = Date.now.timeIntervalSinceReferenceDate - endedTime.timeIntervalSinceReferenceDate
             timeIntervals = Int(restingTime / 1)
             Defaults.shared.actionEndAt = Date.now
-            print("training ends")
         }
     }
-    
 }

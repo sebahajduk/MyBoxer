@@ -9,10 +9,16 @@ import Foundation
 
 class Player: Boxer {
     var currentLevel: Int = 1
-    var experience: Float = 0.0
-    var nextLevel: Float = 100.0
+    var experience: Double = 0.0
+    var nextLevel: Double = 100.0
     
     var money: Int = 0
+    
+    // Multipliers for team members effects
+    var moneyMultiplier = 1.0
+    var trainingEffect = 1.0
+    var fightRegeneration = 1.0
+    var homeRegeneration = 1.0
 
     func training(_ type: TrainingType) {
         switch type {
@@ -39,7 +45,7 @@ class Player: Boxer {
     
     func homeRegeneration(intervals: Int = 0) {
         if stamina < fullStamina {
-            stamina += fullStamina * (0.01 * Float(intervals))
+            stamina += fullStamina * (0.01 * Double(intervals))
         }
         
         if stamina > fullStamina {
@@ -47,7 +53,7 @@ class Player: Boxer {
         }
         
         if hp < vitality {
-            hp += vitality * (0.01 * Float(intervals))
+            hp += vitality * (0.01 * Double(intervals))
         }
         
         if hp > vitality {
@@ -56,8 +62,30 @@ class Player: Boxer {
     }
     
     func wonFight(against opponent: Opponent) {
-        money += Int(opponent.vitality / 10)
+        money += Int(opponent.vitality * 1000)
         experienceGained(points: opponent.vitality)
+    }
+    
+    func hire(member: Member) {
+        money -= member.price
+        switch member.type {
+        case .manager:
+            moneyMultiplier = 1.0
+            moneyMultiplier += Double(member.stats) / 100
+            print("Money multiplier: \(moneyMultiplier)")
+        case .coach:
+            trainingEffect = 1.0
+            trainingEffect += Double(member.stats) / 100
+            print("Training effect: \(trainingEffect)")
+        case .cutman:
+            fightRegeneration = 1.0
+            fightRegeneration += Double(member.stats) / 100
+            print("Fight regeneration: \(fightRegeneration)")
+        case .physio:
+            homeRegeneration = 1.0
+            homeRegeneration += Double(member.stats) / 100
+            print("Home regeneration: \(homeRegeneration)")
+        }
     }
     
     func buyItem(_ item: Item) {
@@ -74,7 +102,7 @@ class Player: Boxer {
         }
     }
     
-    private func experienceGained(points: Float) {
+    private func experienceGained(points: Double) {
         experience += points
         if experience >= nextLevel {
             levelUp()
@@ -83,7 +111,7 @@ class Player: Boxer {
     
     private func levelUp() {
         experience -= nextLevel
-        nextLevel += 100 * Float(currentLevel)
+        nextLevel += 100 * Double(currentLevel)
         currentLevel += 1
         
         if currentLevel % 3 == 0 {
@@ -97,18 +125,14 @@ class Player: Boxer {
         }
     }
     
-    
-    
     override init() {
         super.init()
     }
     
-    
-    
     //MARK: Codable conformance
     
     private enum CodingKeys: String, CodingKey {
-        case hp, stamina, fullStamina, currentLevel, experience, nextLevel, money
+        case hp, stamina, fullStamina, currentLevel, experience, nextLevel, money, moneyMultiplier, trainingEffect, fightRegeneration, homeRegeration
     }
     
     required init(from decoder: Decoder) throws {
@@ -116,13 +140,17 @@ class Player: Boxer {
         
         try super.init(from: decoder)
         
-        hp = try container.decode(Float.self, forKey: .hp)
-        stamina = try container.decode(Float.self, forKey: .stamina)
-        fullStamina = try container.decode(Float.self, forKey: .fullStamina)
+        hp = try container.decode(Double.self, forKey: .hp)
+        stamina = try container.decode(Double.self, forKey: .stamina)
+        fullStamina = try container.decode(Double.self, forKey: .fullStamina)
         currentLevel = try container.decode(Int.self, forKey: .currentLevel)
-        experience = try container.decode(Float.self, forKey: .experience)
-        nextLevel = try container.decode(Float.self, forKey: .nextLevel)
+        experience = try container.decode(Double.self, forKey: .experience)
+        nextLevel = try container.decode(Double.self, forKey: .nextLevel)
         money = try container.decode(Int.self, forKey: .money)
+        moneyMultiplier = try container.decode(Double.self, forKey: .moneyMultiplier)
+        trainingEffect = try container.decode(Double.self, forKey: .trainingEffect)
+        fightRegeneration = try container.decode(Double.self, forKey: .fightRegeneration)
+        homeRegeneration = try container.decode(Double.self, forKey: .homeRegeration)
     }
     
     override func encode(to encoder: Encoder) throws {
@@ -137,8 +165,10 @@ class Player: Boxer {
         try container.encode(experience, forKey: .experience)
         try container.encode(nextLevel, forKey: .nextLevel)
         try container.encode(money, forKey: .money)
+        try container.encode(moneyMultiplier, forKey: .moneyMultiplier)
+        try container.encode(trainingEffect, forKey: .trainingEffect)
+        try container.encode(fightRegeneration, forKey: .fightRegeneration)
+        try container.encode(homeRegeneration, forKey: .homeRegeration)
     }
-    
-    
     
 }

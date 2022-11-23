@@ -23,6 +23,7 @@ class RankVC: UIViewController {
         let layout = UICollectionViewFlowLayout()
         layout.scrollDirection = .horizontal
         let collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
+        collectionView.tag = 0
         
         return collectionView
     }()
@@ -31,6 +32,7 @@ class RankVC: UIViewController {
         let layout = UICollectionViewFlowLayout()
         layout.scrollDirection = .horizontal
         let collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
+        collectionView.tag = 1
         
         return collectionView
     }()
@@ -39,6 +41,7 @@ class RankVC: UIViewController {
         let layout = UICollectionViewFlowLayout()
         layout.scrollDirection = .horizontal
         let collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
+        collectionView.tag = 2
         
         return collectionView
     }()
@@ -132,7 +135,7 @@ extension RankVC: UICollectionViewDataSource, UICollectionViewDelegate, UICollec
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: BoxerRankCell.reuseID, for: indexPath) as! BoxerRankCell
         
-        cell.set(for: indexPath.row)
+        cell.set(for: Boxers.boxers[indexPath.row], rank: indexPath.row)
         
         return cell
     }

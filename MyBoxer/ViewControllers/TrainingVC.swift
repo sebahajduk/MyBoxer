@@ -66,7 +66,12 @@ extension TrainingVC: UITableViewDataSource, UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
         if TimeManagerLocal.shared.inProgres {
-            print("Cannot do training. You are already train")
+            let alert = AlertVC(title: "You're training", message: AlertType.trainingInProgress)
+            
+            alert.modalPresentationStyle = .overFullScreen
+            alert.modalTransitionStyle = .crossDissolve
+            
+            navigationController?.present(alert, animated: true)
         } else {
             TimeManagerLocal.shared.train(for: 5)
             boxer.training(trainings[indexPath.row].type)

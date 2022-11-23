@@ -8,6 +8,8 @@
 import UIKit
 
 class PlayerDetailsVC: UIViewController {
+    
+    var player: Player!
 
     let containerView = ContainerView()
     
@@ -15,14 +17,7 @@ class PlayerDetailsVC: UIViewController {
     let playerName = MBLabel(size: 20)
     let playerRecord = MBLabel(size: 16, color: .systemGray2)
     
-    let level: StatView = StatView(statType: .level)
-    let vitality: StatView = StatView(statType: .vitality)
-    let punchPower: StatView = StatView(statType: .power)
-    let punchSpeed: StatView = StatView(statType: .speed)
-    let footwork: StatView = StatView(statType: .footwork)
-    let movement: StatView = StatView(statType: .movement)
-    let defence: StatView = StatView(statType: .defence)
-    let endurance: StatView = StatView(statType: .endurance)
+    let statView = StatView()
     
     let dismissButton = UIButton()
     
@@ -35,23 +30,17 @@ class PlayerDetailsVC: UIViewController {
         configureConstraints()
     }
     
-    func set(for boxer: Player) {
-        level.set(value: Float(boxer.currentLevel))
-        vitality.set(value: boxer.vitality)
-        punchPower.set(value: boxer.punchPower)
-        punchSpeed.set(value: boxer.punchSpeed)
-        footwork.set(value: boxer.footwork)
-        movement.set(value: boxer.movement)
-        defence.set(value: boxer.defence)
-        endurance.set(value: boxer.endurance)
-    }
-    
     @objc func dismissVC() {
         dismiss(animated: true)
     }
     
+    func set(player: Player) {
+        self.player = player
+        statView.set(boxer: player)
+    }
+    
     private func configure() {
-        view.addSubviews([containerView, playerImage, playerName, playerRecord, level, vitality, punchPower, punchSpeed, footwork, movement, defence, endurance, dismissButton])
+        view.addSubviews([containerView, playerImage, playerName, playerRecord, statView, dismissButton])
         
         playerName.text = "Jonny Baldwin"
         playerName.textAlignment = .center
@@ -73,7 +62,7 @@ class PlayerDetailsVC: UIViewController {
         NSLayoutConstraint.activate([
             containerView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             containerView.centerYAnchor.constraint(equalTo: view.centerYAnchor),
-            containerView.heightAnchor.constraint(equalToConstant: 500),
+            containerView.heightAnchor.constraint(equalToConstant: 600),
             containerView.widthAnchor.constraint(equalToConstant: 293),
             
             playerImage.topAnchor.constraint(equalTo: containerView.topAnchor, constant: 50),
@@ -91,45 +80,10 @@ class PlayerDetailsVC: UIViewController {
             playerRecord.heightAnchor.constraint(equalToConstant: 18),
             playerRecord.widthAnchor.constraint(equalToConstant: 253),
             
-            level.topAnchor.constraint(equalTo: playerRecord.bottomAnchor, constant: 30),
-            level.centerXAnchor.constraint(equalTo: containerView.centerXAnchor),
-            level.heightAnchor.constraint(equalToConstant: 20),
-            level.widthAnchor.constraint(equalToConstant: 253),
-            
-            vitality.topAnchor.constraint(equalTo: level.bottomAnchor, constant: 2),
-            vitality.centerXAnchor.constraint(equalTo: containerView.centerXAnchor),
-            vitality.heightAnchor.constraint(equalToConstant: 20),
-            vitality.widthAnchor.constraint(equalToConstant: 253),
-            
-            punchPower.topAnchor.constraint(equalTo: vitality.bottomAnchor, constant: 2),
-            punchPower.centerXAnchor.constraint(equalTo: containerView.centerXAnchor),
-            punchPower.heightAnchor.constraint(equalToConstant: 20),
-            punchPower.widthAnchor.constraint(equalToConstant: 253),
-            
-            punchSpeed.topAnchor.constraint(equalTo: punchPower.bottomAnchor, constant: 2),
-            punchSpeed.centerXAnchor.constraint(equalTo: containerView.centerXAnchor),
-            punchSpeed.heightAnchor.constraint(equalToConstant: 20),
-            punchSpeed.widthAnchor.constraint(equalToConstant: 253),
-            
-            footwork.topAnchor.constraint(equalTo: punchSpeed.bottomAnchor, constant: 2),
-            footwork.centerXAnchor.constraint(equalTo: containerView.centerXAnchor),
-            footwork.heightAnchor.constraint(equalToConstant: 20),
-            footwork.widthAnchor.constraint(equalToConstant: 253),
-            
-            movement.topAnchor.constraint(equalTo: footwork.bottomAnchor, constant: 2),
-            movement.centerXAnchor.constraint(equalTo: containerView.centerXAnchor),
-            movement.heightAnchor.constraint(equalToConstant: 20),
-            movement.widthAnchor.constraint(equalToConstant: 253),
-            
-            defence.topAnchor.constraint(equalTo: movement.bottomAnchor, constant: 2),
-            defence.centerXAnchor.constraint(equalTo: containerView.centerXAnchor),
-            defence.heightAnchor.constraint(equalToConstant: 20),
-            defence.widthAnchor.constraint(equalToConstant: 253),
-            
-            endurance.topAnchor.constraint(equalTo: defence.bottomAnchor, constant: 2),
-            endurance.centerXAnchor.constraint(equalTo: containerView.centerXAnchor),
-            endurance.heightAnchor.constraint(equalToConstant: 20),
-            endurance.widthAnchor.constraint(equalToConstant: 253),
+            statView.topAnchor.constraint(equalTo: playerRecord.bottomAnchor, constant: 10),
+            statView.centerXAnchor.constraint(equalTo: containerView.centerXAnchor),
+            statView.widthAnchor.constraint(equalToConstant: 253),
+            statView.heightAnchor.constraint(equalToConstant: 450),
             
             dismissButton.bottomAnchor.constraint(equalTo: containerView.bottomAnchor, constant: -20),
             dismissButton.centerXAnchor.constraint(equalTo: containerView.centerXAnchor),

@@ -26,12 +26,14 @@ class BoxerRankCell: UICollectionViewCell {
         fatalError("init(coder:) has not been implemented")
     }
     
-    func set(for rank: Int) {
-        boxerImage.image = Images.opponent
-        boxerName.text = "Henryk Sienkiewicz"
-        boxerRecord.text = "5/1/3"
-        boxerRank.text = "\(rank)"
-        
+    func set(for boxer: Boxer, rank: Int) {
+        if boxer is Opponent {
+            let opp = boxer as! Opponent
+            boxerImage.image = Images.opponent
+            boxerName.text = opp.name
+            boxerRecord.text = "5/1/3"
+            boxerRank.text = "\(rank)"
+        }
         switch rank {
         case 0:
             boxerRank.textColor = .systemMint
@@ -76,5 +78,4 @@ class BoxerRankCell: UICollectionViewCell {
             boxerRecord.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -10)
         ])
     }
-    
 }

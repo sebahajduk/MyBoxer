@@ -28,28 +28,20 @@ class TeamMemberCell: UITableViewCell {
         fatalError("init(coder:) has not been implemented")
     }
 
-    func set(to category: MemberType) {
-        switch category {
+    func set(for member: Member) {
+        memberImage.image = member.image
+        memberName.text = member.name
+        memberPrice.text = "\(member.price)"
+        
+        switch member.type {
         case .manager:
-            memberImage.image = Images.managerImage
-            memberName.text = "My manager"
-            memberStat.text = "+5 Money per fight"
-            memberPrice.text = "1 500"
+            memberStat.text = "+\(member.stats)% money per fight"
         case .coach:
-            memberImage.image = Images.coachImage
-            memberName.text = "My coach"
-            memberStat.text = "+1 attribute per training"
-            memberPrice.text = "10 000"
-        case .physio:
-            memberImage.image = Images.physioImage
-            memberName.text = "My physio"
-            memberStat.text = "+3 Regeneration after fight"
-            memberPrice.text = "1 500"
+            memberStat.text = "+\(member.stats)% training effect"
         case .cutman:
-            memberImage.image = Images.cutmanImage
-            memberName.text = "My cutman"
-            memberStat.text = "+3 Regeneration during fight"
-            memberPrice.text = "8 000"
+            memberStat.text = "+\(member.stats)% regeneration during fight"
+        case .physio:
+            memberStat.text = "+\(member.stats)% home regeneration"
         }
     }
     
