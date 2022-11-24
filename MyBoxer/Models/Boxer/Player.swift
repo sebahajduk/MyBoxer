@@ -161,6 +161,10 @@ class Player: Boxer {
             footwork += 1
             endurance += 1
         }
+        
+        if experience >= nextLevel {
+            levelUp()
+        }
     }
     
     override init() {
