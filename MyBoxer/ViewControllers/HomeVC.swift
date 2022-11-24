@@ -61,6 +61,15 @@ class HomeVC: UIViewController {
     private func loadData() {
         player = Defaults.shared.myBoxer ?? Player()
         player.homeRegeneration(intervals: TimeManagerLocal.shared.timeIntervals)
+        
+        switch player.division {
+        case .lightweight:
+            Boxers.lightweightBoxers.insert(player, at: player.rank)
+        case .middleweight:
+            Boxers.middleweightBoxers.insert(player, at: player.rank)
+        case .heavyweight:
+            Boxers.heavyweightBoxers.insert(player, at: player.rank)
+        }
     }
     
     //MARK: Time managment

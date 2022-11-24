@@ -7,6 +7,10 @@
 
 import Foundation
 
+enum Divisions {
+    case lightweight, middleweight, heavyweight
+}
+
 class Player: Boxer {
     var currentLevel: Int = 1
     var experience: Double = 0.0
@@ -19,7 +23,10 @@ class Player: Boxer {
     var trainingEffect = 1.0
     var fightRegeneration = 1.0
     var homeRegeneration = 1.0
-
+    
+    var division: Divisions = .lightweight
+    var rank: Int = 0
+    
     func training(_ type: TrainingType) {
         switch type {
             
@@ -61,9 +68,44 @@ class Player: Boxer {
         }
     }
     
-    func wonFight(against opponent: Opponent) {
-        money += Int(opponent.vitality * 1000)
-        experienceGained(points: opponent.vitality)
+    func fightFinished(against opponent: Opponent, result: FightResults) {
+        switch result {
+        case .victory:
+            money += Int(opponent.vitality * 1000)
+            experienceGained(points: opponent.vitality)
+            
+            Boxers.middleweightBoxers.insert(self, at: rank)
+            if let oldWinsRecord = record["Wins"] {
+                let newWinsRecord = oldWinsRecord + 1
+                record.updateValue(newWinsRecord, forKey: "Wins")
+            }
+            //TODO: Remove this from Player class!
+            updateRank()
+            
+        case .defeat:
+            if let oldLossesRecord = record["Losses"] {
+                let newLossesRecord = oldLossesRecord + 1
+                record.updateValue(newLossesRecord, forKey: "Losses")
+            }
+        }
+    }
+    
+    //TODO: Remove this from Player class!
+    private func updateRank() {
+        switch division {
+        case .lightweight:
+            Boxers.lightweightBoxers.remove(at: rank)
+            rank += 1
+            Boxers.lightweightBoxers.insert(self, at: rank)
+        case .middleweight:
+            Boxers.middleweightBoxers.remove(at: rank)
+            rank += 1
+            Boxers.middleweightBoxers.insert(self, at: rank)
+        case .heavyweight:
+            Boxers.heavyweightBoxers.remove(at: rank)
+            rank += 1
+            Boxers.heavyweightBoxers.insert(self, at: rank)
+        }
     }
     
     func hire(member: Member) {
@@ -72,19 +114,15 @@ class Player: Boxer {
         case .manager:
             moneyMultiplier = 1.0
             moneyMultiplier += Double(member.stats) / 100
-            print("Money multiplier: \(moneyMultiplier)")
         case .coach:
             trainingEffect = 1.0
             trainingEffect += Double(member.stats) / 100
-            print("Training effect: \(trainingEffect)")
         case .cutman:
             fightRegeneration = 1.0
             fightRegeneration += Double(member.stats) / 100
-            print("Fight regeneration: \(fightRegeneration)")
         case .physio:
             homeRegeneration = 1.0
             homeRegeneration += Double(member.stats) / 100
-            print("Home regeneration: \(homeRegeneration)")
         }
     }
     
@@ -132,7 +170,7 @@ class Player: Boxer {
     //MARK: Codable conformance
     
     private enum CodingKeys: String, CodingKey {
-        case hp, stamina, fullStamina, currentLevel, experience, nextLevel, money, moneyMultiplier, trainingEffect, fightRegeneration, homeRegeration
+        case hp, stamina, fullStamina, currentLevel, experience, nextLevel, money, moneyMultiplier, trainingEffect, fightRegeneration, homeRegeration, record, rank
     }
     
     required init(from decoder: Decoder) throws {
@@ -151,6 +189,8 @@ class Player: Boxer {
         trainingEffect = try container.decode(Double.self, forKey: .trainingEffect)
         fightRegeneration = try container.decode(Double.self, forKey: .fightRegeneration)
         homeRegeneration = try container.decode(Double.self, forKey: .homeRegeration)
+        record = try container.decode(Dictionary.self, forKey: .record)
+        rank = try container.decode(Int.self, forKey: .rank)
     }
     
     override func encode(to encoder: Encoder) throws {
@@ -169,6 +209,8 @@ class Player: Boxer {
         try container.encode(trainingEffect, forKey: .trainingEffect)
         try container.encode(fightRegeneration, forKey: .fightRegeneration)
         try container.encode(homeRegeneration, forKey: .homeRegeration)
+        try container.encode(record, forKey: .record)
+        try container.encode(rank, forKey: .rank)
     }
     
 }

@@ -28,6 +28,7 @@ class FightingHitCell: UITableViewCell {
         fatalError("init(coder:) has not been implemented")
     }
     
+    
     func set(for attack: Attack) {
         self.attacker = attack.attacker
         self.damage = attack.damage

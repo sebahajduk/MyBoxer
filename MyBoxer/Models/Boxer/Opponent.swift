@@ -9,9 +9,7 @@ import Foundation
 
 class Opponent: Boxer {
     
-    var name: String!
-    
-    init(forLevel: Int, name: String) {
+    init(forLevel: Int, name: String, wins: Int, draws: Int, losses: Int) {
         super.init()
         vitality = Double(forLevel) * 150
         hp = vitality
@@ -22,6 +20,7 @@ class Opponent: Boxer {
         movement = Double(forLevel * 3)
         defence = Double(forLevel * 3)
         endurance = Double(forLevel * 5)
+        record = ["Wins": wins, "Draws": draws, "Losses": losses]
     }
     
     required init(from decoder: Decoder) throws {

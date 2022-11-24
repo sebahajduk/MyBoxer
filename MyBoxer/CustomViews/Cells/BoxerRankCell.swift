@@ -31,9 +31,16 @@ class BoxerRankCell: UICollectionViewCell {
             let opp = boxer as! Opponent
             boxerImage.image = Images.opponent
             boxerName.text = opp.name
-            boxerRecord.text = "5/1/3"
-            boxerRank.text = "\(rank)"
+            boxerRecord.text = "\(opp.record["Wins"]!)/\(opp.record["Draws"]!)/\(opp.record["Losses"]!)"
+        } else if boxer is Player {
+            let player = boxer as! Player
+            boxerImage.image = Images.player
+            boxerName.text = player.name
+            boxerRecord.text = "\(player.record["Wins"]!)/\(player.record["Draws"]!)/\(player.record["Losses"]!)"
         }
+        
+        boxerRank.text = "\(rank)"
+        
         switch rank {
         case 0:
             boxerRank.textColor = .systemMint

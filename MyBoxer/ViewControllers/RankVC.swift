@@ -129,13 +129,36 @@ class RankVC: UIViewController {
 
 extension RankVC: UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 10
+        
+        switch collectionView.tag {
+        case 0:
+            return Boxers.lightweightBoxers.count
+        case 1:
+            return Boxers.middleweightBoxers.count
+        case 2:
+            return Boxers.heavyweightBoxers.count
+        default:
+            return 0
+        }
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: BoxerRankCell.reuseID, for: indexPath) as! BoxerRankCell
         
-        cell.set(for: Boxers.boxers[indexPath.row], rank: indexPath.row)
+        switch collectionView.tag {
+        case 0:
+            let rank = Array(Boxers.lightweightBoxers.reversed())
+            cell.set(for: rank[indexPath.row], rank: indexPath.row)
+        case 1:
+            let rank = Array(Boxers.middleweightBoxers.reversed())
+            cell.set(for: rank[indexPath.row], rank: indexPath.row)
+        case 2:
+            let rank = Array(Boxers.heavyweightBoxers.reversed())
+            cell.set(for: rank[indexPath.row], rank: indexPath.row)
+        default:
+            cell.set(for: Boxer(), rank: indexPath.row)
+        }
+        
         
         return cell
     }

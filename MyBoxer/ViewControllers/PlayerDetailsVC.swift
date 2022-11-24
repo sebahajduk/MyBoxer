@@ -42,10 +42,10 @@ class PlayerDetailsVC: UIViewController {
     private func configure() {
         view.addSubviews([containerView, playerImage, playerName, playerRecord, statView, dismissButton])
         
-        playerName.text = "Jonny Baldwin"
+        playerName.text = player.name
         playerName.textAlignment = .center
         
-        playerRecord.text = "10/1/3"
+        playerRecord.text = "\(player.record["Wins"]!)/\(player.record["Draws"]!)/\(player.record["Losses"]!)"
         playerRecord.textAlignment = .center
         
         containerView.translatesAutoresizingMaskIntoConstraints = false

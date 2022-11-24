@@ -13,32 +13,35 @@ class OpponentsVC: UIViewController {
     
     var player: Player!
     
-    let opponents: [Opponent] = [
-        Opponent(forLevel: 1, name: "Devin Colbert"),
-        Opponent(forLevel: 2, name: "Colt Street"),
-        Opponent(forLevel: 4, name: "Deryck Michaels"),
-        Opponent(forLevel: 8, name: "Brody Miller"),
-        Opponent(forLevel: 16, name: "Theo Barker"),
-        Opponent(forLevel: 24, name: "Hughie Mcbride"),
-        Opponent(forLevel: 32, name: "Alvin Blair"),
-        Opponent(forLevel: 40, name: "Randolph Barton"),
-        Opponent(forLevel: 48, name: "Gaylord Saunders"),
-        Opponent(forLevel: 56, name: "Atwater Fitzgerald"),
-        Opponent(forLevel: 64, name: "Marsh Bell"),
-        Opponent(forLevel: 72, name: "Justin Andrews"),
-        Opponent(forLevel: 80, name: "Jordan Jenning"),
-    ]
+    var opponents: [Opponent] = []
 
     override func viewDidLoad() {
         super.viewDidLoad()
         
         configure()
+        configureOpponents()
     }
     
     convenience init(player: Player) {
         self.init()
         
         self.player = player
+        
+    }
+    
+    private func configureOpponents() {
+        switch player.division {
+        case .lightweight:
+            for boxer in Boxers.lightweightBoxers {
+                if boxer is Opponent {
+                    opponents.append(boxer as! Opponent)
+                }
+            }
+        case .middleweight:
+            print("asd")
+        case .heavyweight:
+            print("asd")
+        }
     }
     
     private func configure() {

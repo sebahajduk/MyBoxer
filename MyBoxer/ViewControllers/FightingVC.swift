@@ -134,10 +134,11 @@ class FightingVC: UIViewController {
         if player.hp <= 0 {
             finishFight()
             showResult(.defeat)
+            player.fightFinished(against: opponent, result: .defeat)
         } else if opponent.hp <= 0 {
             finishFight()
             showResult(.victory)
-            player.wonFight(against: opponent)
+            player.fightFinished(against: opponent, result: .victory)
         }
     }
     
