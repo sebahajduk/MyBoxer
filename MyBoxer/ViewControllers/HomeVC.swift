@@ -65,6 +65,7 @@ class HomeVC: UIViewController {
         switch player.division {
         case .lightweight:
             Boxers.lightweightBoxers.insert(player, at: player.rank)
+            print(player.division)
         case .middleweight:
             Boxers.middleweightBoxers.insert(player, at: player.rank)
         case .heavyweight:

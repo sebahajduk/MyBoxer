@@ -12,6 +12,7 @@ enum ItemType {
 }
 
 struct Item {
+    
     let name: String
     let stats: Double
     let cost: Int

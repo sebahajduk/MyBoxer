@@ -135,7 +135,7 @@ extension TeamVC: UITableViewDelegate, UITableViewDataSource {
         case .physio:
             member = physios[indexPath.row]
         }
-        
+        tableView.deselectRow(at: indexPath, animated: true)
         player.hire(member: member)
     }
 }

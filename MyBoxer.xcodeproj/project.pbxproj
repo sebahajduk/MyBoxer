@@ -35,6 +35,7 @@
 		609FFAC128F48F1C00B31C2D /* ShopVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 609FFAC028F48F1B00B31C2D /* ShopVC.swift */; };
 		609FFAC328F4949700B31C2D /* ShopItemCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 609FFAC228F4949700B31C2D /* ShopItemCell.swift */; };
 		60A92438292E807B003CE440 /* StatView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60A92437292E807B003CE440 /* StatView.swift */; };
+		60B93FBB29351ACC000A50A6 /* RankManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60B93FBA29351ACC000A50A6 /* RankManager.swift */; };
 		60C21AD92915418100721BD0 /* FightingVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60C21AD82915418100721BD0 /* FightingVC.swift */; };
 		60E134722927E2880032B292 /* Member.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60E134712927E2880032B292 /* Member.swift */; };
 		60E3AACB2908599600D8D025 /* Opponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60E3AACA2908599600D8D025 /* Opponent.swift */; };
@@ -82,6 +83,7 @@
 		609FFAC028F48F1B00B31C2D /* ShopVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShopVC.swift; sourceTree = "<group>"; };
 		609FFAC228F4949700B31C2D /* ShopItemCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShopItemCell.swift; sourceTree = "<group>"; };
 		60A92437292E807B003CE440 /* StatView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatView.swift; sourceTree = "<group>"; };
+		60B93FBA29351ACC000A50A6 /* RankManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RankManager.swift; sourceTree = "<group>"; };
 		60C21AD82915418100721BD0 /* FightingVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FightingVC.swift; sourceTree = "<group>"; };
 		60E134712927E2880032B292 /* Member.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Member.swift; sourceTree = "<group>"; };
 		60E3AACA2908599600D8D025 /* Opponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Opponent.swift; sourceTree = "<group>"; };
@@ -163,6 +165,7 @@
 			isa = PBXGroup;
 			children = (
 				602B046128EC8A0200BDEB3F /* TimeManagerLocal.swift */,
+				60B93FBA29351ACC000A50A6 /* RankManager.swift */,
 			);
 			path = Managers;
 			sourceTree = "<group>";
@@ -377,6 +380,7 @@
 				604EC0E028DB686200F0D344 /* Images.swift in Sources */,
 				605BD50228DB62FB0026C185 /* HomeVC.swift in Sources */,
 				608867BF28F5C7BC003C8F78 /* Item.swift in Sources */,
+				60B93FBB29351ACC000A50A6 /* RankManager.swift in Sources */,
 				605BD4EE28DB5F9D0026C185 /* AppDelegate.swift in Sources */,
 				601AD101290B0CB100CFF7D0 /* Defaults.swift in Sources */,
 				60F1F0A228E356860018AC4B /* Training.swift in Sources */,

@@ -7,7 +7,7 @@
 
 import Foundation
 
-enum Divisions {
+enum Divisions: Codable {
     case lightweight, middleweight, heavyweight
 }
 
@@ -26,6 +26,9 @@ class Player: Boxer {
     
     var division: Divisions = .lightweight
     var rank: Int = 0
+    
+    var equipment: [Item] = []
+    var defeatedOpponents: [String] = []
     
     func training(_ type: TrainingType) {
         switch type {
@@ -73,16 +76,13 @@ class Player: Boxer {
         case .victory:
             money += Int(opponent.vitality * 1000)
             experienceGained(points: opponent.vitality)
+            defeatedOpponents.append(opponent.name)
             
-            Boxers.middleweightBoxers.insert(self, at: rank)
             if let oldWinsRecord = record["Wins"] {
                 let newWinsRecord = oldWinsRecord + 1
                 record.updateValue(newWinsRecord, forKey: "Wins")
             }
-            //TODO: Remove this from Player class!
-            updateRank()
-            
-        case .defeat:
+       case .defeat:
             if let oldLossesRecord = record["Losses"] {
                 let newLossesRecord = oldLossesRecord + 1
                 record.updateValue(newLossesRecord, forKey: "Losses")
@@ -90,21 +90,19 @@ class Player: Boxer {
         }
     }
     
-    //TODO: Remove this from Player class!
-    private func updateRank() {
-        switch division {
-        case .lightweight:
-            Boxers.lightweightBoxers.remove(at: rank)
-            rank += 1
-            Boxers.lightweightBoxers.insert(self, at: rank)
-        case .middleweight:
-            Boxers.middleweightBoxers.remove(at: rank)
-            rank += 1
-            Boxers.middleweightBoxers.insert(self, at: rank)
-        case .heavyweight:
-            Boxers.heavyweightBoxers.remove(at: rank)
-            rank += 1
-            Boxers.heavyweightBoxers.insert(self, at: rank)
+    func rankUp() {
+        rank += 1
+    }
+    
+    func promote() {
+        if division == .lightweight {
+            division = .middleweight
+            rank = 0
+        } else if division == .middleweight {
+            division = .heavyweight
+            rank = 0
+        } else {
+            //Won the game
         }
     }
     
@@ -138,6 +136,7 @@ class Player: Boxer {
         case .tapes:
             punchSpeed += item.stats
         }
+        equipment.append(item)
     }
     
     private func experienceGained(points: Double) {
@@ -151,6 +150,7 @@ class Player: Boxer {
         experience -= nextLevel
         nextLevel += 100 * Double(currentLevel)
         currentLevel += 1
+        name = "My Boxer"
         
         if currentLevel % 3 == 0 {
             vitality += 10
@@ -169,12 +169,14 @@ class Player: Boxer {
     
     override init() {
         super.init()
+        
+        name = "My Boxer"
     }
     
     //MARK: Codable conformance
     
     private enum CodingKeys: String, CodingKey {
-        case hp, stamina, fullStamina, currentLevel, experience, nextLevel, money, moneyMultiplier, trainingEffect, fightRegeneration, homeRegeration, record, rank
+        case hp, stamina, fullStamina, currentLevel, experience, nextLevel, money, moneyMultiplier, trainingEffect, fightRegeneration, homeRegeration, record, rank, division, defeatedOpponents, equipment
     }
     
     required init(from decoder: Decoder) throws {
@@ -195,6 +197,9 @@ class Player: Boxer {
         homeRegeneration = try container.decode(Double.self, forKey: .homeRegeration)
         record = try container.decode(Dictionary.self, forKey: .record)
         rank = try container.decode(Int.self, forKey: .rank)
+        division = try container.decode(Divisions.self, forKey: .division)
+        defeatedOpponents = try container.decode(Array.self, forKey: .defeatedOpponents)
+        equipment = try container.decode(Array.self, forKey: .equipment)
     }
     
     override func encode(to encoder: Encoder) throws {
@@ -215,6 +220,8 @@ class Player: Boxer {
         try container.encode(homeRegeneration, forKey: .homeRegeration)
         try container.encode(record, forKey: .record)
         try container.encode(rank, forKey: .rank)
+        try container.encode(division, forKey: .division)
+        try container.encode(<#T##value: Bool##Bool#>, forKey: <#T##KeyedEncodingContainer<CodingKeys>.Key#>)
     }
     
 }

@@ -61,8 +61,6 @@ class RankVC: UIViewController {
         lightweightTitle.text = "Lightweight"
         middleweightTitle.text = "Middleweight"
         heavyweightTitle.text = "Heavyweight"
-        
-        
     }
     
     private func configureCollectionViews() {
@@ -165,9 +163,5 @@ extension RankVC: UICollectionViewDataSource, UICollectionViewDelegate, UICollec
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         return CGSize(width: 250, height: 100)
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        print("\(indexPath.row) + \(collectionView)")
     }
 }

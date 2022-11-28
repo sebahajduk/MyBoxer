@@ -19,14 +19,11 @@ class OpponentsVC: UIViewController {
         super.viewDidLoad()
         
         configure()
-        configureOpponents()
     }
     
     convenience init(player: Player) {
         self.init()
-        
         self.player = player
-        
     }
     
     private func configureOpponents() {
@@ -38,14 +35,23 @@ class OpponentsVC: UIViewController {
                 }
             }
         case .middleweight:
-            print("asd")
+            for boxer in Boxers.middleweightBoxers {
+                if boxer is Opponent {
+                    opponents.append(boxer as! Opponent)
+                }
+            }
         case .heavyweight:
-            print("asd")
+            for boxer in Boxers.heavyweightBoxers {
+                if boxer is Opponent {
+                    opponents.append(boxer as! Opponent)
+                }
+            }
         }
     }
     
     private func configure() {
         configureTableView()
+        configureOpponents()
     }
     
     private func configureTableView() {
@@ -74,6 +80,10 @@ extension OpponentsVC: UITableViewDelegate, UITableViewDataSource {
         let cell = tableView.dequeueReusableCell(withIdentifier: OpponentCell.reuseID) as! OpponentCell
         
         cell.set(for: opponents[indexPath.row], index: indexPath.row)
+        let opponentName = opponents[indexPath.row].name
+        if player.defeatedOpponents.contains(where: {$0 == opponentName}) {
+            cell.backgroundColor = .systemGreen.withAlphaComponent(0.2)
+        }
         
         return cell
     }
@@ -82,6 +92,12 @@ extension OpponentsVC: UITableViewDelegate, UITableViewDataSource {
         tableView.deselectRow(at: indexPath, animated: true)
         
         let fightingVC = FightingVC()
+        
+        let opponentName = opponents[indexPath.row].name
+        
+        if player.defeatedOpponents.contains(where: {$0 == opponentName}) {
+            return
+        }
         
         if player.hp > 50 {
             fightingVC.set(player: player, opponent: opponents[indexPath.row])

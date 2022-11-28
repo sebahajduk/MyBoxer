@@ -34,8 +34,6 @@ class FightingVC: UIViewController {
     var opponentHealthBar = MBProgressView(for: .hp, showTitle: false)
     var opponentStaminaBar = MBProgressView(for: .stamina, showTitle: false)
     
-    var isFighting = true
-    
     let tableView = UITableView()
     var attackHistory: [Attack] = []
     var moves = 20
@@ -67,6 +65,7 @@ class FightingVC: UIViewController {
         self.opponent = opponent
         
         opponentName.text = opponent.name
+        playerName.text = player.name
     }
     
     private func startTimer() {
@@ -124,7 +123,6 @@ class FightingVC: UIViewController {
     }
     
     private func finishFight() {
-        isFighting = false
         timer?.invalidate()
         Defaults.shared.myBoxer = player
         self.navigationController?.setNavigationBarHidden(false, animated: true)
@@ -139,6 +137,7 @@ class FightingVC: UIViewController {
             finishFight()
             showResult(.victory)
             player.fightFinished(against: opponent, result: .victory)
+            RankManager.rankUp(winner: player)
         }
     }
     
@@ -169,7 +168,6 @@ class FightingVC: UIViewController {
         
         vsLabel.text = "VS"
         
-        playerName.text = "My Boxer"
         playerName.textAlignment = .center
         
         opponentName.textAlignment = .center

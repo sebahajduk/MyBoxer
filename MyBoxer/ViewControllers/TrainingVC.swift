@@ -27,12 +27,8 @@ class TrainingVC: UIViewController {
     
     convenience init(myBoxer: Player) {
         self.init()
-        configureData(myBoxer: myBoxer)
-        configureTableView()
-    }
-    
-    private func configureData(myBoxer: Player) {
         boxer = myBoxer
+        configureTableView()
     }
     
     private func configureTableView() {
@@ -59,7 +55,9 @@ extension TrainingVC: UITableViewDataSource, UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: TrainingCell.reuseID) as! TrainingCell
+        
         cell.set(for: trainings[indexPath.row])
+        
         return cell
     }
     

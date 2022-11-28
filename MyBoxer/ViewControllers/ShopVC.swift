@@ -106,15 +106,25 @@ extension ShopVC: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: ShopItemCell.reuseID) as! ShopItemCell
 
+        var item: Item
+        
         switch type {
         case .gloves:
-            cell.set(item: gloves[indexPath.row])
+            item = gloves[indexPath.row]
+            cell.set(item: item)
         case .boots:
-            cell.set(item: boots[indexPath.row])
+            item = boots[indexPath.row]
+            cell.set(item: item)
         case .shorts:
-            cell.set(item: shorts[indexPath.row])
+            item = shorts[indexPath.row]
+            cell.set(item: item)
         case .tapes:
-            cell.set(item: tapes[indexPath.row])
+            item = tapes[indexPath.row]
+            cell.set(item: item)
+        }
+        
+        if player.equipment.contains(where: {$0.type == item.type && $0.stats == item.stats}) {
+            cell.backgroundColor = .systemGreen.withAlphaComponent(0.2)
         }
         
         return cell
@@ -134,8 +144,18 @@ extension ShopVC: UITableViewDelegate, UITableViewDataSource {
             item = tapes[indexPath.row]
         }
         
+        tableView.deselectRow(at: indexPath, animated: true)
+        
         if player.money < item.cost {
             let alert = AlertVC(title: "You do not have enough money", message: AlertType.notEnoughMoney)
+            
+            alert.modalPresentationStyle = .overFullScreen
+            alert.modalTransitionStyle = .crossDissolve
+            
+            navigationController?.present(alert, animated: true)
+            return
+        } else if player.equipment.contains(where: {$0.type == item.type && $0.stats == item.stats}) {
+            let alert = AlertVC(title: "You already have this item", message: AlertType.notEnoughMoney)
             
             alert.modalPresentationStyle = .overFullScreen
             alert.modalTransitionStyle = .crossDissolve
