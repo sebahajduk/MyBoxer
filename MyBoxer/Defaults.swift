@@ -40,7 +40,6 @@ class Defaults {
                 let encoder = JSONEncoder()
                 let data = try encoder.encode(newValue)
                 defaults.setValue(data, forKey: keyMyBoxer)
-                
             } catch {
                 print("There was an error saving boxer. Please try again later")
             }
@@ -50,7 +49,7 @@ class Defaults {
                 do {
                     let decoder = JSONDecoder()
                     let player = try decoder.decode(Player.self, from: data)
-                    print("Boxer hp: \(player.hp)")
+                    
                     return player
                 } catch {
                     return nil

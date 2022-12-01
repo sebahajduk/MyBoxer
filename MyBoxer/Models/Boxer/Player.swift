@@ -27,7 +27,7 @@ class Player: Boxer {
     var division: Divisions = .lightweight
     var rank: Int = 0
     
-    var equipment: [Item] = []
+    var equipment: [Int] = []
     var defeatedOpponents: [String] = []
     
     func training(_ type: TrainingType) {
@@ -55,7 +55,7 @@ class Player: Boxer {
     
     func homeRegeneration(intervals: Int = 0) {
         if stamina < fullStamina {
-            stamina += fullStamina * (0.01 * Double(intervals))
+            stamina += fullStamina * ((0.01 * homeRegeneration) * Double(intervals))
         }
         
         if stamina > fullStamina {
@@ -63,7 +63,7 @@ class Player: Boxer {
         }
         
         if hp < vitality {
-            hp += vitality * (0.01 * Double(intervals))
+            hp += vitality * ((0.01 * homeRegeneration) * Double(intervals))
         }
         
         if hp > vitality {
@@ -77,6 +77,7 @@ class Player: Boxer {
             money += Int(opponent.vitality * 1000)
             experienceGained(points: opponent.vitality)
             defeatedOpponents.append(opponent.name)
+            
             
             if let oldWinsRecord = record["Wins"] {
                 let newWinsRecord = oldWinsRecord + 1
@@ -136,7 +137,7 @@ class Player: Boxer {
         case .tapes:
             punchSpeed += item.stats
         }
-        equipment.append(item)
+        equipment.append(item.id)
     }
     
     private func experienceGained(points: Double) {
@@ -221,7 +222,8 @@ class Player: Boxer {
         try container.encode(record, forKey: .record)
         try container.encode(rank, forKey: .rank)
         try container.encode(division, forKey: .division)
-        try container.encode(<#T##value: Bool##Bool#>, forKey: <#T##KeyedEncodingContainer<CodingKeys>.Key#>)
+        try container.encode(defeatedOpponents, forKey: .defeatedOpponents)
+        try container.encode(equipment, forKey: .equipment)
     }
     
 }

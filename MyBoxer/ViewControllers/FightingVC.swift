@@ -12,7 +12,7 @@ enum FightResults {
 }
 
 class FightingVC: UIViewController {
-
+    
     var player: Player!
     var opponent: Opponent!
     
@@ -47,6 +47,7 @@ class FightingVC: UIViewController {
         configure()
         configureConstraints()
     }
+    
     
     override func viewDidAppear(_ animated: Bool) {
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) { [self] in
@@ -119,7 +120,7 @@ class FightingVC: UIViewController {
         self.round += 1
         self.moves = 20
         opponent.regeneration()
-        player.regeneration()
+        player.regeneration(multiplier: player.fightRegeneration)
     }
     
     private func finishFight() {

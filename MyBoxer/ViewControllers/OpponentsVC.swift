@@ -17,8 +17,13 @@ class OpponentsVC: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         configure()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        DispatchQueue.main.async {
+            self.tableView.reloadData()
+        }
     }
     
     convenience init(player: Player) {
@@ -81,7 +86,8 @@ extension OpponentsVC: UITableViewDelegate, UITableViewDataSource {
         
         cell.set(for: opponents[indexPath.row], index: indexPath.row)
         let opponentName = opponents[indexPath.row].name
-        if player.defeatedOpponents.contains(where: {$0 == opponentName}) {
+        
+        if player.defeatedOpponents.contains(where: { $0 == opponentName}) {
             cell.backgroundColor = .systemGreen.withAlphaComponent(0.2)
         }
         

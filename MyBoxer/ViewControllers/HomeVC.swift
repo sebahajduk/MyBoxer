@@ -40,7 +40,6 @@ class HomeVC: UIViewController {
         
         DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 1) { [self] in
             updateUI()
-            startTimer()
         }
     }
     
@@ -50,7 +49,6 @@ class HomeVC: UIViewController {
     }
     
     override func viewDidDisappear(_ animated: Bool) {
-        stopTimer()
         saveBoxer()
     }
     
@@ -65,7 +63,6 @@ class HomeVC: UIViewController {
         switch player.division {
         case .lightweight:
             Boxers.lightweightBoxers.insert(player, at: player.rank)
-            print(player.division)
         case .middleweight:
             Boxers.middleweightBoxers.insert(player, at: player.rank)
         case .heavyweight:
@@ -85,7 +82,6 @@ class HomeVC: UIViewController {
                     DispatchQueue.main.async { [self] in
                         timeProgress.setProgress(Float((timeLeft ?? 0) / Defaults.shared.actionTime), animated: true)
                         timeLeftLabel.text = DateComponentsFormatter().string(from: timeLeft!)!
-                        print(Float(timeLeft!))
                     }
                 } else {
                     if timerFiredCounter == 1500 {
@@ -95,7 +91,6 @@ class HomeVC: UIViewController {
                     }
                     timerFiredCounter += 1
                     timeLeftLabel.text = ""
-                    stopTimer()
                 }
             }
         }

@@ -71,7 +71,7 @@ extension TrainingVC: UITableViewDataSource, UITableViewDelegate {
             
             navigationController?.present(alert, animated: true)
         } else {
-            TimeManagerLocal.shared.train(for: 5)
+            TimeManagerLocal.shared.train(for: 300)
             boxer.training(trainings[indexPath.row].type)
         }
         

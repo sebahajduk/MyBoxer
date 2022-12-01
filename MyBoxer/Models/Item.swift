@@ -12,14 +12,15 @@ enum ItemType {
 }
 
 struct Item {
-    
+    let id: Int
     let name: String
     let stats: Double
     let cost: Int
     let type: ItemType
     var image: UIImage! = Images.boxingGlove
     
-    init(name: String, stats: Double, cost: Int, type: ItemType) {
+    init(id: Int, name: String, stats: Double, cost: Int, type: ItemType) {
+        self.id = id
         self.name = name
         self.stats = stats
         self.cost = cost

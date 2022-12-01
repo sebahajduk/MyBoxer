@@ -60,13 +60,13 @@ class SingleStatView: UIView {
             stat.textColor = .label
             statValue.textColor = .label
         case .moneyMultiplier:
-            stat.text = "moneyMultiplier"
+            stat.text = "Money multiplier"
         case .trainingEffect:
-            stat.text = "trainingEffect"
+            stat.text = "training Effect"
         case .fightRegeneration:
-            stat.text = "fightRegeneration"
+            stat.text = "fight Regeneration"
         case .homeRegeneration:
-            stat.text = "homeRegeneration"
+            stat.text = "home Regeneration"
         }
         
         translatesAutoresizingMaskIntoConstraints = false
@@ -74,7 +74,7 @@ class SingleStatView: UIView {
         NSLayoutConstraint.activate([
             stat.topAnchor.constraint(equalTo: self.topAnchor),
             stat.leadingAnchor.constraint(equalTo: leadingAnchor),
-            stat.widthAnchor.constraint(equalToConstant: 100),
+            stat.widthAnchor.constraint(equalToConstant: 150),
             stat.heightAnchor.constraint(equalToConstant: 16),
             
             statValue.centerYAnchor.constraint(equalTo: stat.centerYAnchor),
