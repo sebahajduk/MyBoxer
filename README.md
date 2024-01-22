@@ -1,3 +1,5 @@
+THIS APP HAS REFACTORED VERSION.
+https://github.com/sebahajduk/MyBoxer-refactored-.git
 
 ![DSC_7826-Edit](https://user-images.githubusercontent.com/86189139/213913375-acab5359-fb8c-41a1-8ff3-b8e205266978.jpg)
 
